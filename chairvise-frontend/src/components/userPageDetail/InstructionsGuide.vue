@@ -1,6 +1,8 @@
 <template>
   <el-collapse v-model="activeNames">
-    <el-collapse-item title="Importing CSV Data" name="1">      
+    <el-collapse-item 
+      title="Importing CSV Data" 
+      name="1">      
       <ol>
         <li>Log in.</li>
         <li>Click on "Import Data".</li>
@@ -10,7 +12,9 @@
         <li>Upload!</li>
       </ol>      
     </el-collapse-item>
-    <el-collapse-item title="Make Presentation" name="2">      
+    <el-collapse-item 
+      title="Make Presentation" 
+      name="2">      
       <ol>
         <li>Click on "Analyze".</li>
         <li>Create a new presentation.</li>
@@ -26,14 +30,18 @@
         <li>There is no limit to the number of visualizations!</li>
       </ol>
     </el-collapse-item>
-    <el-collapse-item title="Sharing Presentation" name="3">      
+    <el-collapse-item 
+      title="Sharing Presentation" 
+      name="3">      
       <ol>
         <li>Click on "SHARE"</li>
         <li>Enter the email address of the person you want to share it with.</li>
         <li>Change the permission (view or edit) given to the user. </li>        
       </ol>
     </el-collapse-item>
-    <el-collapse-item title="Download presentations as PDF" name="4"> 
+    <el-collapse-item 
+      title="Download presentations as PDF" 
+      name="4"> 
       <p> Pre-requisites: You must have create a presentation. </p>
       <ol>
         <li>Click on "Analyze".</li>
@@ -42,7 +50,9 @@
         <li>And you get the presentation generated in PDF.</li>
       </ol>
     </el-collapse-item>
-    <el-collapse-item title="Download presentations as Powerpoint" name="5">
+    <el-collapse-item 
+      title="Download presentations as Powerpoint" 
+      name="5">
       <p> Pre-requisites: You must have create a presentation. </p>
       <ol>
         <li>Click on "Analyze".</li>
@@ -51,7 +61,9 @@
         <li>And you get the presentation generated in Powerpoint slides.</li>
       </ol>
     </el-collapse-item>
-    <el-collapse-item title="Manage conference" name="6">
+    <el-collapse-item 
+      title="Manage conference" 
+      name="6">
       <ol>
         <li>Click on "Track".</li>
         <li>Click on "Add new conferences".</li>

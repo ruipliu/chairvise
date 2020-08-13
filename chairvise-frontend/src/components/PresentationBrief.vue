@@ -1,67 +1,125 @@
 <template>
   <div>
     <el-card class="details-card">
-      <div slot="header" class="clearfix">
+      <div 
+        slot="header" 
+        class="clearfix">
         <span> Presentation Details </span>
       </div>
       <el-row>
         <el-col :span="18">
-          <el-form label-position="left" ref="presentationForm" 
-                  label-width="150px" :rules="rules"
-                  :model="presentationForm" v-loading="isLoading" >
-            <el-alert v-if="isError" :title="apiErrorMsg" type="error" show-icon class="errorMsg"/>
+          <el-form 
+            label-position="left" 
+            ref="presentationForm" 
+            label-width="150px" 
+            :rules="rules"
+            :model="presentationForm" 
+            v-loading="isLoading" >
+            <el-alert 
+              v-if="isError" 
+              :title="apiErrorMsg" 
+              type="error" 
+              show-icon 
+              class="errorMsg"/>
 
-            <el-form-item label="Name: " v-show="isInEditMode" :prop=" 'name' " >
+            <el-form-item 
+              label="Name: " 
+              v-show="isInEditMode" 
+              :prop=" 'name' " >
               <div v-if="!isInEditMode">{{ presentationForm.name }}</div>
-              <el-input v-model="presentationFormName" v-if="isInEditMode"/>
+              <el-input 
+                v-model="presentationFormName" 
+                v-if="isInEditMode"/>
             </el-form-item>
-            <el-form-item label="Name: " v-show="!isInEditMode" >
+            <el-form-item 
+              label="Name: " 
+              v-show="!isInEditMode" >
               <div v-if="!isInEditMode">{{ presentationForm.name }}</div>
-              <el-input v-model="presentationFormName" v-if="isInEditMode"/>
+              <el-input 
+                v-model="presentationFormName" 
+                v-if="isInEditMode"/>
             </el-form-item>
-            <el-form-item label="Access Control: " v-if="!isNewPresentation">
+            <el-form-item 
+              label="Access Control: " 
+              v-if="!isNewPresentation">
               <el-tag>Created by {{ presentationForm.creatorIdentifier }}</el-tag>
             </el-form-item>
             <el-form-item label="Description: ">
-              <div v-if="!isInEditMode" id="presentation-description">{{ presentationForm.description }}</div>
-              <el-input type="textarea" autosize v-model="presentationFormDescription" v-if="isInEditMode"/>
+              <div 
+                v-if="!isInEditMode" 
+                id="presentation-description">{{ presentationForm.description }}</div>
+              <el-input 
+                type="textarea" 
+                autosize 
+                v-model="presentationFormDescription" 
+                v-if="isInEditMode"/>
             </el-form-item>
             <el-form-item v-if="isInEditMode">
               <el-button-group>
-                <el-button type="primary" icon="el-icon-check" @click="addPresentation()" v-if="isInEditMode">Save</el-button>
-                <el-button type="info" icon="el-icon-close" @click="changeEditMode(false)" v-if="isInEditMode && !isNewPresentation">Cancel</el-button>
+                <el-button 
+                  type="primary" 
+                  icon="el-icon-check" 
+                  @click="addPresentation()" 
+                  v-if="isInEditMode">Save</el-button>
+                <el-button 
+                  type="info" 
+                  icon="el-icon-close" 
+                  @click="changeEditMode(false)" 
+                  v-if="isInEditMode && !isNewPresentation">Cancel</el-button>
               </el-button-group>
             </el-form-item>
           </el-form>
         </el-col>
       </el-row>
-      <el-divider v-if="!isInEditMode"></el-divider>
+      <el-divider v-if="!isInEditMode"/>
       <el-row v-if="!isInEditMode">
-        <el-col class="download-section" :span="12">
+        <el-col 
+          class="download-section" 
+          :span="12">
           <el-button-group>
-            <el-button type="primary" @click="downloadPDF()" v-if="!isInEditMode && !isNewPresentation"
+            <el-button 
+              type="primary" 
+              @click="downloadPDF()" 
+              v-if="!isInEditMode && !isNewPresentation"
               icon="el-icon-document">
-                PDF
+              PDF
             </el-button>
-            <el-button type="danger" @click="downloadPPTX()" v-if="!isInEditMode && !isNewPresentation"
+            <el-button 
+              type="danger" 
+              @click="downloadPPTX()" 
+              v-if="!isInEditMode && !isNewPresentation"
               icon="el-icon-data-board">
-                Powerpoint
+              Powerpoint
             </el-button>
           </el-button-group>
         </el-col>
-        <el-col class="options-section" :span="12">
-          <el-divider direction="vertical" class="v-divide"></el-divider>
+        <el-col 
+          class="options-section" 
+          :span="12">
+          <el-divider 
+            direction="vertical" 
+            class="v-divide"/>
           <el-button-group>
-            <el-button type="success" class="share_button_left_margin" icon="el-icon-share"
-                    @click="openAccessControlPanel()" v-if="isLogin && isPresentationEditable">
+            <el-button 
+              type="success" 
+              class="share_button_left_margin" 
+              icon="el-icon-share"
+              @click="openAccessControlPanel()" 
+              v-if="isLogin && isPresentationEditable">
               Share
             </el-button>
-            <el-button type="primary" @click="changeEditMode(true)" icon="el-icon-edit"
-                    v-if="!isInEditMode && isPresentationEditable">
+            <el-button 
+              type="primary" 
+              @click="changeEditMode(true)" 
+              icon="el-icon-edit"
+              v-if="!isInEditMode && isPresentationEditable">
               Edit
             </el-button>
-            <el-button type="danger" v-if="!isNewPresentation && isLogin && isPresentationEditable"
-                    icon="el-icon-delete" @click="deletePresentation()">
+            <el-button 
+              type="danger" 
+              v-if="!isNewPresentation && isLogin && isPresentationEditable"
+              icon="el-icon-delete" 
+              @click="deletePresentation()">
               Delete
             </el-button>
           </el-button-group>
@@ -69,9 +127,12 @@
       </el-row>
     </el-card>
 
-    <el-dialog title="Share with other users:" :visible.sync="isAccessControlDialogVisible" width="70%"
-            :close-on-click-modal="false">
-      <access-control-panel :presentationId="id"></access-control-panel>
+    <el-dialog 
+      title="Share with other users:" 
+      :visible.sync="isAccessControlDialogVisible" 
+      width="70%"
+      :close-on-click-modal="false">
+      <access-control-panel :presentation-id="id"/>
     </el-dialog>
   </div>
 </template>

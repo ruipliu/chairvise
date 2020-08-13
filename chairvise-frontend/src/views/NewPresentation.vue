@@ -1,52 +1,82 @@
 <template>
-    <el-main>
-        <el-card>
-            <div slot="header" class="clearfix">
-                <span> Create New Presentation </span>
-            </div>
-            <el-alert v-if="isNewPresentation && !isLogin" title="Please login to create new presentation" type="error" show-icon
-                    class="errorMsg"/>
-            <el-form v-else :rules="rules" ref="presentationForm"
-                    :model="presentationForm" v-loading="isLoading">
+  <el-main>
+    <el-card>
+      <div 
+        slot="header" 
+        class="clearfix">
+        <span> Create New Presentation </span>
+      </div>
+      <el-alert 
+        v-if="isNewPresentation && !isLogin" 
+        title="Please login to create new presentation" 
+        type="error" 
+        show-icon
+        class="errorMsg"/>
+      <el-form 
+        v-else 
+        :rules="rules" 
+        ref="presentationForm"
+        :model="presentationForm" 
+        v-loading="isLoading">
 
-                <el-form-item label="Name" :prop="'name'" >
-                    <el-col>
-                        <el-input v-model="presentationFormName" placeholder="Enter name"/>
-                    </el-col>
-                </el-form-item>
-                <el-form-item label="Description">
-                    <el-col>
-                        <el-input type="textarea" v-model="presentationFormDescription" placeholder="Enter description"/>
-                    </el-col>
-                </el-form-item>
-                <el-form-item>
-                    <el-button type="primary" icon="el-icon-check" @click="uploadClicked()">Save</el-button>
-                </el-form-item>
-            </el-form>
-        </el-card>
+        <el-form-item 
+          label="Name" 
+          :prop="'name'" >
+          <el-col>
+            <el-input 
+              v-model="presentationFormName" 
+              placeholder="Enter name"/>
+          </el-col>
+        </el-form-item>
+        <el-form-item label="Description">
+          <el-col>
+            <el-input 
+              type="textarea" 
+              v-model="presentationFormDescription" 
+              placeholder="Enter description"/>
+          </el-col>
+        </el-form-item>
+        <el-form-item>
+          <el-button 
+            type="primary" 
+            icon="el-icon-check" 
+            @click="uploadClicked()">Save</el-button>
+        </el-form-item>
+      </el-form>
+    </el-card>
 
-        <!-- dialogs -->
-        <el-dialog
-        title="Confirm"
-        :visible.sync="hasSubmitted"
-        width="30%" center>
-            <span> Are you sure that the presentation details are correct?</span>
-            <span slot="footer" class="dialog-footer">
-                <el-button v-on:click="hasSubmitted = false">Cancel</el-button>
-                <el-button type="primary" v-on:click="addPresentation">Confirm</el-button>
-            </span>
-        </el-dialog>
-        <el-dialog
-        title="Success"
-        :visible.sync="saveSuccess"
-        width="30%" center>
-            <span>You have successfully added a new presentation</span>
-            <span slot="footer" class="dialog-footer">
-                <el-button type="primary" v-on:click="closeSuccess">Sure</el-button>
-            </span>
-        </el-dialog>
-        <!-- end of dialogs -->
-    </el-main>
+    <!-- dialogs -->
+    <el-dialog
+      title="Confirm"
+      :visible.sync="hasSubmitted"
+      width="30%" 
+      center>
+      <span> Are you sure that the presentation details are correct?</span>
+      <span 
+        slot="footer" 
+        class="dialog-footer">
+        <el-button @click="hasSubmitted = false">Cancel</el-button>
+        <el-button 
+          type="primary" 
+          @click="addPresentation">Confirm</el-button>
+      </span>
+    </el-dialog>
+    <el-dialog
+      title="Success"
+      :visible.sync="saveSuccess"
+      width="30%" 
+      center>
+      <span>You have successfully added a new presentation</span>
+      <span 
+        slot="footer" 
+        class="dialog-footer">
+        <el-button 
+          type="primary" 
+          @click="closeSuccess">Sure</el-button>
+      </span>
+    </el-dialog>
+    <!-- end of dialogs -->
+  </el-main>
 </template>
 
 <script>

@@ -31,7 +31,7 @@
   import FAQGuide from '@/components/userPageDetail/FAQGuide.vue'
 
   export default {
-    name: 'userGuide',
+    name: 'UserGuide',
     components: {
       OverviewGuide,
       FeatureGuide,

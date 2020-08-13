@@ -1,7 +1,7 @@
 <template>
   <div>
-    <BannerDetail></BannerDetail>
-    <FeatureListDetail></FeatureListDetail>
+    <BannerDetail/>
+    <FeatureListDetail/>
   </div>
 </template>
 
@@ -11,7 +11,7 @@
   import FeatureListDetail from '@/components/homePageDetail/FeatureListDetail.vue'
 
   export default {
-    name: 'home',
+    name: 'Home',
     components: {
       BannerDetail,
       FeatureListDetail

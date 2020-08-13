@@ -1,8 +1,11 @@
 <template>
-  <basic-section-detail :section-detail="sectionDetail" :presentation-id="presentationId" :has-data="hasData"
-                        :version="version"
-                        :extraFormItemsRules="{}"
-                        @update-visualisation="updateVisualisation">
+  <basic-section-detail 
+    :section-detail="sectionDetail" 
+    :presentation-id="presentationId" 
+    :has-data="hasData"
+    :version="version"
+    :extra-form-items-rules="{}"
+    @update-visualisation="updateVisualisation">
     <el-table
       :data="tableData"
       stripe
@@ -10,40 +13,72 @@
 
       <el-table-column
         prop="type"
-        label="Type" width="200">
-      </el-table-column>
+        label="Type" 
+        width="200"/>
 
       <el-table-column
         prop="value"
-        label="Value" width="100">
+        label="Value" 
+        width="100">
         <template slot-scope="scope">
-          <el-popover trigger="hover" placement="top-start">
+          <el-popover 
+            trigger="hover" 
+            placement="top-start">
             <p> No. of Reviewers: {{ scope.row.numIds }}</p>
-            <div slot="reference" class="name-wrapper">
-              <el-button class="hovered-text" type="text"> {{ scope.row.value }} </el-button> 
+            <div 
+              slot="reference" 
+              class="name-wrapper">
+              <el-button 
+                class="hovered-text" 
+                type="text"> {{ scope.row.value }} </el-button> 
             </div>
           </el-popover>
         </template>
       </el-table-column>
 
-     <el-table-column
+      <el-table-column
         prop="reviewer"
         label="Corresponding Reviewer ID">
         <template slot-scope="scope">
-        {{ scope.row.reviewer }}
+          {{ scope.row.reviewer }}
         </template>
       </el-table-column>
 
     </el-table>
-    <template slot="extraFormItems" slot-scope="slotProps">
-      <el-form-item label="Type" v-if="slotProps.isInAdvancedMode">
-        <el-select placeholder="type" v-model="slotProps.extraData.types" multiple>
-          <el-option label="Min" value="min" reviewer="min"></el-option>
-          <el-option label="Max" value="max" reviewer="max"></el-option>
-          <el-option label="Sum" value="sum" reviewer="sum"></el-option>
-          <el-option label="Average" value="avg" reviewer="avg"></el-option>
-          <el-option label="Median" value="median" reviewer="median"></el-option>
-          <el-option label="Standard Deviation" value="std" reviewer="std"></el-option>
+    <template 
+      slot="extraFormItems" 
+      slot-scope="slotProps">
+      <el-form-item 
+        label="Type" 
+        v-if="slotProps.isInAdvancedMode">
+        <el-select 
+          placeholder="type" 
+          v-model="slotProps.extraData.types" 
+          multiple>
+          <el-option 
+            label="Min" 
+            value="min" 
+            reviewer="min"/>
+          <el-option 
+            label="Max" 
+            value="max" 
+            reviewer="max"/>
+          <el-option 
+            label="Sum" 
+            value="sum" 
+            reviewer="sum"/>
+          <el-option 
+            label="Average" 
+            value="avg" 
+            reviewer="avg"/>
+          <el-option 
+            label="Median" 
+            value="median" 
+            reviewer="median"/>
+          <el-option 
+            label="Standard Deviation" 
+            value="std" 
+            reviewer="std"/>
         </el-select>
       </el-form-item>
     </template>

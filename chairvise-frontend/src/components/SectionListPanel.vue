@@ -1,22 +1,40 @@
 <template>
   <div>
-    <div v-loading="isLoadingDBMetaData || isLoadingSectionList" v-if="!isNewPresentation">
-      <el-aside width="300px" class="addRowRightAlign" v-if="isLogin">
+    <div 
+      v-loading="isLoadingDBMetaData || isLoadingSectionList" 
+      v-if="!isNewPresentation">
+      <el-aside 
+        width="300px" 
+        class="addRowRightAlign" 
+        v-if="isLogin">
         <el-card v-if="!isSectionListEmpty" >
-          <div slot="header" class="clearfix">
+          <div 
+            slot="header" 
+            class="clearfix">
             <span> Select version </span>
           </div>
-          <el-select class= "versionInput" v-model="presentationFormVersion" placeholder="Please select a version" >
-            <el-option v-for="v in versions" :key="v" :label="v" :value="v">
-            </el-option>
+          <el-select 
+            class= "versionInput" 
+            v-model="presentationFormVersion" 
+            placeholder="Please select a version" >
+            <el-option 
+              v-for="v in versions" 
+              :key="v" 
+              :label="v" 
+              :value="v"/>
           </el-select>        
         </el-card>
         <el-card>  
-          <div slot="header" class="clearfix">
+          <div 
+            slot="header" 
+            class="clearfix">
             <span> Add section </span>
           </div>
-          <el-select class= "selectionInput" v-model="selectedNewSection" placeholder="Please select a section to add"
-                    filterable>
+          <el-select 
+            class= "selectionInput" 
+            v-model="selectedNewSection" 
+            placeholder="Please select a section to add"
+            filterable>
             <el-option-group
               v-for="group in predefinedSections"
               :key="group.label"
@@ -25,22 +43,30 @@
                 v-for="item in group.options"
                 :key="item.value"
                 :label="item.label"
-                :value="item.value">
-              </el-option>
+                :value="item.value"/>
             </el-option-group>
           </el-select>
-          <el-button class="selectionInputButton" icon="el-icon-plus" type="success" @click="addNewSection">Add New Section</el-button>
+          <el-button 
+            class="selectionInputButton" 
+            icon="el-icon-plus" 
+            type="success" 
+            @click="addNewSection">Add New Section</el-button>
         </el-card>
       </el-aside>
-      <br/>
+      <br>
       <el-alert
         v-if="isSectionListApiError"
         :title="sectionListApiErrorMsg"
-        type="error" show-icon>
-      </el-alert>
+        type="error" 
+        show-icon/>
       <el-card shadow="hover">
-        <abstract-section-detail class="presentation-section" v-for="section in sectionList" :sectionDetail="section"
-                            :key="section.id" :presentationId="presentationId" :version="presentationFormVersion"/>
+        <abstract-section-detail 
+          class="presentation-section" 
+          v-for="section in sectionList" 
+          :section-detail="section"
+          :key="section.id" 
+          :presentation-id="presentationId" 
+          :version="presentationFormVersion"/>
         <EmptySection v-if="isSectionListEmpty" />
       </el-card>
     </div>

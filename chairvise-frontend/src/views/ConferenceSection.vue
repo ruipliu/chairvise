@@ -1,11 +1,11 @@
 <template>
-    <el-main>
-        <el-container>
-            <el-main>
-                <conference-brief :id="id"/>
-            </el-main>
-        </el-container>
-    </el-main>
+  <el-main>
+    <el-container>
+      <el-main>
+        <conference-brief :id="id"/>
+      </el-main>
+    </el-container>
+  </el-main>
 </template>
 
 <script>

@@ -1,23 +1,23 @@
 <template>
-    <div class="emptySection">
-        <el-row>
-            <el-col>                
-                <div class="icon">
-                    <img src="@/assets/businessman.png"/>
-                </div>
-            </el-col>
-        </el-row>
-        <el-row>
-            <el-col>
-                <p> 
-                    <i> No section found. Want to visualise data? </i>
-                </p>
-                <p>
-                    Let's get started by adding a new section on the right side of the panel.
-                </p>
-            </el-col>
-        </el-row>
-    </div>
+  <div class="emptySection">
+    <el-row>
+      <el-col>                
+        <div class="icon">
+          <img src="@/assets/businessman.png">
+        </div>
+      </el-col>
+    </el-row>
+    <el-row>
+      <el-col>
+        <p> 
+          <i> No section found. Want to visualise data? </i>
+        </p>
+        <p>
+          Let's get started by adding a new section on the right side of the panel.
+        </p>
+      </el-col>
+    </el-row>
+  </div>
 </template>
 
 <script>

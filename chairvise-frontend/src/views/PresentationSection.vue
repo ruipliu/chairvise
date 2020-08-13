@@ -1,12 +1,12 @@
 <template>
-    <el-main>
-        <el-container>
-            <el-main>
-                <presentation-brief :id="id"/>
-                <section-list-panel :presentationId="id"/>
-            </el-main>
-        </el-container>
-    </el-main>
+  <el-main>
+    <el-container>
+      <el-main>
+        <presentation-brief :id="id"/>
+        <section-list-panel :presentation-id="id"/>
+      </el-main>
+    </el-container>
+  </el-main>
 </template>
 
 <script>

@@ -1,17 +1,26 @@
 <template>
-    <el-main>
-        <h1 class="alignLeft">My Conferences </h1>
-        <el-button class="alignRight" type="primary" icon="el-icon-plus" @click="createConference">Add New Conference</el-button>
-        <br/>
-        <el-divider></el-divider>
-        <zoom-center-transition :duration="500" :delay="100">
-            <el-card v-show="show">
-                <FullCalendar :events="conferences" ref="fullCalendar" 
-                        defaultView='month' :config="config"
-                        @event-selected="eventSelected"/>
-            </el-card>
-        </zoom-center-transition>
-    </el-main>
+  <el-main>
+    <h1 class="alignLeft">My Conferences </h1>
+    <el-button 
+      class="alignRight" 
+      type="primary" 
+      icon="el-icon-plus" 
+      @click="createConference">Add New Conference</el-button>
+    <br>
+    <el-divider/>
+    <zoom-center-transition 
+      :duration="500" 
+      :delay="100">
+      <el-card v-show="show">
+        <FullCalendar 
+          :events="conferences" 
+          ref="fullCalendar" 
+          default-view='month' 
+          :config="config"
+          @event-selected="eventSelected"/>
+      </el-card>
+    </zoom-center-transition>
+  </el-main>
 </template>
 
 <script>

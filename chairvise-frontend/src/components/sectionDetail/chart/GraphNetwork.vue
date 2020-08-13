@@ -1,7 +1,10 @@
 <template>
-    <d3-network :net-nodes="nodes" :net-links="links" :options="options"
-            @node-click="nodeClick"
-            @link-click="linkClick" />
+  <d3-network 
+    :net-nodes="nodes" 
+    :net-links="links" 
+    :options="options"
+    @node-click="nodeClick"
+    @link-click="linkClick" />
 </template>
 
 <script>

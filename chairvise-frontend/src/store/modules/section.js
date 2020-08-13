@@ -108,10 +108,13 @@ export default {
 
       let newSection = PredefinedQueries[selectedNewSection].data;
       newSection = JSON.parse(JSON.stringify(newSection).replace(/\${PLACEHOLDER_DATA_SET}/g, dataSet));
+      // console.log(newSection);
 
       await axios.post(`/api/presentations/${presentationId}/sections`, newSection)
         .then(response => {
           commit('addSectionDetail', response.data)
+          // eslint-disable-next-line no-console
+          console.log(response.data)
         })
         .catch(e => {
           commit('setSectionListApiError', e.toString())

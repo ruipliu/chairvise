@@ -1,26 +1,47 @@
 <template>
-  <basic-section-detail :section-detail="sectionDetail" :presentation-id="presentationId" :has-data="hasData"
-                        :version="version"
-                        :edit-form-selections-rule="editFormSelectionsRule"
-                        :edit-form-involved-records-rule="editFormInvolvedRecordsRule"
-                        :edit-form-filters-rule="editFormFiltersRule"
-                        :extraFormItemsRules="extraFormItemsRules"
-                        @update-visualisation="updateVisualisation">
+  <basic-section-detail 
+    :section-detail="sectionDetail" 
+    :presentation-id="presentationId" 
+    :has-data="hasData"
+    :version="version"
+    :edit-form-selections-rule="editFormSelectionsRule"
+    :edit-form-involved-records-rule="editFormInvolvedRecordsRule"
+    :edit-form-filters-rule="editFormFiltersRule"
+    :extra-form-items-rules="extraFormItemsRules"
+    @update-visualisation="updateVisualisation">
     <word-cloud
-      :data="words">
-    </word-cloud>
+      :data="words"/>
 
-    <template slot="extraFormItems" slot-scope="slotProps">
-      <el-form-item label="Delimiter to Generate Word" prop="extraData.delimiters" v-if="slotProps.isInAdvancedMode">
-        <el-select multiple v-model="slotProps.extraData.delimiters">
-          <el-option label="\r" value="\r"/>
-          <el-option label="\n" value="\n"/>
-          <el-option label="Space" value="\s"/>
+    <template 
+      slot="extraFormItems" 
+      slot-scope="slotProps">
+      <el-form-item 
+        label="Delimiter to Generate Word" 
+        prop="extraData.delimiters" 
+        v-if="slotProps.isInAdvancedMode">
+        <el-select 
+          multiple 
+          v-model="slotProps.extraData.delimiters">
+          <el-option 
+            label="\r" 
+            value="\r"/>
+          <el-option 
+            label="\n" 
+            value="\n"/>
+          <el-option 
+            label="Space" 
+            value="\s"/>
         </el-select>
       </el-form-item>
-      <el-form-item label="Word to Ignore" prop="extraData.ignoreWords" v-if="slotProps.isInAdvancedMode">
-        <el-select multiple v-model="slotProps.extraData.ignoreWords" filterable allow-create>
-        </el-select>
+      <el-form-item 
+        label="Word to Ignore" 
+        prop="extraData.ignoreWords" 
+        v-if="slotProps.isInAdvancedMode">
+        <el-select 
+          multiple 
+          v-model="slotProps.extraData.ignoreWords" 
+          filterable 
+          allow-create/>
       </el-form-item>
     </template>
   </basic-section-detail>

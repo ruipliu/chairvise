@@ -1,23 +1,38 @@
 <template>
-  <basic-section-detail :section-detail="sectionDetail" :presentation-id="presentationId" :has-data="hasData"
-                        :version="version"
-                        :extraFormItemsRules="{}"
-                        @update-visualisation="updateVisualisation">
-    <GraphNetwork :nodes="nodes" :links="links" :options="options"
-            :nodeClick="showNodeDetails"
-            :linkClick="showLinkDetails"></GraphNetwork>
+  <basic-section-detail 
+    :section-detail="sectionDetail" 
+    :presentation-id="presentationId" 
+    :has-data="hasData"
+    :version="version"
+    :extra-form-items-rules="{}"
+    @update-visualisation="updateVisualisation">
+    <GraphNetwork 
+      :nodes="nodes" 
+      :links="links" 
+      :options="options"
+      :node-click="showNodeDetails"
+      :link-click="showLinkDetails"/>
 
-    <template slot="extraFormItems" slot-scope="slotProps">
-      <el-form-item label="Colorful Bar" prop="extraData.isColorfulBar" v-if="slotProps.isInAdvancedMode">
+    <template 
+      slot="extraFormItems" 
+      slot-scope="slotProps">
+      <el-form-item 
+        label="Colorful Bar" 
+        prop="extraData.isColorfulBar" 
+        v-if="slotProps.isInAdvancedMode">
         <el-switch
           v-model="slotProps.extraData.isColorfulBar"
           active-text="Colorful Bar"
-          inactive-text="Single Color Bar">
-        </el-switch>
+          inactive-text="Single Color Bar"/>
       </el-form-item>
-      <el-form-item label="Num of result to display" prop="extraData.numOfResultToDisplay"
-                    v-if="slotProps.isInAdvancedMode">
-        <el-slider v-model="slotProps.extraData.numOfResultToDisplay" :min="5" :max="30"></el-slider>
+      <el-form-item 
+        label="Num of result to display" 
+        prop="extraData.numOfResultToDisplay"
+        v-if="slotProps.isInAdvancedMode">
+        <el-slider 
+          v-model="slotProps.extraData.numOfResultToDisplay" 
+          :min="5" 
+          :max="30"/>
       </el-form-item>
     </template>
   </basic-section-detail>

@@ -1,27 +1,49 @@
 <template>
   <el-main>
     <h1 class="alignLeft">My Created Presentations </h1>
-    <el-button class="alignRight" type="primary" icon="el-icon-plus"
-           v-if="!isPresentationListEmpty" @click="createPresentation">Add New Presentation</el-button>
-    <br/>
-    <el-divider></el-divider>
+    <el-button 
+      class="alignRight" 
+      type="primary" 
+      icon="el-icon-plus"
+      v-if="!isPresentationListEmpty" 
+      @click="createPresentation">Add New Presentation</el-button>
+    <br>
+    <el-divider/>
     <div class="infinite-list-wrapper">
       <el-card v-if="isPresentationListEmpty" >
         <EmptyPresentation />
       </el-card>
-      <ul class="infinite-list" v-infinite-scroll="loadMorePresentation" infinite-scroll-disabled="disabled" v-loading="isLoading">
-        <li v-for="(presentation, index) in presentations" :key="presentation.id">
-          <zoom-center-transition :duration="500" :delay="100 * (index - 1)">
+      <ul 
+        class="infinite-list" 
+        v-infinite-scroll="loadMorePresentation" 
+        infinite-scroll-disabled="disabled" 
+        v-loading="isLoading">
+        <li 
+          v-for="(presentation, index) in presentations" 
+          :key="presentation.id">
+          <zoom-center-transition 
+            :duration="500" 
+            :delay="100 * (index - 1)">
             <el-card shadow="hover">
-              <el-button type="text" class="presentationCard" v-show="show" @click="viewPresentation(presentation.id)">
+              <el-button 
+                type="text" 
+                class="presentationCard" 
+                v-show="show" 
+                @click="viewPresentation(presentation.id)">
                 <el-row>
-                  <el-col class="presentation-id" :span="1">
-                    <p> #{{presentation.id}} </p>
+                  <el-col 
+                    class="presentation-id" 
+                    :span="1">
+                    <p> #{{ presentation.id }} </p>
                   </el-col>
-                  <el-col :span="19" :offset="1">
+                  <el-col 
+                    :span="19" 
+                    :offset="1">
                     <p> {{ presentation.name }} </p>
                   </el-col>
-                  <el-col :span="19" :offset="1">
+                  <el-col 
+                    :span="19" 
+                    :offset="1">
                     <p>{{ presentation.description }}</p>
                   </el-col>
                 </el-row>

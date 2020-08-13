@@ -4,7 +4,9 @@
       <el-row>
         <div v-show="show">
           <el-col :span="6">
-            <img alt="Vue logo" src="@/assets/chair2.png"/>
+            <img 
+              alt="Vue logo" 
+              src="@/assets/chair2.png">
           </el-col>
           <el-col :span="18">
             <h2> ChairVisE -- The Conference Data Visualisation Management System </h2>

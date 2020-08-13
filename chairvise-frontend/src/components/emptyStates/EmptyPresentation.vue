@@ -1,24 +1,27 @@
 <template>
-    <div class="emptySection">
-        <el-row>
-            <el-col>
-                <div class="icon">
-                    <img src="@/assets/businessman.png" />
-                </div>
-            </el-col>
-        </el-row>
-        <el-row>
-            <el-col>
-                <p> 
-                    <i> No presentation found. Want to generate presentation for a conference? </i>
-                </p>
-                <p>
-                    Let's get started by adding a new presentation.
-                </p>
-                <el-button type="primary" icon="el-icon-plus" @click="createPresentation">Add New Presentation</el-button>
-            </el-col>
-        </el-row>
-    </div>
+  <div class="emptySection">
+    <el-row>
+      <el-col>
+        <div class="icon">
+          <img src="@/assets/businessman.png" >
+        </div>
+      </el-col>
+    </el-row>
+    <el-row>
+      <el-col>
+        <p> 
+          <i> No presentation found. Want to generate presentation for a conference? </i>
+        </p>
+        <p>
+          Let's get started by adding a new presentation.
+        </p>
+        <el-button 
+          type="primary" 
+          icon="el-icon-plus" 
+          @click="createPresentation">Add New Presentation</el-button>
+      </el-col>
+    </el-row>
+  </div>
 </template>
 
 <script>

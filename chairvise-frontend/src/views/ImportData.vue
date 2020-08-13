@@ -4,113 +4,137 @@
       title="You need to login-in to view the page"
       type="error"
       v-if="!isLogin && !isAppLoading">
-      &nbsp;<el-button type="warning" plain size="mini" @click="navigateToHomePage">Return to the Home Page</el-button>
+      &nbsp;<el-button 
+        type="warning" 
+        plain 
+        size="mini" 
+        @click="navigateToHomePage">Return to the Home Page</el-button>
     </el-alert>
 
     <div v-if="isLogin">
-      <mapping-tool v-if="isReadyForMapping" ref="mapTool"></mapping-tool>
+      <mapping-tool 
+        v-if="isReadyForMapping" 
+        ref="mapTool"/>
 
       <el-card v-else>
-        <div slot="header" class="clearfix">
+        <div 
+          slot="header" 
+          class="clearfix">
           <span>Upload Data</span>
         </div>
       
-      <div class="section">
-        <h2> Record Information </h2>
-        <el-divider></el-divider>
+        <div class="section">
+          <h2> Record Information </h2>
+          <el-divider/>
         
-        <div class="form-card">
-          <label class="label"> Conference Type </label>
-          <br/>
-          <el-radio-group v-model="formatType" size="medium">
-            <el-radio-button :label="1">EasyChair</el-radio-button>
-            <el-radio-button :label="2">SoftConf</el-radio-button>
-          </el-radio-group>
+          <div class="form-card">
+            <label class="label"> Conference Type </label>
+            <br>
+            <el-radio-group 
+              v-model="formatType" 
+              size="medium">
+              <el-radio-button :label="1">EasyChair</el-radio-button>
+              <el-radio-button :label="2">SoftConf</el-radio-button>
+            </el-radio-group>
+          </div>
+
+          <div class="form-card">
+            <label class="label"> Table Type </label>
+            <br>
+            <el-radio-group 
+              v-model="tableType" 
+              size="medium">
+              <el-radio-button 
+                v-for="(schema, idx) in dbSchemas" 
+                :label="idx" 
+                :key="schema.name"> 
+                {{ schema.name }}
+              </el-radio-button>
+            </el-radio-group>
+          </div>
         </div>
 
-        <div class="form-card">
-          <label class="label"> Table Type </label>
-          <br/>
-          <el-radio-group v-model="tableType" size="medium">
-            <el-radio-button v-for="(schema, idx) in dbSchemas" 
-              :label="idx" 
-              :key="schema.name"> 
-              {{ schema.name }}
-            </el-radio-button>
-          </el-radio-group>
+        <div 
+          class="section" 
+          v-if="isReadyForChoosing">
+          <h2>
+            Mapping Information
+
+            <el-tooltip placement="top">
+              <div slot="content">
+                Optional
+              </div>
+              <el-button 
+                type="text" 
+                icon="el-icon-info" 
+                circle/>
+            </el-tooltip>
+          </h2>
+          <el-divider/>
+
+          <div class="form-card">
+            <el-switch
+              v-model="hasHeader"
+              active-text="Has Header"
+              inactive-text="No Header"/>
+          </div>
+
+          <div class="form-card" >
+            <el-switch
+              v-model="hasPredefined"
+              active-text="Predefined Mapping"
+              inactive-text="No Predefined Mapping"/>
+          </div> 
         </div>
-      </div>
-
-      <div class="section" v-if="isReadyForChoosing">
-        <h2>
-          Mapping Information
-
-          <el-tooltip placement="top">
-            <div slot="content">
-              Optional
-            </div>
-            <el-button type="text" icon="el-icon-info" circle></el-button>
-          </el-tooltip>
-        </h2>
-        <el-divider></el-divider>
-
-        <div class="form-card">
-          <el-switch
-            v-model="hasHeader"
-            active-text="Has Header"
-            inactive-text="No Header">
-          </el-switch>
-        </div>
-
-        <div class="form-card" >
-          <el-switch
-            v-model="hasPredefined"
-            active-text="Predefined Mapping"
-            inactive-text="No Predefined Mapping">
-          </el-switch>
-        </div> 
-      </div>
       
-      <div class="section" v-if="isReadyForChoosing">
-        <h2> 
-          Version Information
+        <div 
+          class="section" 
+          v-if="isReadyForChoosing">
+          <h2> 
+            Version Information
 
-          <el-tooltip placement="top">
-            <div slot="content">
-              If the input version is an existing version, current record will be replaced based on record type.
-              <br/>
-              If the input version is a new version, current record will be created based on record type.
-            </div>
-            <el-button type="text" icon="el-icon-question" circle></el-button>
-          </el-tooltip>
-        </h2>        
-        <el-divider></el-divider>
+            <el-tooltip placement="top">
+              <div slot="content">
+                If the input version is an existing version, current record will be replaced based on record type.
+                <br>
+                If the input version is a new version, current record will be created based on record type.
+              </div>
+              <el-button 
+                type="text" 
+                icon="el-icon-question" 
+                circle/>
+            </el-tooltip>
+          </h2>        
+          <el-divider/>
         
-        <el-row class="form-card">
-          <el-col>
-            <label class="label">
-              Version
-            </label>
-            <br/>
-            <el-autocomplete
-              class="inline-input"
-              v-model="versionId"
-              :fetch-suggestions="querySearch"
-              placeholder="Input Version"
-            ></el-autocomplete>
-          </el-col>
-        </el-row>
-        <div class="form-card">
-          <el-upload v-if="isReadyForUpload" drag action=""
-                    :auto-upload="false"
-                    :show-file-list="false"
-                    :multiple="false"
-                    :on-change="fileUploadHandler">
-            <i class="el-icon-upload"></i>
-            <div class="el-upload__text">Drop .csv file here or <em>click to upload</em></div>
-          </el-upload>
+          <el-row class="form-card">
+            <el-col>
+              <label class="label">
+                Version
+              </label>
+              <br>
+              <el-autocomplete
+                class="inline-input"
+                v-model="versionId"
+                :fetch-suggestions="querySearch"
+                placeholder="Input Version"
+              />
+            </el-col>
+          </el-row>
+          <div class="form-card">
+            <el-upload 
+              v-if="isReadyForUpload" 
+              drag 
+              action=""
+              :auto-upload="false"
+              :show-file-list="false"
+              :multiple="false"
+              :on-change="fileUploadHandler">
+              <i class="el-icon-upload"/>
+              <div class="el-upload__text">Drop .csv file here or <em>click to upload</em></div>
+            </el-upload>
+          </div>
         </div>
-      </div>
 
       </el-card>
     </div>
@@ -339,7 +363,7 @@
                 //var element1=[x[0],x[14],x[15],x[16],"",x[17],"",""];
                 }
                 res2=authorres;
-                //console.log(authorres)
+                // console.log(authorres)
               }
 
               //author anonymization - Both formats
@@ -358,7 +382,8 @@
                   res2[m][1]=firstname;
                   res2[m][2]=lastname;
               }
-              //console.log(res2);
+              // res2: 2d array storing data
+              // console.log(res2);
            }
 
           //review file preprocessing
@@ -435,20 +460,26 @@
             }
             // for each row of data, manipulate temporary array element[] 
             // then push to true array res2[] for parsing
-            var csvRow=[];
-            for (var rowNum = 1; rowNum < res2.length; rowNum++) {
+            let csvRow = [];
+            for (let rowNum = 1; rowNum < res2.length; rowNum++) {
                 csvRow = res2[rowNum];
                 //csvRow.push(verId);
                 tempCSV.push(csvRow);
             }
             res2=tempCSV;
           }
+            // this.$store.state.currentdata[this.$store.state.dataMapping.data.tableType] = res2;
             //console.log(res2);
             this.$store.commit("setUploadedFile",res2);
             this.$store.commit("setPageLoadingStatus", false);
+            switch (this.$store.state.dataMapping.data.tableType) {
+              case "0": this.$store.state.curMetadata.author = res2; break;
+              case "1": this.$store.state.curMetadata.review = res2; break;
+              case "2": this.$store.state.curMetadata.submission = res2; break;
+            }
           }.bind(this)
         });
-      }
+      },
     },
     components: {
       MappingTool

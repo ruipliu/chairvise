@@ -1,7 +1,7 @@
 <template>
   <el-container v-loading.fullscreen.lock="isAppLoading">
     <el-header style="padding: 0;">
-      <menu-bar style="position: fixed; width: 100vw; z-index: 1;"></menu-bar>
+      <menu-bar style="position: fixed; width: 100vw; z-index: 1;"/>
     </el-header>
     <transition name="fade">
       <router-view/>

@@ -1,37 +1,66 @@
 <template>
   <div>
     <el-card class="details-card">
-      <div slot="header" class="clearfix">
+      <div 
+        slot="header" 
+        class="clearfix">
         <span> Conference Details </span>
       </div>
       <el-row>
         <el-col :span="18">
-          <el-form class="formStyle" label-position="left" ref="conferenceForm" label-width="150px" :rules="rules"
-                   :model="conferenceForm" v-loading="isLoading" >
-            <el-alert v-if="isError" :title="apiErrorMsg" type="error" show-icon class="errorMsg"/>
+          <el-form 
+            class="formStyle" 
+            label-position="left" 
+            ref="conferenceForm" 
+            label-width="150px" 
+            :rules="rules"
+            :model="conferenceForm" 
+            v-loading="isLoading" >
+            <el-alert 
+              v-if="isError" 
+              :title="apiErrorMsg" 
+              type="error" 
+              show-icon 
+              class="errorMsg"/>
 
-            <el-form-item label="Name: " :prop=" isInEditMode ? 'name' : ''" >
+            <el-form-item 
+              label="Name: " 
+              :prop=" isInEditMode ? 'name' : ''" >
               <div v-if="!isInEditMode">{{ conferenceForm.name }}</div>
-              <el-input v-model="conferenceFormName" v-if="isInEditMode"/>
+              <el-input 
+                v-model="conferenceFormName" 
+                v-if="isInEditMode"/>
             </el-form-item>
             <el-form-item label="Description: ">
-              <div v-if="!isInEditMode" id="conference-description">{{ conferenceForm.description }}</div>
-              <el-input type="textarea" autosize v-model="conferenceFormDescription" v-if="isInEditMode"/>
+              <div 
+                v-if="!isInEditMode" 
+                id="conference-description">{{ conferenceForm.description }}</div>
+              <el-input 
+                type="textarea" 
+                autosize 
+                v-model="conferenceFormDescription" 
+                v-if="isInEditMode"/>
             </el-form-item>
             <el-form-item label="Date: ">
               <el-col>
-                <div v-if="!isInEditMode" id="conference-date">{{ conferenceForm.date.slice(0, 10) + "  " + conferenceForm.date.slice(11, 19) }}</div>
-                <el-input v-model="conferenceFormDate" v-if="isInEditMode"/>
+                <div 
+                  v-if="!isInEditMode" 
+                  id="conference-date">{{ conferenceForm.date.slice(0, 10) + "  " + conferenceForm.date.slice(11, 19) }}</div>
+                <el-input 
+                  v-model="conferenceFormDate" 
+                  v-if="isInEditMode"/>
               </el-col>
             </el-form-item>
           </el-form>
         </el-col>
       </el-row>
-      <el-divider></el-divider>
+      <el-divider/>
       <div class="options-section">
         <el-button-group>
-          <el-button type="danger" v-if="!isNewConference && isLogin"
-                    @click="deleteConference()">
+          <el-button 
+            type="danger" 
+            v-if="!isNewConference && isLogin"
+            @click="deleteConference()">
             <i class="el-icon-delete"> Delete </i>
           </el-button>
         </el-button-group>

@@ -23,6 +23,7 @@
   export default {
     name: 'OverviewGuide',
     props: {
+      // eslint-disable-next-line vue/require-default-prop
       msg: String
     }
   }

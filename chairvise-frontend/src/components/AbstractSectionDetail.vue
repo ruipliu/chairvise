@@ -2,44 +2,69 @@
   <el-row class="sectionDetail">
     <div v-if="version !== undefined && typeof version != 'undefined'">
       <div v-if="sectionDetail.type === WORD_CLOUD">
-        <word-cloud-section-detail :sectionDetail="sectionDetail" :presentationId="presentationId" :version="version"/>
+        <word-cloud-section-detail 
+          :section-detail="sectionDetail" 
+          :presentation-id="presentationId" 
+          :version="version"/>
       </div>
       <div v-else-if="sectionDetail.type === BAR_CHART">
-        <bar-chart-section-detail :sectionDetail="sectionDetail" :presentationId="presentationId" :version="version"/>
+        <bar-chart-section-detail 
+          :section-detail="sectionDetail" 
+          :presentation-id="presentationId" 
+          :version="version"/>
       </div>
       <div v-else-if="sectionDetail.type === PIE_CHART">
-        <pie-chart-section-detail :sectionDetail="sectionDetail" :presentationId="presentationId" :version="version"/>
+        <pie-chart-section-detail 
+          :section-detail="sectionDetail" 
+          :presentation-id="presentationId" 
+          :version="version"/>
       </div>
       <div v-else-if="sectionDetail.type === LINE_CHART">
-        <line-chart-section-detail :sectionDetail="sectionDetail" :presentationId="presentationId" :version="version"/>
+        <line-chart-section-detail 
+          :section-detail="sectionDetail" 
+          :presentation-id="presentationId" 
+          :version="version"/>
       </div>
       <div v-else-if="sectionDetail.type === STATS">
-        <stats-section-detail :sectionDetail="sectionDetail" :presentationId="presentationId" :version="version"/>
+        <stats-section-detail 
+          :section-detail="sectionDetail" 
+          :presentation-id="presentationId" 
+          :version="version"/>
       </div>
       <div v-else-if="sectionDetail.type === SCATTER_CHART">
-        <scatter-chart-section-detail :sectionDetail="sectionDetail" :presentationId="presentationId" :version="version"/>
+        <scatter-chart-section-detail 
+          :section-detail="sectionDetail" 
+          :presentation-id="presentationId" 
+          :version="version"/>
       </div>
       <div v-else-if="sectionDetail.type === GRAPH_NETWORK">
-        <graph-network-section-detail :sectionDetail="sectionDetail" :presentationId="presentationId" :version="version"/>
+        <graph-network-section-detail 
+          :section-detail="sectionDetail" 
+          :presentation-id="presentationId" 
+          :version="version"/>
       </div>    
       <div v-else-if="sectionDetail.type === RADAR_CHART">
-        <radar-chart-section-detail :sectionDetail="sectionDetail" :presentationId="presentationId" :version="version"/>
+        <radar-chart-section-detail 
+          :section-detail="sectionDetail" 
+          :presentation-id="presentationId" 
+          :version="version"/>
       </div>    
       <div v-else-if="sectionDetail.type === DEPENDENCY_CHART">
-        <dependency-chart-section-detail :sectionDetail="sectionDetail" :presentationId="presentationId" :version="version"/>
+        <dependency-chart-section-detail 
+          :section-detail="sectionDetail" 
+          :presentation-id="presentationId" 
+          :version="version"/>
       </div>
       <div v-else>
         <el-alert
           :title="`Unexpected Section Detail Type: ${sectionDetail.type}`"
-          type="error">
-        </el-alert>
+          type="error"/>
       </div>
     </div>      
     <div v-else>
       <el-alert
         :title="`Unexpected version`"
-        type="error">
-      </el-alert>
+        type="error"/>
     </div>
   </el-row>
 </template>
@@ -76,8 +101,9 @@
         type: String,
         required: true
       },
+      // eslint-disable-next-line vue/require-default-prop
       version: {
-        type: String,
+        type: String
       }
     },
     data() {
