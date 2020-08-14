@@ -1,4 +1,4 @@
-const isProduction = process.env.NODE_ENV === 'production';
+const isProduction = process.env.NODE_ENV === 'production'
 
 module.exports = {
   baseUrl: isProduction ? '/web/' : '/',
@@ -7,4 +7,4 @@ module.exports = {
   devServer: {
     proxy: 'http://localhost:8080'
   }
-};
+}

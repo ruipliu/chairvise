@@ -1,65 +1,65 @@
 import {SECTION_TYPE_BAR_CHART, SECTION_TYPE_GRAPH_NETWORK,
-  SECTION_TYPE_RADAR_CHART, SECTION_TYPE_DEPENDENCY_CHART} from "../../common/const";
+  SECTION_TYPE_RADAR_CHART, SECTION_TYPE_DEPENDENCY_CHART} from '../../common/const'
 
 export default {
-  "co_authorship_author_dependency": {
-    name: "Dependency Chart Inter-author collaboration",
-    group: "Co-authorship",
+  'co_authorship_author_dependency': {
+    name: 'Dependency Chart Inter-author collaboration',
+    group: 'Co-authorship',
     data: {
       type: SECTION_TYPE_DEPENDENCY_CHART,
-      title: "Inter-author collaboration",
-      dataSet: "${PLACEHOLDER_DATA_SET}",
-      description: "Dependency chart for author-author collaborations",
+      title: 'Inter-author collaboration',
+      dataSet: '${PLACEHOLDER_DATA_SET}',
+      description: 'Dependency chart for author-author collaborations',
       selections: [
         {
-          expression: "count(*)",
-          rename: "num_collab"
+          expression: 'count(*)',
+          rename: 'num_collab'
         },
         {
-          expression: "temp.a1_author",
-          rename: "a1_author"
+          expression: 'temp.a1_author',
+          rename: 'a1_author'
         },
         {
-          expression: "temp.a2_author",
-          rename: "a2_author"
+          expression: 'temp.a2_author',
+          rename: 'a2_author'
         }
       ],
       involvedRecords: [
         {
-          name:"(select a1.a_person_id as a1_author, a2.a_person_id as a2_author, a1.a_submission_id as submission_id," +
-              "s1.s_is_accepted, s1.s_keywords\n" +
-              "from author_record as a1, author_record as a2, submission_record as s1\n" +
+          name: '(select a1.a_person_id as a1_author, a2.a_person_id as a2_author, a1.a_submission_id as submission_id,' +
+              's1.s_is_accepted, s1.s_keywords\n' +
+              'from author_record as a1, author_record as a2, submission_record as s1\n' +
               "where a1.data_set = '${PLACEHOLDER_DATA_SET}' and a2.data_set = '${PLACEHOLDER_DATA_SET}' and s1.data_set = '${PLACEHOLDER_DATA_SET}'\n" +
-              "and a1.a_submission_id = a2.a_submission_id and s1.s_submission_id = a1.a_submission_id " +
+              'and a1.a_submission_id = a2.a_submission_id and s1.s_submission_id = a1.a_submission_id ' +
               "and a1.a_person_id < a2.a_person_id and a1.a_person_id != '') as temp",
           customized: true
         }
       ],
       filters: [
         {
-          field: "temp.s_is_accepted",
-          comparator: "=",
+          field: 'temp.s_is_accepted',
+          comparator: '=',
           value: "'accept'"
         },
         {
-          field: "temp.s_keywords",
-          comparator: "like",
+          field: 'temp.s_keywords',
+          comparator: 'like',
           value: "'%'"
         }
       ],
       joiners: [],
       groupers: [
         {
-          field: "temp.a1_author"
+          field: 'temp.a1_author'
         },
         {
-          field: "temp.a2_author"
+          field: 'temp.a2_author'
         }
       ],
       sorters: [
         {
-          field: "count(*)",
-          order: "desc"
+          field: 'count(*)',
+          order: 'desc'
         }
       ],
       extraData: {
@@ -68,70 +68,70 @@ export default {
           {
             label: 'Authors: ',
             field: 'auth-auth'
-          },
+          }
         ],
-        xAxisFieldName: "a1_author",
-        xAxisFieldName2: "a2_author",
+        xAxisFieldName: 'a1_author',
+        xAxisFieldName2: 'a2_author',
         yAxisFieldName: 'num_collab',
         numOfResultToDisplay: 10,
-        isColorfulBar: true,
+        isColorfulBar: true
       }
     }
   },
-  "co_authorship_author_radar": {
-    name: "Radar Chart Inter-author collaboration",
-    group: "Co-authorship",
+  'co_authorship_author_radar': {
+    name: 'Radar Chart Inter-author collaboration',
+    group: 'Co-authorship',
     data: {
       type: SECTION_TYPE_RADAR_CHART,
-      title: "Inter-author collaboration",
-      dataSet: "${PLACEHOLDER_DATA_SET}",
-      description: "Radar chart for author-author collaborations",
+      title: 'Inter-author collaboration',
+      dataSet: '${PLACEHOLDER_DATA_SET}',
+      description: 'Radar chart for author-author collaborations',
       selections: [
         {
           expression: "concat(temp.a1_author, ' - ', temp.a2_author)",
-          rename: "auth-auth"
+          rename: 'auth-auth'
         },
         {
-          expression: "count(*)",
-          rename: "num_collab"
-        },
+          expression: 'count(*)',
+          rename: 'num_collab'
+        }
       ],
       involvedRecords: [
         {
-          name:"(select a1.a_person_id as a1_author, a2.a_person_id as a2_author, a1.a_submission_id as submission_id," +
-              "s1.s_is_accepted, s1.s_keywords\n" +
-              "from author_record as a1, author_record as a2, submission_record as s1\n" +
+          name: '(select a1.a_person_id as a1_author, a2.a_person_id as a2_author, a1.a_submission_id as submission_id,' +
+              's1.s_is_accepted, s1.s_keywords\n' +
+              'from author_record as a1, author_record as a2, submission_record as s1\n' +
               "where a1.data_set = '${PLACEHOLDER_DATA_SET}' and a2.data_set = '${PLACEHOLDER_DATA_SET}' and s1.data_set = '${PLACEHOLDER_DATA_SET}'\n" +
-              "and a1.a_submission_id = a2.a_submission_id and s1.s_submission_id = a1.a_submission_id " +
+              'and a1.a_submission_id = a2.a_submission_id and s1.s_submission_id = a1.a_submission_id ' +
               "and a1.a_person_id < a2.a_person_id and a1.a_person_id != '') as temp",
           customized: true
         }
       ],
       filters: [
         {
-          field: "temp.s_is_accepted",
-          comparator: "=",
+          field: 'temp.s_is_accepted',
+          comparator: '=',
           value: "'accept'"
         },
         {
-          field: "temp.s_keywords",
-          comparator: "like",
+          field: 'temp.s_keywords',
+          comparator: 'like',
           value: "'%'"
         }
       ],
       joiners: [],
       groupers: [
         {
-          field: "temp.a1_author"
+          field: 'temp.a1_author'
         },
         {
-          field: "temp.a2_author"
+          field: 'temp.a2_author'
         }
       ],
       sorters: [
         {
-          field: "count(*)",
-          order: "desc"
+          field: 'count(*)',
+          order: 'desc'
         }
       ],
       extraData: {
@@ -140,69 +140,69 @@ export default {
           {
             label: 'Authors: ',
             field: 'auth-auth'
-          },
+          }
         ],
         xAxisFieldName: 'auth-auth',
         yAxisFieldName: 'num_collab',
         numOfResultToDisplay: 10,
-        isColorfulBar: true,
+        isColorfulBar: true
       }
     }
   },
-  "co_authorship_organisation_radar": {
-    name: "Radar chart Inter-organisation collaboration",
-    group: "Co-authorship",
+  'co_authorship_organisation_radar': {
+    name: 'Radar chart Inter-organisation collaboration',
+    group: 'Co-authorship',
     data: {
       type: SECTION_TYPE_RADAR_CHART,
-      title: "Inter-organisation collaboration",
-      dataSet: "${PLACEHOLDER_DATA_SET}",
-      description: "Radar chart for organisation-organisation collaborations",
+      title: 'Inter-organisation collaboration',
+      dataSet: '${PLACEHOLDER_DATA_SET}',
+      description: 'Radar chart for organisation-organisation collaborations',
       selections: [
         {
           expression: "concat(temp.a1_org, ' - ', temp.a2_org)",
-          rename: "org-org"
+          rename: 'org-org'
         },
         {
-          expression: "count(*)",
-          rename: "num_collab"
-        },
+          expression: 'count(*)',
+          rename: 'num_collab'
+        }
       ],
       involvedRecords: [
         {
-          name:"(select a1.a_organisation as a1_org, a2.a_organisation as a2_org, a1.a_submission_id as submission_id," +
-              "s1.s_is_accepted, s1.s_keywords\n" +
-              "from author_record as a1, author_record as a2, submission_record as s1\n" +
+          name: '(select a1.a_organisation as a1_org, a2.a_organisation as a2_org, a1.a_submission_id as submission_id,' +
+              's1.s_is_accepted, s1.s_keywords\n' +
+              'from author_record as a1, author_record as a2, submission_record as s1\n' +
               "where a1.data_set = '${PLACEHOLDER_DATA_SET}' and a2.data_set = '${PLACEHOLDER_DATA_SET}' and s1.data_set = '${PLACEHOLDER_DATA_SET}'\n" +
-              "and a1.a_submission_id = a2.a_submission_id and s1.s_submission_id = a1.a_submission_id " +
-              "and a1.a_organisation < a2.a_organisation) as temp",
+              'and a1.a_submission_id = a2.a_submission_id and s1.s_submission_id = a1.a_submission_id ' +
+              'and a1.a_organisation < a2.a_organisation) as temp',
           customized: true
         }
       ],
       filters: [
         {
-          field: "temp.s_is_accepted",
-          comparator: "=",
+          field: 'temp.s_is_accepted',
+          comparator: '=',
           value: "'accept'"
         },
         {
-          field: "temp.s_keywords",
-          comparator: "like",
+          field: 'temp.s_keywords',
+          comparator: 'like',
           value: "'%'"
         }
       ],
       joiners: [],
       groupers: [
         {
-          field: "temp.a1_org"
+          field: 'temp.a1_org'
         },
         {
-          field: "temp.a2_org"
+          field: 'temp.a2_org'
         }
       ],
       sorters: [
         {
-          field: "count(*)",
-          order: "desc"
+          field: 'count(*)',
+          order: 'desc'
         }
       ],
       extraData: {
@@ -216,64 +216,64 @@ export default {
         xAxisFieldName: 'org-org',
         yAxisFieldName: 'num_collab',
         numOfResultToDisplay: 10,
-        isColorfulBar: true,
+        isColorfulBar: true
       }
     }
   },
-  "co_authorship_country_radar": {
-    name: "Radar Chart Inter-country collaboration",
-    group: "Co-authorship",
+  'co_authorship_country_radar': {
+    name: 'Radar Chart Inter-country collaboration',
+    group: 'Co-authorship',
     data: {
       type: SECTION_TYPE_RADAR_CHART,
-      title: "Inter-country collaboration",
-      dataSet: "${PLACEHOLDER_DATA_SET}",
-      description: "Radar chart for country-country collaborations",
+      title: 'Inter-country collaboration',
+      dataSet: '${PLACEHOLDER_DATA_SET}',
+      description: 'Radar chart for country-country collaborations',
       selections: [
         {
           expression: "concat(temp.a1_country, ' - ', temp.a2_country)",
-          rename: "country-country"
+          rename: 'country-country'
         },
         {
-          expression: "count(*)",
-          rename: "num_collab"
-        },
+          expression: 'count(*)',
+          rename: 'num_collab'
+        }
       ],
       involvedRecords: [
         {
-          name:"(select a1.a_country as a1_country, a2.a_country as a2_country, a1.a_submission_id as submission_id," +
-              "s1.s_is_accepted, s1.s_keywords\n" +
-              "from author_record as a1, author_record as a2, submission_record as s1\n" +
+          name: '(select a1.a_country as a1_country, a2.a_country as a2_country, a1.a_submission_id as submission_id,' +
+              's1.s_is_accepted, s1.s_keywords\n' +
+              'from author_record as a1, author_record as a2, submission_record as s1\n' +
               "where a1.data_set = '${PLACEHOLDER_DATA_SET}' and a2.data_set = '${PLACEHOLDER_DATA_SET}' and s1.data_set = '${PLACEHOLDER_DATA_SET}'\n" +
-              "and a1.a_submission_id = a2.a_submission_id and s1.s_submission_id = a1.a_submission_id " +
-              "and a1.a_country < a2.a_country) as temp",
+              'and a1.a_submission_id = a2.a_submission_id and s1.s_submission_id = a1.a_submission_id ' +
+              'and a1.a_country < a2.a_country) as temp',
           customized: true
         }
       ],
       filters: [
         {
-          field: "temp.s_is_accepted",
-          comparator: "=",
+          field: 'temp.s_is_accepted',
+          comparator: '=',
           value: "'accept'"
         },
         {
-          field: "temp.s_keywords",
-          comparator: "like",
+          field: 'temp.s_keywords',
+          comparator: 'like',
           value: "'%'"
         }
       ],
       joiners: [],
       groupers: [
         {
-          field: "temp.a1_country"
+          field: 'temp.a1_country'
         },
         {
-          field: "temp.a2_country"
+          field: 'temp.a2_country'
         }
       ],
       sorters: [
         {
-          field: "count(*)",
-          order: "desc"
+          field: 'count(*)',
+          order: 'desc'
         }
       ],
       extraData: {
@@ -287,64 +287,64 @@ export default {
         xAxisFieldName: 'country-country',
         yAxisFieldName: 'num_collab',
         numOfResultToDisplay: 10,
-        isColorfulBar: true,
+        isColorfulBar: true
       }
     }
-  }, 
-  "co_authorship_author_bar": {
-    name: "Inter-author collaboration",
-    group: "Co-authorship",
+  },
+  'co_authorship_author_bar': {
+    name: 'Inter-author collaboration',
+    group: 'Co-authorship',
     data: {
       type: SECTION_TYPE_BAR_CHART,
-      title: "Inter-author collaboration",
-      dataSet: "${PLACEHOLDER_DATA_SET}",
-      description: "Bar chart for author-author collaborations",
+      title: 'Inter-author collaboration',
+      dataSet: '${PLACEHOLDER_DATA_SET}',
+      description: 'Bar chart for author-author collaborations',
       selections: [
         {
           expression: "concat(temp.a1_author, ' - ', temp.a2_author)",
-          rename: "auth-auth"
+          rename: 'auth-auth'
         },
         {
-          expression: "count(*)",
-          rename: "num_collab"
-        },
+          expression: 'count(*)',
+          rename: 'num_collab'
+        }
       ],
       involvedRecords: [
         {
-          name:"(select a1.a_person_id as a1_author, a2.a_person_id as a2_author, a1.a_submission_id as submission_id," +
-              "s1.s_is_accepted, s1.s_keywords\n" +
-              "from author_record as a1, author_record as a2, submission_record as s1\n" +
+          name: '(select a1.a_person_id as a1_author, a2.a_person_id as a2_author, a1.a_submission_id as submission_id,' +
+              's1.s_is_accepted, s1.s_keywords\n' +
+              'from author_record as a1, author_record as a2, submission_record as s1\n' +
               "where a1.data_set = '${PLACEHOLDER_DATA_SET}' and a2.data_set = '${PLACEHOLDER_DATA_SET}' and s1.data_set = '${PLACEHOLDER_DATA_SET}'\n" +
-              "and a1.a_submission_id = a2.a_submission_id and s1.s_submission_id = a1.a_submission_id " +
+              'and a1.a_submission_id = a2.a_submission_id and s1.s_submission_id = a1.a_submission_id ' +
               "and a1.a_person_id < a2.a_person_id and a1.a_person_id != '') as temp",
           customized: true
         }
       ],
       filters: [
         {
-          field: "temp.s_is_accepted",
-          comparator: "=",
+          field: 'temp.s_is_accepted',
+          comparator: '=',
           value: "'accept'"
         },
         {
-          field: "temp.s_keywords",
-          comparator: "like",
+          field: 'temp.s_keywords',
+          comparator: 'like',
           value: "'%'"
         }
       ],
       joiners: [],
       groupers: [
         {
-          field: "temp.a1_author"
+          field: 'temp.a1_author'
         },
         {
-          field: "temp.a2_author"
+          field: 'temp.a2_author'
         }
       ],
       sorters: [
         {
-          field: "count(*)",
-          order: "desc"
+          field: 'count(*)',
+          order: 'desc'
         }
       ],
       extraData: {
@@ -353,69 +353,69 @@ export default {
           {
             label: 'Authors: ',
             field: 'auth-auth'
-          },
+          }
         ],
         xAxisFieldName: 'auth-auth',
         yAxisFieldName: 'num_collab',
         numOfResultToDisplay: 10,
-        isColorfulBar: true,
+        isColorfulBar: true
       }
     }
   },
-  "co_authorship_organisation_bar": {
-    name: "Inter-organisation collaboration",
-    group: "Co-authorship",
+  'co_authorship_organisation_bar': {
+    name: 'Inter-organisation collaboration',
+    group: 'Co-authorship',
     data: {
       type: SECTION_TYPE_BAR_CHART,
-      title: "Inter-organisation collaboration",
-      dataSet: "${PLACEHOLDER_DATA_SET}",
-      description: "Bar chart for organisation-organisation collaborations",
+      title: 'Inter-organisation collaboration',
+      dataSet: '${PLACEHOLDER_DATA_SET}',
+      description: 'Bar chart for organisation-organisation collaborations',
       selections: [
         {
           expression: "concat(temp.a1_org, ' - ', temp.a2_org)",
-          rename: "org-org"
+          rename: 'org-org'
         },
         {
-          expression: "count(*)",
-          rename: "num_collab"
-        },
+          expression: 'count(*)',
+          rename: 'num_collab'
+        }
       ],
       involvedRecords: [
         {
-          name:"(select a1.a_organisation as a1_org, a2.a_organisation as a2_org, a1.a_submission_id as submission_id," +
-              "s1.s_is_accepted, s1.s_keywords\n" +
-              "from author_record as a1, author_record as a2, submission_record as s1\n" +
+          name: '(select a1.a_organisation as a1_org, a2.a_organisation as a2_org, a1.a_submission_id as submission_id,' +
+              's1.s_is_accepted, s1.s_keywords\n' +
+              'from author_record as a1, author_record as a2, submission_record as s1\n' +
               "where a1.data_set = '${PLACEHOLDER_DATA_SET}' and a2.data_set = '${PLACEHOLDER_DATA_SET}' and s1.data_set = '${PLACEHOLDER_DATA_SET}'\n" +
-              "and a1.a_submission_id = a2.a_submission_id and s1.s_submission_id = a1.a_submission_id " +
-              "and a1.a_organisation < a2.a_organisation) as temp",
+              'and a1.a_submission_id = a2.a_submission_id and s1.s_submission_id = a1.a_submission_id ' +
+              'and a1.a_organisation < a2.a_organisation) as temp',
           customized: true
         }
       ],
       filters: [
         {
-          field: "temp.s_is_accepted",
-          comparator: "=",
+          field: 'temp.s_is_accepted',
+          comparator: '=',
           value: "'accept'"
         },
         {
-          field: "temp.s_keywords",
-          comparator: "like",
+          field: 'temp.s_keywords',
+          comparator: 'like',
           value: "'%'"
         }
       ],
       joiners: [],
       groupers: [
         {
-          field: "temp.a1_org"
+          field: 'temp.a1_org'
         },
         {
-          field: "temp.a2_org"
+          field: 'temp.a2_org'
         }
       ],
       sorters: [
         {
-          field: "count(*)",
-          order: "desc"
+          field: 'count(*)',
+          order: 'desc'
         }
       ],
       extraData: {
@@ -429,64 +429,64 @@ export default {
         xAxisFieldName: 'org-org',
         yAxisFieldName: 'num_collab',
         numOfResultToDisplay: 10,
-        isColorfulBar: true,
+        isColorfulBar: true
       }
     }
   },
-  "co_authorship_country_bar": {
-    name: "Inter-country collaboration",
-    group: "Co-authorship",
+  'co_authorship_country_bar': {
+    name: 'Inter-country collaboration',
+    group: 'Co-authorship',
     data: {
       type: SECTION_TYPE_BAR_CHART,
-      title: "Inter-country collaboration",
-      dataSet: "${PLACEHOLDER_DATA_SET}",
-      description: "Bar chart for country-country collaborations",
+      title: 'Inter-country collaboration',
+      dataSet: '${PLACEHOLDER_DATA_SET}',
+      description: 'Bar chart for country-country collaborations',
       selections: [
         {
           expression: "concat(temp.a1_country, ' - ', temp.a2_country)",
-          rename: "country-country"
+          rename: 'country-country'
         },
         {
-          expression: "count(*)",
-          rename: "num_collab"
-        },
+          expression: 'count(*)',
+          rename: 'num_collab'
+        }
       ],
       involvedRecords: [
         {
-          name:"(select a1.a_country as a1_country, a2.a_country as a2_country, a1.a_submission_id as submission_id," +
-              "s1.s_is_accepted, s1.s_keywords\n" +
-              "from author_record as a1, author_record as a2, submission_record as s1\n" +
+          name: '(select a1.a_country as a1_country, a2.a_country as a2_country, a1.a_submission_id as submission_id,' +
+              's1.s_is_accepted, s1.s_keywords\n' +
+              'from author_record as a1, author_record as a2, submission_record as s1\n' +
               "where a1.data_set = '${PLACEHOLDER_DATA_SET}' and a2.data_set = '${PLACEHOLDER_DATA_SET}' and s1.data_set = '${PLACEHOLDER_DATA_SET}'\n" +
-              "and a1.a_submission_id = a2.a_submission_id and s1.s_submission_id = a1.a_submission_id " +
-              "and a1.a_country < a2.a_country) as temp",
+              'and a1.a_submission_id = a2.a_submission_id and s1.s_submission_id = a1.a_submission_id ' +
+              'and a1.a_country < a2.a_country) as temp',
           customized: true
         }
       ],
       filters: [
         {
-          field: "temp.s_is_accepted",
-          comparator: "=",
+          field: 'temp.s_is_accepted',
+          comparator: '=',
           value: "'accept'"
         },
         {
-          field: "temp.s_keywords",
-          comparator: "like",
+          field: 'temp.s_keywords',
+          comparator: 'like',
           value: "'%'"
         }
       ],
       joiners: [],
       groupers: [
         {
-          field: "temp.a1_country"
+          field: 'temp.a1_country'
         },
         {
-          field: "temp.a2_country"
+          field: 'temp.a2_country'
         }
       ],
       sorters: [
         {
-          field: "count(*)",
-          order: "desc"
+          field: 'count(*)',
+          order: 'desc'
         }
       ],
       extraData: {
@@ -500,246 +500,246 @@ export default {
         xAxisFieldName: 'country-country',
         yAxisFieldName: 'num_collab',
         numOfResultToDisplay: 10,
-        isColorfulBar: true,
+        isColorfulBar: true
       }
     }
-  },  
-  "co_authorship_author_network": {
-    name: "Graph network of author collaborations",
-    group: "Co-authorship",
+  },
+  'co_authorship_author_network': {
+    name: 'Graph network of author collaborations',
+    group: 'Co-authorship',
     data: {
       type: SECTION_TYPE_GRAPH_NETWORK,
-      title: "Graph network of author collaborations",
-      dataSet: "${PLACEHOLDER_DATA_SET}",
-      description: "Graph network for author-author collaborated submissions",
+      title: 'Graph network of author collaborations',
+      dataSet: '${PLACEHOLDER_DATA_SET}',
+      description: 'Graph network for author-author collaborated submissions',
       selections: [
         {
-          expression: "temp.a1_author",
-          rename: "author_1"
+          expression: 'temp.a1_author',
+          rename: 'author_1'
         },
         {
-          expression: "temp.a2_author",
-          rename: "author_2"
+          expression: 'temp.a2_author',
+          rename: 'author_2'
         },
         {
-          expression: "count(*)",
-          rename: "num_collab"
-        },
+          expression: 'count(*)',
+          rename: 'num_collab'
+        }
       ],
       involvedRecords: [
         {
-          name:"(select a1.a_person_id as a1_author, a2.a_person_id as a2_author, a1.a_submission_id as submission_id," +
-              "s1.s_is_accepted, s1.s_keywords\n" +
-              "from author_record as a1, author_record as a2, submission_record as s1\n" +
+          name: '(select a1.a_person_id as a1_author, a2.a_person_id as a2_author, a1.a_submission_id as submission_id,' +
+              's1.s_is_accepted, s1.s_keywords\n' +
+              'from author_record as a1, author_record as a2, submission_record as s1\n' +
               "where a1.data_set = '${PLACEHOLDER_DATA_SET}' and a2.data_set = '${PLACEHOLDER_DATA_SET}' and s1.data_set = '${PLACEHOLDER_DATA_SET}'\n" +
-              "and a1.a_submission_id = a2.a_submission_id and s1.s_submission_id = a1.a_submission_id " +
+              'and a1.a_submission_id = a2.a_submission_id and s1.s_submission_id = a1.a_submission_id ' +
               "and a1.a_person_id < a2.a_person_id and a1.a_person_id != '') as temp",
           customized: true
         }
       ],
       filters: [
         {
-          field: "temp.s_is_accepted",
-          comparator: "=",
+          field: 'temp.s_is_accepted',
+          comparator: '=',
           value: "'accept'"
         },
         {
-          field: "temp.s_keywords",
-          comparator: "like",
+          field: 'temp.s_keywords',
+          comparator: 'like',
           value: "'%'"
         }
       ],
       joiners: [],
       groupers: [
         {
-          field: "temp.a1_author"
+          field: 'temp.a1_author'
         },
         {
-          field: "temp.a2_author"
+          field: 'temp.a2_author'
         }
       ],
       sorters: [
         {
-          field: "count(*)",
-          order: "desc"
+          field: 'count(*)',
+          order: 'desc'
         }
       ],
       extraData: {
-        linkMessage: [ 
+        linkMessage: [
           {
-            msg: " has collaborated with  "
+            msg: ' has collaborated with  '
           },
           {
-            msg: " for  "
+            msg: ' for  '
           },
           {
-            msg: " submissions ",
+            msg: ' submissions '
           }
         ],
         numOfResultToDisplay: 15,
         isColorfulBar: true,
-        nodeMessage: "Author ID: ",
+        nodeMessage: 'Author ID: '
       }
     }
   },
-  "co_authorship_organisation_network": {
-    name: "Graph network of organisation collaborations",
-    group: "Co-authorship",
+  'co_authorship_organisation_network': {
+    name: 'Graph network of organisation collaborations',
+    group: 'Co-authorship',
     data: {
       type: SECTION_TYPE_GRAPH_NETWORK,
-      title: "Graph network of organisation collaborations",
-      dataSet: "${PLACEHOLDER_DATA_SET}",
-      description: "Graph network for organisation-organisation collaborated submissions",
+      title: 'Graph network of organisation collaborations',
+      dataSet: '${PLACEHOLDER_DATA_SET}',
+      description: 'Graph network for organisation-organisation collaborated submissions',
       selections: [
         {
-          expression: "temp.a1_org",
-          rename: "org_1"
+          expression: 'temp.a1_org',
+          rename: 'org_1'
         },
         {
-          expression: "temp.a2_org",
-          rename: "org_2"
+          expression: 'temp.a2_org',
+          rename: 'org_2'
         },
         {
-          expression: "count(*)",
-          rename: "num_collab"
-        },
+          expression: 'count(*)',
+          rename: 'num_collab'
+        }
       ],
       involvedRecords: [
         {
-          name:"(select a1.a_organisation as a1_org, a2.a_organisation as a2_org, a1.a_submission_id as submission_id," +
-              "s1.s_is_accepted, s1.s_keywords\n" +
-              "from author_record as a1, author_record as a2, submission_record as s1\n" +
+          name: '(select a1.a_organisation as a1_org, a2.a_organisation as a2_org, a1.a_submission_id as submission_id,' +
+              's1.s_is_accepted, s1.s_keywords\n' +
+              'from author_record as a1, author_record as a2, submission_record as s1\n' +
               "where a1.data_set = '${PLACEHOLDER_DATA_SET}' and a2.data_set = '${PLACEHOLDER_DATA_SET}' and s1.data_set = '${PLACEHOLDER_DATA_SET}'\n" +
-              "and a1.a_submission_id = a2.a_submission_id and s1.s_submission_id = a1.a_submission_id " +
-              "and a1.a_organisation < a2.a_organisation) as temp",
+              'and a1.a_submission_id = a2.a_submission_id and s1.s_submission_id = a1.a_submission_id ' +
+              'and a1.a_organisation < a2.a_organisation) as temp',
           customized: true
         }
       ],
       filters: [
         {
-          field: "temp.s_is_accepted",
-          comparator: "=",
+          field: 'temp.s_is_accepted',
+          comparator: '=',
           value: "'accept'"
         },
         {
-          field: "temp.s_keywords",
-          comparator: "like",
+          field: 'temp.s_keywords',
+          comparator: 'like',
           value: "'%'"
         }
       ],
       joiners: [],
       groupers: [
         {
-          field: "temp.a1_org"
+          field: 'temp.a1_org'
         },
         {
-          field: "temp.a2_org"
+          field: 'temp.a2_org'
         }
       ],
       sorters: [
         {
-          field: "count(*)",
-          order: "desc"
+          field: 'count(*)',
+          order: 'desc'
         }
       ],
       extraData: {
-        linkMessage: [ 
+        linkMessage: [
           {
-            msg: " has collaborated with  "
+            msg: ' has collaborated with  '
           },
           {
-            msg: " for  "
+            msg: ' for  '
           },
           {
-            msg: " submissions ",
+            msg: ' submissions '
           }
         ],
         numOfResultToDisplay: 15,
         isColorfulBar: true,
-        nodeMessage: "Organisation: ",
+        nodeMessage: 'Organisation: '
       }
     }
   },
-  "co_authorship_country_network": {
-    name: "Graph network of country collaborations",
-    group: "Co-authorship",
+  'co_authorship_country_network': {
+    name: 'Graph network of country collaborations',
+    group: 'Co-authorship',
     data: {
       type: SECTION_TYPE_GRAPH_NETWORK,
-      title: "Graph network of country collaborations",
-      dataSet: "${PLACEHOLDER_DATA_SET}",
-      description: "Graph network for country-country collaborated submissions",
+      title: 'Graph network of country collaborations',
+      dataSet: '${PLACEHOLDER_DATA_SET}',
+      description: 'Graph network for country-country collaborated submissions',
       selections: [
         {
-          expression: "temp.a1_country",
-          rename: "country_1"
+          expression: 'temp.a1_country',
+          rename: 'country_1'
         },
         {
-          expression: "temp.a2_country",
-          rename: "country_2"
+          expression: 'temp.a2_country',
+          rename: 'country_2'
         },
         {
-          expression: "count(*)",
-          rename: "num_collab"
-        },
+          expression: 'count(*)',
+          rename: 'num_collab'
+        }
       ],
       involvedRecords: [
         {
-          name:"(select a1.a_country as a1_country, a2.a_country as a2_country, a1.a_submission_id as submission_id," +
-              "s1.s_is_accepted, s1.s_keywords\n" +
-              "from author_record as a1, author_record as a2, submission_record as s1\n" +
+          name: '(select a1.a_country as a1_country, a2.a_country as a2_country, a1.a_submission_id as submission_id,' +
+              's1.s_is_accepted, s1.s_keywords\n' +
+              'from author_record as a1, author_record as a2, submission_record as s1\n' +
               "where a1.data_set = '${PLACEHOLDER_DATA_SET}' and a2.data_set = '${PLACEHOLDER_DATA_SET}' and s1.data_set = '${PLACEHOLDER_DATA_SET}'\n" +
-              "and a1.a_submission_id = a2.a_submission_id and s1.s_submission_id = a1.a_submission_id " +
-              "and a1.a_country < a2.a_country) as temp",
+              'and a1.a_submission_id = a2.a_submission_id and s1.s_submission_id = a1.a_submission_id ' +
+              'and a1.a_country < a2.a_country) as temp',
           customized: true
         }
       ],
       filters: [
         {
-          field: "temp.s_is_accepted",
-          comparator: "=",
+          field: 'temp.s_is_accepted',
+          comparator: '=',
           value: "'accept'"
         },
         {
-          field: "temp.s_keywords",
-          comparator: "like",
+          field: 'temp.s_keywords',
+          comparator: 'like',
           value: "'%'"
         }
       ],
       joiners: [],
       groupers: [
         {
-          field: "temp.a1_country"
+          field: 'temp.a1_country'
         },
         {
-          field: "temp.a2_country"
+          field: 'temp.a2_country'
         }
       ],
       sorters: [
         {
-          field: "count(*)",
-          order: "desc"
+          field: 'count(*)',
+          order: 'desc'
         }
       ],
       extraData: {
-        linkMessage: [ 
+        linkMessage: [
           {
-            msg: " has collaborated with  "
+            msg: ' has collaborated with  '
           },
           {
-            msg: " for  "
+            msg: ' for  '
           },
           {
-            msg: " submissions ",
+            msg: ' submissions '
           }
         ],
         numOfResultToDisplay: 15,
         isColorfulBar: true,
-        nodeMessage: "Country: ",
+        nodeMessage: 'Country: '
       }
     }
   },
-  "word_cloud_keywords_all_submission": {
-    name: "Word Cloud for All Submissions Keywords",
+  'word_cloud_keywords_all_submission': {
+    name: 'Word Cloud for All Submissions Keywords',
     group: 'Submission Record',
     data: {
       type: 'word_cloud',
@@ -755,7 +755,7 @@ export default {
       involvedRecords: [
         {
           name: 'submission_record',
-          customized: false,
+          customized: false
         }
       ],
       filters: [],
@@ -764,12 +764,12 @@ export default {
       sorters: [],
       extraData: {
         delimiters: ['\\r', '\\n'],
-        ignoreWords: [],
+        ignoreWords: []
       }
     }
   },
-  "word_cloud_keywords_accepted_submission": {
-    name: "Word Cloud for Accepted Submissions Keywords",
+  'word_cloud_keywords_accepted_submission': {
+    name: 'Word Cloud for Accepted Submissions Keywords',
     group: 'Submission Record',
     data: {
       type: 'word_cloud',
@@ -785,7 +785,7 @@ export default {
       involvedRecords: [
         {
           name: 'submission_record',
-          customized: false,
+          customized: false
         }
       ],
       filters: [
@@ -800,48 +800,48 @@ export default {
       sorters: [],
       extraData: {
         delimiters: ['\\r', '\\n'],
-        ignoreWords: [],
+        ignoreWords: []
       }
     }
   },
-    "word_cloud_keywords_rejected_submission": {
-      name: "Word Cloud for Rejected Submissions Keywords",
-      group: 'Submission Record',
-      data: {
-        type: 'word_cloud',
-        title: 'Word Cloud for Rejected Submissions Keywords',
-        dataSet: '${PLACEHOLDER_DATA_SET}',
-        description: 'This word cloud shows a list of key words found under the abstract section for all the rejected papers.',
-        selections: [
-          {
-            expression: 's_keywords',
-            rename: 's_keywords'
-          }
-        ],
-        involvedRecords: [
-          {
-            name: 'submission_record',
-            customized: false,
-          }
-        ],
-        filters: [
-          {
-            field: 's_is_accepted',
-            comparator: '=',
-            value: 'reject'
-          }
-        ],
-        joiners: [],
-        groupers: [],
-        sorters: [],
-        extraData: {
-          delimiters: ['\\r', '\\n'],
-          ignoreWords: [],
+  'word_cloud_keywords_rejected_submission': {
+    name: 'Word Cloud for Rejected Submissions Keywords',
+    group: 'Submission Record',
+    data: {
+      type: 'word_cloud',
+      title: 'Word Cloud for Rejected Submissions Keywords',
+      dataSet: '${PLACEHOLDER_DATA_SET}',
+      description: 'This word cloud shows a list of key words found under the abstract section for all the rejected papers.',
+      selections: [
+        {
+          expression: 's_keywords',
+          rename: 's_keywords'
         }
+      ],
+      involvedRecords: [
+        {
+          name: 'submission_record',
+          customized: false
+        }
+      ],
+      filters: [
+        {
+          field: 's_is_accepted',
+          comparator: '=',
+          value: 'reject'
+        }
+      ],
+      joiners: [],
+      groupers: [],
+      sorters: [],
+      extraData: {
+        delimiters: ['\\r', '\\n'],
+        ignoreWords: []
       }
-    },
-  "word_cloud_keywords_submission_in_full_papers": {
-    name: "Word Cloud for All Full Papers Submissions Keywords",
+    }
+  },
+  'word_cloud_keywords_submission_in_full_papers': {
+    name: 'Word Cloud for All Full Papers Submissions Keywords',
     group: 'Submission Record',
     data: {
       type: 'word_cloud',
@@ -857,7 +857,7 @@ export default {
       involvedRecords: [
         {
           name: 'submission_record',
-          customized: false,
+          customized: false
         }
       ],
       filters: [
@@ -872,48 +872,48 @@ export default {
       sorters: [],
       extraData: {
         delimiters: ['\\r', '\\n'],
-        ignoreWords: [],
+        ignoreWords: []
       }
     }
   },
-    "word_cloud_keywords_submission_in_posters_amd_demos": {
-      name: "Word Cloud for All Posters and Demos Submissions Keywords",
-      group: 'Submission Record',
-      data: {
-        type: 'word_cloud',
-        title: 'Word Cloud for All Posters and Demos Submissions Keywords',
-        dataSet: '${PLACEHOLDER_DATA_SET}',
-        description: 'This word cloud shows a list of key words found under the abstract section for all the submitted papers in Posters and Demos Track.',
-        selections: [
-          {
-            expression: 's_keywords',
-            rename: 's_keywords'
-          }
-        ],
-        involvedRecords: [
-          {
-            name: 'submission_record',
-            customized: false,
-          }
-        ],
-        filters: [
-          {
-            field: 's_track_name',
-            comparator: '=',
-            value: 'Posters and Demos'
-          }
-        ],
-        joiners: [],
-        groupers: [],
-        sorters: [],
-        extraData: {
-          delimiters: ['\\r', '\\n'],
-          ignoreWords: [],
+  'word_cloud_keywords_submission_in_posters_amd_demos': {
+    name: 'Word Cloud for All Posters and Demos Submissions Keywords',
+    group: 'Submission Record',
+    data: {
+      type: 'word_cloud',
+      title: 'Word Cloud for All Posters and Demos Submissions Keywords',
+      dataSet: '${PLACEHOLDER_DATA_SET}',
+      description: 'This word cloud shows a list of key words found under the abstract section for all the submitted papers in Posters and Demos Track.',
+      selections: [
+        {
+          expression: 's_keywords',
+          rename: 's_keywords'
         }
+      ],
+      involvedRecords: [
+        {
+          name: 'submission_record',
+          customized: false
+        }
+      ],
+      filters: [
+        {
+          field: 's_track_name',
+          comparator: '=',
+          value: 'Posters and Demos'
+        }
+      ],
+      joiners: [],
+      groupers: [],
+      sorters: [],
+      extraData: {
+        delimiters: ['\\r', '\\n'],
+        ignoreWords: []
       }
-    },
-  "word_cloud_keywords_submission_in_short_papers": {
-    name: "Word Cloud for All Short Papers Submissions Keywords",
+    }
+  },
+  'word_cloud_keywords_submission_in_short_papers': {
+    name: 'Word Cloud for All Short Papers Submissions Keywords',
     group: 'Submission Record',
     data: {
       type: 'word_cloud',
@@ -929,7 +929,7 @@ export default {
       involvedRecords: [
         {
           name: 'submission_record',
-          customized: false,
+          customized: false
         }
       ],
       filters: [
@@ -944,48 +944,48 @@ export default {
       sorters: [],
       extraData: {
         delimiters: ['\\r', '\\n'],
-        ignoreWords: [],
+        ignoreWords: []
       }
     }
   },
-    "word_cloud_keywords_submission_in_workshops": {
-      name: "Word Cloud for All Workshop Submissions Keywords",
-      group: 'Submission Record',
-      data: {
-        type: 'word_cloud',
-        title: 'Word Cloud for All Workshop Submissions Keywords',
-        dataSet: '${PLACEHOLDER_DATA_SET}',
-        description: 'This word cloud shows a list of key words found under the abstract section for all the submitted papers in Workshop Track.',
-        selections: [
-          {
-            expression: 's_keywords',
-            rename: 's_keywords'
-          }
-        ],
-        involvedRecords: [
-          {
-            name: 'submission_record',
-            customized: false,
-          }
-        ],
-        filters: [
-          {
-            field: 's_track_name',
-            comparator: '=',
-            value: 'JCDL 2018 - Workshops'
-          }
-        ],
-        joiners: [],
-        groupers: [],
-        sorters: [],
-        extraData: {
-          delimiters: ['\\r', '\\n'],
-          ignoreWords: [],
+  'word_cloud_keywords_submission_in_workshops': {
+    name: 'Word Cloud for All Workshop Submissions Keywords',
+    group: 'Submission Record',
+    data: {
+      type: 'word_cloud',
+      title: 'Word Cloud for All Workshop Submissions Keywords',
+      dataSet: '${PLACEHOLDER_DATA_SET}',
+      description: 'This word cloud shows a list of key words found under the abstract section for all the submitted papers in Workshop Track.',
+      selections: [
+        {
+          expression: 's_keywords',
+          rename: 's_keywords'
         }
+      ],
+      involvedRecords: [
+        {
+          name: 'submission_record',
+          customized: false
+        }
+      ],
+      filters: [
+        {
+          field: 's_track_name',
+          comparator: '=',
+          value: 'JCDL 2018 - Workshops'
+        }
+      ],
+      joiners: [],
+      groupers: [],
+      sorters: [],
+      extraData: {
+        delimiters: ['\\r', '\\n'],
+        ignoreWords: []
       }
-    },
-  "word_cloud_keywords_reviewer_comment": {
-    name: "Word Cloud for Reviewer Comment",
+    }
+  },
+  'word_cloud_keywords_reviewer_comment': {
+    name: 'Word Cloud for Reviewer Comment',
     group: 'Review Record',
     data: {
       type: 'word_cloud',
@@ -1001,7 +1001,7 @@ export default {
       involvedRecords: [
         {
           name: 'review_record',
-          customized: false,
+          customized: false
         }
       ],
       filters: [],
@@ -1010,14 +1010,14 @@ export default {
       sorters: [],
       extraData: {
         delimiters: ['\\r', '\\n', '\\s'],
-        ignoreWords: ["the", "to", "of", "and", "in", "a", "are", "is", "this", "it", "that", "on", "be", "have",
-          "for", "as", "an", "would", "some", "there", "from", "or", "by", "they", "can", "with", "should", "how", "what",
-          "at", "could", "if"],
+        ignoreWords: ['the', 'to', 'of', 'and', 'in', 'a', 'are', 'is', 'this', 'it', 'that', 'on', 'be', 'have',
+          'for', 'as', 'an', 'would', 'some', 'there', 'from', 'or', 'by', 'they', 'can', 'with', 'should', 'how', 'what',
+          'at', 'could', 'if']
       }
     }
   },
-  "submission_rank_author": {
-    name: "Submission Rank Author",
+  'submission_rank_author': {
+    name: 'Submission Rank Author',
     group: 'Author Record',
     data: {
       type: 'bar_chart',
@@ -1034,37 +1034,37 @@ export default {
           rename: 'author_name'
         },
         {
-          expression: "a_email",
+          expression: 'a_email',
           rename: 'author_email'
         }
       ],
       involvedRecords: [
         {
           name: 'author_record',
-          customized: false,
+          customized: false
         }
       ],
       filters: [],
       joiners: [],
       groupers: [
         {
-          field: "a_email"
+          field: 'a_email'
         },
         {
-          field: "a_first_name"
+          field: 'a_first_name'
         },
         {
-          field: "a_last_name"
+          field: 'a_last_name'
         }
       ],
       sorters: [
         {
           field: 'submission_count',
-          order: 'DESC',
+          order: 'DESC'
         },
         {
           field: 'a_email',
-          order: 'ASC',
+          order: 'ASC'
         }
       ],
       extraData: {
@@ -1073,18 +1073,18 @@ export default {
         xAxisFieldName: 'author_name',
         yAxisFieldName: 'submission_count',
         numOfResultToDisplay: 10,
-        isColorfulBar: true,
+        isColorfulBar: true
       }
     },
     options: {
-        scales: {
-           xAxes: [{
-              stacked: true // this should be set to make the bars stacked
-           }],
-           yAxes: [{
-              stacked: true // this also..
-           }]
-        }
+      scales: {
+        xAxes: [{
+          stacked: true // this should be set to make the bars stacked
+        }],
+        yAxes: [{
+          stacked: true // this also..
+        }]
+      }
     }
   },
   /*
@@ -1142,8 +1142,8 @@ export default {
     }
   },
   */
-  "submission_rank_paper_author_in_full_papers": {
-    name: "Submission Rank Paper Author in Full Papers",
+  'submission_rank_paper_author_in_full_papers': {
+    name: 'Submission Rank Paper Author in Full Papers',
     group: 'Submission Record',
     data: {
       type: 'bar_chart',
@@ -1156,15 +1156,15 @@ export default {
           rename: 'paper_count'
         },
         {
-          expression: "s_author_name",
+          expression: 's_author_name',
           rename: 's_author_name'
         }
       ],
       involvedRecords: [
         {
-          name: "(SELECT s_author_name, s_track_name FROM submission_record, submission_record_author_set, submission_author_record " +
+          name: '(SELECT s_author_name, s_track_name FROM submission_record, submission_record_author_set, submission_author_record ' +
             "WHERE s_id = submission_record_s_id AND author_set_s_author_id = s_author_id AND submission_record.data_set = '${PLACEHOLDER_DATA_SET}') AS `tmp`",
-          customized: true,
+          customized: true
         }
       ],
       filters: [
@@ -1177,17 +1177,17 @@ export default {
       joiners: [],
       groupers: [
         {
-          field: "s_author_name"
+          field: 's_author_name'
         }
       ],
       sorters: [
         {
           field: 'paper_count',
-          order: 'DESC',
+          order: 'DESC'
         },
         {
           field: 's_author_name',
-          order: 'ASC',
+          order: 'ASC'
         }
       ],
       extraData: {
@@ -1197,12 +1197,12 @@ export default {
         xAxisFieldName: 's_author_name',
         yAxisFieldName: 'paper_count',
         numOfResultToDisplay: 10,
-        isColorfulBar: true,
+        isColorfulBar: true
       }
     }
   },
-  "submission_acceptance_rate_rank_paper_author": {
-    name: "Submission Acceptance Rate Rank Paper Author",
+  'submission_acceptance_rate_rank_paper_author': {
+    name: 'Submission Acceptance Rate Rank Paper Author',
     group: 'Submission Record',
     data: {
       type: 'bar_chart',
@@ -1211,32 +1211,32 @@ export default {
       description: 'This bar chart shows the percentage of acceptance rate of each author\'s papers in descending order. This tells us which authors has higher acceptance rate than other authors. We have split the authors field in each submission into individual authors and calculate the acceptance rate for each author.',
       selections: [
         {
-          expression: "accepted",
+          expression: 'accepted',
           rename: 'accepted'
         },
         {
-          expression: "submitted",
+          expression: 'submitted',
           rename: 'submitted'
         },
         {
-          expression: "acceptance_rate",
+          expression: 'acceptance_rate',
           rename: 'acceptance_rate'
         },
         {
-          expression: "s_author_name",
+          expression: 's_author_name',
           rename: 's_author_name'
-        },
+        }
       ],
       involvedRecords: [
         {
           name: "(SELECT SUM(CASE WHEN s_is_accepted = 'accept' THEN 1 ELSE 0 END) AS `accepted`, " +
-            "COUNT(*) AS `submitted`, " +
+            'COUNT(*) AS `submitted`, ' +
             "ROUND(SUM(CASE WHEN s_is_accepted = 'accept' THEN 1 ELSE 0 END)/COUNT(*), 2) AS `acceptance_rate`, " +
-            "s_author_name FROM " +
-              "(SELECT s_author_name, s_is_accepted FROM submission_record, submission_record_author_set, submission_author_record " +
+            's_author_name FROM ' +
+              '(SELECT s_author_name, s_is_accepted FROM submission_record, submission_record_author_set, submission_author_record ' +
               "WHERE s_id = submission_record_s_id AND author_set_s_author_id = s_author_id AND submission_record.data_set = '${PLACEHOLDER_DATA_SET}') AS `tmp1` " +
-            "GROUP BY s_author_name) AS `tmp2`",
-          customized: true,
+            'GROUP BY s_author_name) AS `tmp2`',
+          customized: true
         }
       ],
       filters: [],
@@ -1245,11 +1245,11 @@ export default {
       sorters: [
         {
           field: 'acceptance_rate',
-          order: 'DESC',
+          order: 'DESC'
         },
         {
           field: 's_author_name',
-          order: 'ASC',
+          order: 'ASC'
         }
       ],
       extraData: {
@@ -1257,22 +1257,22 @@ export default {
         fieldsShownInToolTips: [
           {
             label: 'Total Accepted',
-            field: 'accepted',
+            field: 'accepted'
           },
           {
             label: 'Total Submitted',
-            field: 'submitted',
-          },
+            field: 'submitted'
+          }
         ],
         xAxisFieldName: 's_author_name',
         yAxisFieldName: 'acceptance_rate',
         numOfResultToDisplay: 10,
-        isColorfulBar: true,
+        isColorfulBar: true
       }
     }
   },
-  "submission_accepted_rank_paper_author": {
-    name: "Submission Accepted Rank Paper Author",
+  'submission_accepted_rank_paper_author': {
+    name: 'Submission Accepted Rank Paper Author',
     group: 'Submission Record',
     data: {
       type: 'bar_chart',
@@ -1285,7 +1285,7 @@ export default {
           rename: 'accepted'
         },
         {
-          expression: "COUNT(*)",
+          expression: 'COUNT(*)',
           rename: 'submitted'
         },
         {
@@ -1293,32 +1293,32 @@ export default {
           rename: 'acceptance_rate'
         },
         {
-          expression: "s_author_name",
+          expression: 's_author_name',
           rename: 's_author_name'
-        },
+        }
       ],
       involvedRecords: [
         {
-          name: "(SELECT s_author_name, s_is_accepted FROM submission_record, submission_record_author_set, submission_author_record " +
+          name: '(SELECT s_author_name, s_is_accepted FROM submission_record, submission_record_author_set, submission_author_record ' +
             "WHERE s_id = submission_record_s_id AND author_set_s_author_id = s_author_id AND submission_record.data_set = '${PLACEHOLDER_DATA_SET}') AS `tmp`",
-          customized: true,
+          customized: true
         }
       ],
       filters: [],
       joiners: [],
       groupers: [
         {
-          field: "s_author_name"
-        },
+          field: 's_author_name'
+        }
       ],
       sorters: [
         {
           field: 'accepted',
-          order: 'DESC',
+          order: 'DESC'
         },
         {
           field: 's_author_name',
-          order: 'ASC',
+          order: 'ASC'
         }
       ],
       extraData: {
@@ -1326,22 +1326,22 @@ export default {
         fieldsShownInToolTips: [
           {
             label: 'Acceptance Rate',
-            field: 'acceptance_rate',
+            field: 'acceptance_rate'
           },
           {
             label: 'Total Submitted',
-            field: 'submitted',
-          },
+            field: 'submitted'
+          }
         ],
         xAxisFieldName: 's_author_name',
         yAxisFieldName: 'accepted',
         numOfResultToDisplay: 10,
-        isColorfulBar: true,
+        isColorfulBar: true
       }
     }
   },
-  "submission_rank_country": {
-    name: "Submission Rank Country",
+  'submission_rank_country': {
+    name: 'Submission Rank Country',
     group: 'Author Record',
     data: {
       type: 'pie_chart',
@@ -1354,38 +1354,38 @@ export default {
           rename: 'submission_count'
         },
         {
-          expression: "a_country",
+          expression: 'a_country',
           rename: 'a_country'
         }
       ],
       involvedRecords: [
         {
           name: 'author_record',
-          customized: false,
+          customized: false
         }
       ],
       filters: [],
       joiners: [],
       groupers: [
         {
-          field: "a_country"
+          field: 'a_country'
         }
       ],
       sorters: [
         {
           field: 'submission_count',
-          order: 'DESC',
+          order: 'DESC'
         }
       ],
       extraData: {
         categoryFieldName: 'a_country',
         valueFieldName: 'submission_count',
-        numOfResultToDisplay: 10,
+        numOfResultToDisplay: 10
       }
     }
   },
-  "submission_rank_organization": {
-    name: "Submission Rank Organization",
+  'submission_rank_organization': {
+    name: 'Submission Rank Organization',
     group: 'Author Record',
     data: {
       type: 'pie_chart',
@@ -1398,38 +1398,38 @@ export default {
           rename: 'submission_count'
         },
         {
-          expression: "a_organisation",
+          expression: 'a_organisation',
           rename: 'a_organisation'
         }
       ],
       involvedRecords: [
         {
           name: 'author_record',
-          customized: false,
+          customized: false
         }
       ],
       filters: [],
       joiners: [],
       groupers: [
         {
-          field: "a_organisation"
+          field: 'a_organisation'
         }
       ],
       sorters: [
         {
           field: 'submission_count',
-          order: 'DESC',
+          order: 'DESC'
         }
       ],
       extraData: {
         categoryFieldName: 'a_organisation',
         valueFieldName: 'submission_count',
-        numOfResultToDisplay: 10,
+        numOfResultToDisplay: 10
       }
     }
   },
-  "review_weighted_score_distribution": {
-    name: "Review Weighted Score Distribution",
+  'review_weighted_score_distribution': {
+    name: 'Review Weighted Score Distribution',
     group: 'Review Record',
     data: {
       type: 'bar_chart',
@@ -1442,38 +1442,38 @@ export default {
           rename: 'weighted_score_interval'
         },
         {
-          expression: "COUNT(*) - 1",
-          rename: 'submission_count',
+          expression: 'COUNT(*) - 1',
+          rename: 'submission_count'
         }
       ],
       involvedRecords: [
         {
-          name: "(SELECT CASE  \n" +
-            "  WHEN weighted_score <= -2.75 THEN 1\n" +
-            "  WHEN weighted_score <= -2.50 THEN 2\n" +
-            "  WHEN weighted_score <= -2.25 THEN 3\n" +
-            "  WHEN weighted_score <= -2.00 THEN 4\n" +
-            "  WHEN weighted_score <= -1.75 THEN 5\n" +
-            "  WHEN weighted_score <= -1.50 THEN 6\n" +
-            "  WHEN weighted_score <= -1.25 THEN 7\n" +
-            "  WHEN weighted_score <= -1.00 THEN 8\n" +
-            "  WHEN weighted_score <= -0.75 THEN 9\n" +
-            "  WHEN weighted_score <= -0.50 THEN 10\n" +
-            "  WHEN weighted_score <= -0.25 THEN 11\n" +
-            "  WHEN weighted_score <= 0.00 THEN 12\n" +
-            "  WHEN weighted_score <= 0.25 THEN 13\n" +
-            "  WHEN weighted_score <= 0.50 THEN 14\n" +
-            "  WHEN weighted_score <= 0.75 THEN 15\n" +
-            "  WHEN weighted_score <= 1.00 THEN 16\n" +
-            "  WHEN weighted_score <= 1.25 THEN 17\n" +
-            "  WHEN weighted_score <= 1.50 THEN 18\n" +
-            "  WHEN weighted_score <= 1.75 THEN 19\n" +
-            "  WHEN weighted_score <= 2.00 THEN 20\n" +
-            "  WHEN weighted_score <= 2.25 THEN 21\n" +
-            "  WHEN weighted_score <= 2.50 THEN 22\n" +
-            "  WHEN weighted_score <= 2.75 THEN 23\n" +
-            "  WHEN weighted_score <= 3.00 THEN 24\n" +
-            "END `weighted_score_interval_sort`, CASE  \n" +
+          name: '(SELECT CASE  \n' +
+            '  WHEN weighted_score <= -2.75 THEN 1\n' +
+            '  WHEN weighted_score <= -2.50 THEN 2\n' +
+            '  WHEN weighted_score <= -2.25 THEN 3\n' +
+            '  WHEN weighted_score <= -2.00 THEN 4\n' +
+            '  WHEN weighted_score <= -1.75 THEN 5\n' +
+            '  WHEN weighted_score <= -1.50 THEN 6\n' +
+            '  WHEN weighted_score <= -1.25 THEN 7\n' +
+            '  WHEN weighted_score <= -1.00 THEN 8\n' +
+            '  WHEN weighted_score <= -0.75 THEN 9\n' +
+            '  WHEN weighted_score <= -0.50 THEN 10\n' +
+            '  WHEN weighted_score <= -0.25 THEN 11\n' +
+            '  WHEN weighted_score <= 0.00 THEN 12\n' +
+            '  WHEN weighted_score <= 0.25 THEN 13\n' +
+            '  WHEN weighted_score <= 0.50 THEN 14\n' +
+            '  WHEN weighted_score <= 0.75 THEN 15\n' +
+            '  WHEN weighted_score <= 1.00 THEN 16\n' +
+            '  WHEN weighted_score <= 1.25 THEN 17\n' +
+            '  WHEN weighted_score <= 1.50 THEN 18\n' +
+            '  WHEN weighted_score <= 1.75 THEN 19\n' +
+            '  WHEN weighted_score <= 2.00 THEN 20\n' +
+            '  WHEN weighted_score <= 2.25 THEN 21\n' +
+            '  WHEN weighted_score <= 2.50 THEN 22\n' +
+            '  WHEN weighted_score <= 2.75 THEN 23\n' +
+            '  WHEN weighted_score <= 3.00 THEN 24\n' +
+            'END `weighted_score_interval_sort`, CASE  \n' +
             "  WHEN weighted_score <= -2.75 THEN '-3.00 ~ -2.75'\n" +
             "  WHEN weighted_score <= -2.50 THEN '-2.75 ~ -2.50'\n" +
             "  WHEN weighted_score <= -2.25 THEN '-2.50 ~ -2.25'\n" +
@@ -1498,33 +1498,33 @@ export default {
             "  WHEN weighted_score <= 2.50 THEN '2.25 ~ 2.50'\n" +
             "  WHEN weighted_score <= 2.75 THEN '2.50 ~ 2.75'\n" +
             "  WHEN weighted_score <= 3.00 THEN '2.75 ~ 3.00'\n" +
-            "END AS `weighted_score_interval` FROM (SELECT SUM(r_confidence_level * r_overall_evaluation_score) / SUM(r_confidence_level) AS `weighted_score` " +
+            'END AS `weighted_score_interval` FROM (SELECT SUM(r_confidence_level * r_overall_evaluation_score) / SUM(r_confidence_level) AS `weighted_score` ' +
             "FROM review_record WHERE review_record.data_set = '${PLACEHOLDER_DATA_SET}' GROUP BY r_submission_id " +
-            "UNION ALL SELECT -2.75\n" +
-            "UNION ALL SELECT -2.50\n" +
-            "UNION ALL SELECT -2.25\n" +
-            "UNION ALL SELECT -2.00\n" +
-            "UNION ALL SELECT -1.75\n" +
-            "UNION ALL SELECT -1.50\n" +
-            "UNION ALL SELECT -1.25\n" +
-            "UNION ALL SELECT -1.00\n" +
-            "UNION ALL SELECT -0.75\n" +
-            "UNION ALL SELECT -0.50\n" +
-            "UNION ALL SELECT -0.25\n" +
-            "UNION ALL SELECT 0.00\n" +
-            "UNION ALL SELECT 0.25\n" +
-            "UNION ALL SELECT 0.50\n" +
-            "UNION ALL SELECT 0.75\n" +
-            "UNION ALL SELECT 1.00\n" +
-            "UNION ALL SELECT 1.25\n" +
-            "UNION ALL SELECT 1.50\n" +
-            "UNION ALL SELECT 1.75\n" +
-            "UNION ALL SELECT 2.00\n" +
-            "UNION ALL SELECT 2.25\n" +
-            "UNION ALL SELECT 2.50\n" +
-            "UNION ALL SELECT 2.75\n" +
-            "UNION ALL SELECT 3.00) AS `tmp1`) AS `tmp2`",
-          customized: true,
+            'UNION ALL SELECT -2.75\n' +
+            'UNION ALL SELECT -2.50\n' +
+            'UNION ALL SELECT -2.25\n' +
+            'UNION ALL SELECT -2.00\n' +
+            'UNION ALL SELECT -1.75\n' +
+            'UNION ALL SELECT -1.50\n' +
+            'UNION ALL SELECT -1.25\n' +
+            'UNION ALL SELECT -1.00\n' +
+            'UNION ALL SELECT -0.75\n' +
+            'UNION ALL SELECT -0.50\n' +
+            'UNION ALL SELECT -0.25\n' +
+            'UNION ALL SELECT 0.00\n' +
+            'UNION ALL SELECT 0.25\n' +
+            'UNION ALL SELECT 0.50\n' +
+            'UNION ALL SELECT 0.75\n' +
+            'UNION ALL SELECT 1.00\n' +
+            'UNION ALL SELECT 1.25\n' +
+            'UNION ALL SELECT 1.50\n' +
+            'UNION ALL SELECT 1.75\n' +
+            'UNION ALL SELECT 2.00\n' +
+            'UNION ALL SELECT 2.25\n' +
+            'UNION ALL SELECT 2.50\n' +
+            'UNION ALL SELECT 2.75\n' +
+            'UNION ALL SELECT 3.00) AS `tmp1`) AS `tmp2`',
+          customized: true
         }
       ],
       filters: [],
@@ -1537,7 +1537,7 @@ export default {
       sorters: [
         {
           field: 'weighted_score_interval_sort',
-          order: 'ASC',
+          order: 'ASC'
         }
       ],
       extraData: {
@@ -1546,12 +1546,12 @@ export default {
         xAxisFieldName: 'weighted_score_interval',
         yAxisFieldName: 'submission_count',
         numOfResultToDisplay: 50,
-        isColorfulBar: false,
+        isColorfulBar: false
       }
     }
   },
-  "review_weighted_evaluation_score_stats_summary": {
-    name: "Review Weighted Evaluation Score Statistic Summary",
+  'review_weighted_evaluation_score_stats_summary': {
+    name: 'Review Weighted Evaluation Score Statistic Summary',
     group: 'Review Record',
     data: {
       type: 'stats',
@@ -1566,13 +1566,13 @@ export default {
         {
           expression: 'temp.weighted_score',
           rename: 'weighted_score'
-        },
+        }
       ],
       involvedRecords: [
         {
           name: '(SELECT r1.r_id, r2.weighted_score FROM review_record r1, (SELECT r_submission_id, ROUND(SUM(r_confidence_level * r_overall_evaluation_score) / SUM(r_confidence_level), 2) AS `weighted_score` FROM review_record WHERE review_record.data_set = "${PLACEHOLDER_DATA_SET}" GROUP BY r_submission_id) r2\n' +
                 'WHERE r1.r_submission_id = r2.r_submission_id AND r1.data_set = "${PLACEHOLDER_DATA_SET}") as temp',
-          customized: true,
+          customized: true
         }
       ],
       filters: [],
@@ -1580,12 +1580,12 @@ export default {
       groupers: [],
       sorters: [],
       extraData: {
-        types: ['min', 'max', 'avg', 'median', 'std'],
+        types: ['min', 'max', 'avg', 'median', 'std']
       }
     }
   },
-  "review_expertise_level_stats_summary": {
-    name: "Reviewer Expertise Level Statistic Summary",
+  'review_expertise_level_stats_summary': {
+    name: 'Reviewer Expertise Level Statistic Summary',
     group: 'Review Record',
     data: {
       type: 'stats',
@@ -1600,13 +1600,13 @@ export default {
         {
           expression: 'temp.avg_expertise_level',
           rename: 'avg_expertise_level'
-        },
+        }
       ],
       involvedRecords: [
         {
           name: '(SELECT r1.r_id, r2.avg_expertise_level FROM review_record r1, (SELECT r_submission_id, ROUND(AVG(r_expertise_level), 2) AS `avg_expertise_level` FROM review_record WHERE review_record.data_set = "${PLACEHOLDER_DATA_SET}" GROUP BY r_submission_id) r2\n' +
           'WHERE r1.r_submission_id = r2.r_submission_id AND r1.data_set = "${PLACEHOLDER_DATA_SET}") as temp',
-          customized: true,
+          customized: true
         }
       ],
       filters: [],
@@ -1614,12 +1614,12 @@ export default {
       groupers: [],
       sorters: [],
       extraData: {
-        types: ['min', 'max', 'avg', 'median', 'std'],
+        types: ['min', 'max', 'avg', 'median', 'std']
       }
     }
   },
-  "review_confidence_level_stats_summary": {
-    name: "Reviewer Confidence Level Statistic Summary",
+  'review_confidence_level_stats_summary': {
+    name: 'Reviewer Confidence Level Statistic Summary',
     group: 'Review Record',
     data: {
       type: 'stats',
@@ -1634,13 +1634,13 @@ export default {
         {
           expression: 'temp.avg_confidence_level',
           rename: 'avg_confidence_level'
-        },
+        }
       ],
       involvedRecords: [
         {
           name: '(SELECT r1.r_id, r2.avg_confidence_level FROM review_record r1, (SELECT r_submission_id, ROUND(AVG(r_confidence_level), 2) AS `avg_confidence_level` FROM review_record WHERE review_record.data_set = "${PLACEHOLDER_DATA_SET}" GROUP BY r_submission_id) r2\n' +
                 'WHERE r1.r_submission_id = r2.r_submission_id AND r1.data_set = "${PLACEHOLDER_DATA_SET}") as temp',
-          customized: true,
+          customized: true
         }
       ],
       filters: [],
@@ -1648,12 +1648,12 @@ export default {
       groupers: [],
       sorters: [],
       extraData: {
-        types: ['min', 'max', 'avg', 'median', 'std'],
+        types: ['min', 'max', 'avg', 'median', 'std']
       }
     }
   },
-  "submission_rank_track": {
-    name: "Submission Rank Track",
+  'submission_rank_track': {
+    name: 'Submission Rank Track',
     group: 'Submission Record',
     data: {
       type: 'bar_chart',
@@ -1666,27 +1666,27 @@ export default {
           rename: 'submission_count'
         },
         {
-          expression: "s_track_name",
+          expression: 's_track_name',
           rename: 's_track_name'
         }
       ],
       involvedRecords: [
         {
           name: 'submission_record',
-          customized: false,
+          customized: false
         }
       ],
       filters: [],
       joiners: [],
       groupers: [
         {
-          field: "s_track_name"
+          field: 's_track_name'
         }
       ],
       sorters: [
         {
           field: 's_track_name',
-          order: 'ASC',
+          order: 'ASC'
         }
       ],
       extraData: {
@@ -1695,12 +1695,12 @@ export default {
         xAxisFieldName: 's_track_name',
         yAxisFieldName: 'submission_count',
         numOfResultToDisplay: 10,
-        isColorfulBar: true,
+        isColorfulBar: true
       }
     }
   },
-  "acceptance_ratio_track": {
-    name: "Acceptance Ratio Track",
+  'acceptance_ratio_track': {
+    name: 'Acceptance Ratio Track',
     group: 'Submission Record',
     data: {
       type: 'bar_chart',
@@ -1713,27 +1713,27 @@ export default {
           rename: 'acceptance_ratio'
         },
         {
-          expression: "s_track_name",
+          expression: 's_track_name',
           rename: 's_track_name'
         }
       ],
       involvedRecords: [
         {
           name: 'submission_record',
-          customized: false,
+          customized: false
         }
       ],
       filters: [],
       joiners: [],
       groupers: [
         {
-          field: "s_track_name"
+          field: 's_track_name'
         }
       ],
       sorters: [
         {
           field: 's_track_name',
-          order: 'ASC',
+          order: 'ASC'
         }
       ],
       extraData: {
@@ -1742,12 +1742,12 @@ export default {
         xAxisFieldName: 's_track_name',
         yAxisFieldName: 'acceptance_ratio',
         numOfResultToDisplay: 10,
-        isColorfulBar: true,
+        isColorfulBar: true
       }
     }
   },
-  "acceptance_ratio_by_year": {
-    name: "Acceptance Ratio by Year",
+  'acceptance_ratio_by_year': {
+    name: 'Acceptance Ratio by Year',
     group: 'Submission Record',
     data: {
       type: 'line_chart',
@@ -1760,38 +1760,38 @@ export default {
           rename: 'acceptance_ratio'
         },
         {
-          expression: "YEAR(s_submission_time)",
+          expression: 'YEAR(s_submission_time)',
           rename: 'year'
         }
       ],
       involvedRecords: [
         {
           name: 'submission_record',
-          customized: false,
+          customized: false
         }
       ],
       filters: [],
       joiners: [],
       groupers: [
         {
-          field: "YEAR(s_submission_time)"
+          field: 'YEAR(s_submission_time)'
         }
       ],
       sorters: [
         {
           field: 'year',
-          order: 'ASC',
+          order: 'ASC'
         }
       ],
       extraData: {
         dataSetLabel: 'Acceptance Ratio',
         xAxisFieldName: 'year',
-        yAxisFieldName: 'acceptance_ratio',
+        yAxisFieldName: 'acceptance_ratio'
       }
     }
   },
-  "recommendation_for_best_paper_distribution": {
-    name: "Recommendation for Best Paper Distribution",
+  'recommendation_for_best_paper_distribution': {
+    name: 'Recommendation for Best Paper Distribution',
     group: 'Review Record',
     data: {
       type: 'pie_chart',
@@ -1805,33 +1805,33 @@ export default {
           rename: 'label'
         },
         {
-          expression: "COUNT(*)",
+          expression: 'COUNT(*)',
           rename: 'review_count'
         }
       ],
       involvedRecords: [
         {
           name: 'review_record',
-          customized: false,
+          customized: false
         }
       ],
       filters: [],
       joiners: [],
       groupers: [
         {
-          field: "r_has_recommended_for_best_paper"
+          field: 'r_has_recommended_for_best_paper'
         }
       ],
       sorters: [],
       extraData: {
         categoryFieldName: 'label',
         valueFieldName: 'review_count',
-        numOfResultToDisplay: 10,
+        numOfResultToDisplay: 10
       }
     }
   },
-  "review_count_summary_for_each_submission": {
-    name: "Review Count Summary for Each Submission",
+  'review_count_summary_for_each_submission': {
+    name: 'Review Count Summary for Each Submission',
     group: 'Review Record',
     data: {
       type: 'stats',
@@ -1846,13 +1846,13 @@ export default {
         {
           expression: 'temp.number_of_review',
           rename: 'number_of_review'
-        },
+        }
       ],
       involvedRecords: [
         {
           name: '(SELECT r1.r_id, r2.number_of_review FROM review_record r1, (SELECT r_submission_id, COUNT(*) AS `number_of_review` FROM review_record WHERE review_record.data_set = "${PLACEHOLDER_DATA_SET}" GROUP BY r_submission_id) r2\n' +
           'WHERE r1.r_submission_id = r2.r_submission_id AND r1.data_set = "${PLACEHOLDER_DATA_SET}") as temp',
-          customized: true,
+          customized: true
         }
       ],
       filters: [],
@@ -1860,12 +1860,12 @@ export default {
       groupers: [],
       sorters: [],
       extraData: {
-        types: ['min', 'max', 'avg', 'median'],
+        types: ['min', 'max', 'avg', 'median']
       }
     }
   },
-  "submission_rank_author_in_full_papers": {
-    name: "Submission Rank Author in Full Papers",
+  'submission_rank_author_in_full_papers': {
+    name: 'Submission Rank Author in Full Papers',
     group: 'Author Record + Submission Record',
     data: {
       type: 'bar_chart',
@@ -1882,48 +1882,48 @@ export default {
           rename: 'author_name'
         },
         {
-          expression: "a_email",
+          expression: 'a_email',
           rename: 'author_email'
         }
       ],
       involvedRecords: [
         {
           name: 'author_record',
-          customized: false,
+          customized: false
         },
         {
           name: 'submission_record',
-          customized: false,
+          customized: false
         }
       ],
       filters: [{
         field: 's_track_name',
         comparator: '=',
-        value: 'Full Papers',
+        value: 'Full Papers'
       }],
       joiners: [{
         left: 'a_submission_id',
-        right: 's_submission_id',
+        right: 's_submission_id'
       }],
       groupers: [
         {
-          field: "a_email"
+          field: 'a_email'
         },
         {
-          field: "a_first_name"
+          field: 'a_first_name'
         },
         {
-          field: "a_last_name"
+          field: 'a_last_name'
         }
       ],
       sorters: [
         {
           field: 'submission_count',
-          order: 'DESC',
+          order: 'DESC'
         },
         {
           field: 'a_email',
-          order: 'ASC',
+          order: 'ASC'
         }
       ],
       extraData: {
@@ -1932,12 +1932,12 @@ export default {
         xAxisFieldName: 'author_name',
         yAxisFieldName: 'submission_count',
         numOfResultToDisplay: 10,
-        isColorfulBar: true,
+        isColorfulBar: true
       }
     }
   },
-  "submission_acceptance_rate_rank_author": {
-    name: "Submission Acceptance Rate Rank Author",
+  'submission_acceptance_rate_rank_author': {
+    name: 'Submission Acceptance Rate Rank Author',
     group: 'Author Record + Submission Record',
     data: {
       type: 'bar_chart',
@@ -1946,23 +1946,23 @@ export default {
       description: 'By combining author and submission data, this bar chart shows the percentage of acceptance rate of each author\'s papers in descending order. This tells us which authors has higher acceptance rate than other authors.',
       selections: [
         {
-          expression: "acceptance_rate",
+          expression: 'acceptance_rate',
           rename: 'acceptance_rate'
         },
         {
-          expression: "author_name",
+          expression: 'author_name',
           rename: 'author_name'
         },
         {
-          expression: "author_email",
+          expression: 'author_email',
           rename: 'author_email'
         },
         {
-          expression: "submitted",
+          expression: 'submitted',
           rename: 'submitted'
         },
         {
-          expression: "accepted",
+          expression: 'accepted',
           rename: 'accepted'
         }
       ],
@@ -1976,8 +1976,8 @@ export default {
             'FROM author_record, submission_record WHERE ' +
             "author_record.data_set = '${PLACEHOLDER_DATA_SET}' AND submission_record.data_set = '${PLACEHOLDER_DATA_SET}' " +
             'AND a_submission_id = s_submission_id GROUP BY a_email, a_first_name, a_last_name) AS `tmp`',
-          customized: true,
-        },
+          customized: true
+        }
       ],
       filters: [],
       joiners: [],
@@ -1985,11 +1985,11 @@ export default {
       sorters: [
         {
           field: 'acceptance_rate',
-          order: 'DESC',
+          order: 'DESC'
         },
         {
           field: 'author_email',
-          order: 'ASC',
+          order: 'ASC'
         }
       ],
       extraData: {
@@ -1997,26 +1997,26 @@ export default {
         fieldsShownInToolTips: [
           {
             label: 'Email',
-            field: 'author_email',
+            field: 'author_email'
           },
           {
             label: 'Total Accepted',
-            field: 'accepted',
+            field: 'accepted'
           },
           {
             label: 'Total Submitted',
-            field: 'submitted',
-          },
+            field: 'submitted'
+          }
         ],
         xAxisFieldName: 'author_name',
         yAxisFieldName: 'acceptance_rate',
         numOfResultToDisplay: 10,
-        isColorfulBar: true,
+        isColorfulBar: true
       }
     }
   },
-  "submission_acceptance_rate_author_distribution": {
-    name: "Submission Acceptance Rate Author Distribution",
+  'submission_acceptance_rate_author_distribution': {
+    name: 'Submission Acceptance Rate Author Distribution',
     group: 'Author Record + Submission Record',
     data: {
       type: 'bar_chart',
@@ -2025,28 +2025,28 @@ export default {
       description: 'By combining author and submission data, this bar chart shows the distribution of acceptance rate for all authors. This tells us the capability of researchers who choose to submit in the conference.',
       selections: [
         {
-          expression: "COUNT(*) - 1",
+          expression: 'COUNT(*) - 1',
           rename: 'number_of_author'
         },
         {
-          expression: "acceptance_rate_interval",
+          expression: 'acceptance_rate_interval',
           rename: 'acceptance_rate_interval'
-        },
+        }
       ],
       involvedRecords: [
         {
-          name: "(SELECT CASE \n" +
-            "  WHEN acceptance_rate <= 0.1 THEN 1\n" +
-            "  WHEN acceptance_rate <= 0.2 THEN 2\n" +
-            "  WHEN acceptance_rate <= 0.3 THEN 3\n" +
-            "  WHEN acceptance_rate <= 0.4 THEN 4\n" +
-            "  WHEN acceptance_rate <= 0.5 THEN 5\n" +
-            "  WHEN acceptance_rate <= 0.6 THEN 6\n" +
-            "  WHEN acceptance_rate <= 0.7 THEN 7\n" +
-            "  WHEN acceptance_rate <= 0.8 THEN 8\n" +
-            "  WHEN acceptance_rate <= 0.9 THEN 9\n" +
-            "  WHEN acceptance_rate <= 1.0 THEN 10\n" +
-            "END AS `acceptance_rate_interval_sort`, CASE " +
+          name: '(SELECT CASE \n' +
+            '  WHEN acceptance_rate <= 0.1 THEN 1\n' +
+            '  WHEN acceptance_rate <= 0.2 THEN 2\n' +
+            '  WHEN acceptance_rate <= 0.3 THEN 3\n' +
+            '  WHEN acceptance_rate <= 0.4 THEN 4\n' +
+            '  WHEN acceptance_rate <= 0.5 THEN 5\n' +
+            '  WHEN acceptance_rate <= 0.6 THEN 6\n' +
+            '  WHEN acceptance_rate <= 0.7 THEN 7\n' +
+            '  WHEN acceptance_rate <= 0.8 THEN 8\n' +
+            '  WHEN acceptance_rate <= 0.9 THEN 9\n' +
+            '  WHEN acceptance_rate <= 1.0 THEN 10\n' +
+            'END AS `acceptance_rate_interval_sort`, CASE ' +
             "  WHEN acceptance_rate <= 0.1 THEN '0.0 ~ 0.1'\n" +
             "  WHEN acceptance_rate <= 0.2 THEN '0.1 ~ 0.2'\n" +
             "  WHEN acceptance_rate <= 0.3 THEN '0.2 ~ 0.3'\n" +
@@ -2057,7 +2057,7 @@ export default {
             "  WHEN acceptance_rate <= 0.8 THEN '0.7 ~ 0.8'\n" +
             "  WHEN acceptance_rate <= 0.9 THEN '0.8 ~ 0.9'\n" +
             "  WHEN acceptance_rate <= 1.0 THEN '0.9 ~ 1.0'\n" +
-            "END AS `acceptance_rate_interval` FROM " +
+            'END AS `acceptance_rate_interval` FROM ' +
             "(SELECT ROUND(SUM(CASE WHEN s_is_accepted = 'accept' THEN 1 ELSE 0 END)/COUNT(*), 2) AS `acceptance_rate`" +
             'FROM author_record, submission_record WHERE ' +
             "author_record.data_set = '${PLACEHOLDER_DATA_SET}' AND submission_record.data_set = '${PLACEHOLDER_DATA_SET}' " +
@@ -2072,8 +2072,8 @@ export default {
             'UNION ALL SELECT 0.8 ' +
             'UNION ALL SELECT 0.9 ' +
             'UNION ALL SELECT 1.0) AS `tmp1` ) AS `tmp2`',
-          customized: true,
-        },
+          customized: true
+        }
       ],
       filters: [],
       joiners: [],
@@ -2088,7 +2088,7 @@ export default {
       sorters: [
         {
           field: 'acceptance_rate_interval_sort',
-          order: 'ASC',
+          order: 'ASC'
         }
       ],
       extraData: {
@@ -2097,12 +2097,12 @@ export default {
         xAxisFieldName: 'acceptance_rate_interval',
         yAxisFieldName: 'number_of_author',
         numOfResultToDisplay: 20,
-        isColorfulBar: false,
+        isColorfulBar: false
       }
     }
   },
-  "submission_accepted_rank_author": {
-    name: "Submission Accepted Rank Author",
+  'submission_accepted_rank_author': {
+    name: 'Submission Accepted Rank Author',
     group: 'Author Record + Submission Record',
     data: {
       type: 'bar_chart',
@@ -2119,11 +2119,11 @@ export default {
           rename: 'author_name'
         },
         {
-          expression: "a_email",
+          expression: 'a_email',
           rename: 'author_email'
         },
         {
-          expression: "COUNT(*)",
+          expression: 'COUNT(*)',
           rename: 'submitted'
         },
         {
@@ -2134,39 +2134,39 @@ export default {
       involvedRecords: [
         {
           name: 'author_record',
-          customized: false,
+          customized: false
         },
         {
           name: 'submission_record',
-          customized: false,
+          customized: false
         }
       ],
       filters: [],
       joiners: [
         {
-          left: "a_submission_id",
-          right: "s_submission_id",
+          left: 'a_submission_id',
+          right: 's_submission_id'
         }
       ],
       groupers: [
         {
-          field: "a_email"
+          field: 'a_email'
         },
         {
-          field: "a_first_name"
+          field: 'a_first_name'
         },
         {
-          field: "a_last_name"
+          field: 'a_last_name'
         }
       ],
       sorters: [
         {
           field: 'accepted',
-          order: 'DESC',
+          order: 'DESC'
         },
         {
           field: 'a_email',
-          order: 'ASC',
+          order: 'ASC'
         }
       ],
       extraData: {
@@ -2174,26 +2174,26 @@ export default {
         fieldsShownInToolTips: [
           {
             label: 'Email',
-            field: 'author_email',
+            field: 'author_email'
           },
           {
             label: 'Accepted Rate',
-            field: 'acceptance_rate',
+            field: 'acceptance_rate'
           },
           {
             label: 'Total Submitted',
-            field: 'submitted',
-          },
+            field: 'submitted'
+          }
         ],
         xAxisFieldName: 'author_name',
         yAxisFieldName: 'accepted',
         numOfResultToDisplay: 10,
-        isColorfulBar: true,
+        isColorfulBar: true
       }
     }
   },
-  "submission_acceptance_rate_rank_organisation": {
-    name: "Submission Acceptance Rate Rank Organization",
+  'submission_acceptance_rate_rank_organisation': {
+    name: 'Submission Acceptance Rate Rank Organization',
     group: 'Author Record + Submission Record',
     data: {
       type: 'bar_chart',
@@ -2202,19 +2202,19 @@ export default {
       description: 'By combining author and submission, this bar chart shows the percentage of acceptance rate of each organization\'s papers in descending order. This tells us which organizations has higher acceptance rate than other organizations.',
       selections: [
         {
-          expression: "acceptance_rate",
+          expression: 'acceptance_rate',
           rename: 'acceptance_rate'
         },
         {
-          expression: "a_organisation",
+          expression: 'a_organisation',
           rename: 'a_organisation'
         },
         {
-          expression: "submitted",
+          expression: 'submitted',
           rename: 'submitted'
         },
         {
-          expression: "accepted",
+          expression: 'accepted',
           rename: 'accepted'
         }
       ],
@@ -2222,11 +2222,11 @@ export default {
         {
           name: "(SELECT ROUND(SUM(CASE WHEN s_is_accepted = 'accept' THEN 1 ELSE 0 END)/COUNT(*), 2) AS `acceptance_rate`," +
             "a_organisation, COUNT(*) AS `submitted`, SUM(CASE WHEN s_is_accepted = 'accept' THEN 1 ELSE 0 END) AS `accepted` FROM " +
-            "author_record, submission_record WHERE " +
+            'author_record, submission_record WHERE ' +
             "author_record.data_set = '${PLACEHOLDER_DATA_SET}' AND submission_record.data_set = '${PLACEHOLDER_DATA_SET}' " +
-            "AND a_submission_id = s_submission_id GROUP BY a_organisation) AS `tmp`",
-          customized: true,
-        },
+            'AND a_submission_id = s_submission_id GROUP BY a_organisation) AS `tmp`',
+          customized: true
+        }
       ],
       filters: [],
       joiners: [],
@@ -2234,11 +2234,11 @@ export default {
       sorters: [
         {
           field: 'acceptance_rate',
-          order: 'DESC',
+          order: 'DESC'
         },
         {
           field: 'a_organisation',
-          order: 'ASC',
+          order: 'ASC'
         }
       ],
       extraData: {
@@ -2246,22 +2246,22 @@ export default {
         fieldsShownInToolTips: [
           {
             label: 'Total Accepted',
-            field: 'accepted',
+            field: 'accepted'
           },
           {
             label: 'Total Submitted',
-            field: 'submitted',
-          },
+            field: 'submitted'
+          }
         ],
         xAxisFieldName: 'a_organisation',
         yAxisFieldName: 'acceptance_rate',
         numOfResultToDisplay: 10,
-        isColorfulBar: true,
+        isColorfulBar: true
       }
     }
   },
-  "submission_accepted_rank_organisation": {
-    name: "Submission Accepted Rank Organization",
+  'submission_accepted_rank_organisation': {
+    name: 'Submission Accepted Rank Organization',
     group: 'Author Record + Submission Record',
     data: {
       type: 'bar_chart',
@@ -2274,11 +2274,11 @@ export default {
           rename: 'acceptance_rate'
         },
         {
-          expression: "a_organisation",
+          expression: 'a_organisation',
           rename: 'a_organisation'
         },
         {
-          expression: "COUNT(*)",
+          expression: 'COUNT(*)',
           rename: 'submitted'
         },
         {
@@ -2289,33 +2289,33 @@ export default {
       involvedRecords: [
         {
           name: 'author_record',
-          customized: false,
+          customized: false
         },
         {
           name: 'submission_record',
-          customized: false,
+          customized: false
         }
       ],
       filters: [],
       joiners: [
         {
-          left: "a_submission_id",
-          right: "s_submission_id",
+          left: 'a_submission_id',
+          right: 's_submission_id'
         }
       ],
       groupers: [
         {
-          field: "a_organisation"
+          field: 'a_organisation'
         }
       ],
       sorters: [
         {
           field: 'accepted',
-          order: 'DESC',
+          order: 'DESC'
         },
         {
           field: 'a_organisation',
-          order: 'ASC',
+          order: 'ASC'
         }
       ],
       extraData: {
@@ -2323,22 +2323,22 @@ export default {
         fieldsShownInToolTips: [
           {
             label: 'Total Accepted',
-            field: 'accepted',
+            field: 'accepted'
           },
           {
             label: 'Acceptance Rate',
-            field: 'acceptance_rate',
-          },
+            field: 'acceptance_rate'
+          }
         ],
         xAxisFieldName: 'a_organisation',
         yAxisFieldName: 'accepted',
         numOfResultToDisplay: 10,
-        isColorfulBar: true,
+        isColorfulBar: true
       }
     }
   },
-  "submission_acceptance_rate_rank_country": {
-    name: "Submission Acceptance Rate Rank Country",
+  'submission_acceptance_rate_rank_country': {
+    name: 'Submission Acceptance Rate Rank Country',
     group: 'Author Record + Submission Record',
     data: {
       type: 'bar_chart',
@@ -2351,11 +2351,11 @@ export default {
           rename: 'acceptance_rate'
         },
         {
-          expression: "a_country",
+          expression: 'a_country',
           rename: 'a_country'
         },
         {
-          expression: "COUNT(*)",
+          expression: 'COUNT(*)',
           rename: 'submitted'
         },
         {
@@ -2366,33 +2366,33 @@ export default {
       involvedRecords: [
         {
           name: 'author_record',
-          customized: false,
+          customized: false
         },
         {
           name: 'submission_record',
-          customized: false,
+          customized: false
         }
       ],
       filters: [],
       joiners: [
         {
-          left: "a_submission_id",
-          right: "s_submission_id",
+          left: 'a_submission_id',
+          right: 's_submission_id'
         }
       ],
       groupers: [
         {
-          field: "a_country"
+          field: 'a_country'
         }
       ],
       sorters: [
         {
           field: 'acceptance_rate',
-          order: 'DESC',
+          order: 'DESC'
         },
         {
           field: 'a_country',
-          order: 'ASC',
+          order: 'ASC'
         }
       ],
       extraData: {
@@ -2400,22 +2400,22 @@ export default {
         fieldsShownInToolTips: [
           {
             label: 'Total Accepted',
-            field: 'accepted',
+            field: 'accepted'
           },
           {
             label: 'Total Submitted',
-            field: 'submitted',
-          },
+            field: 'submitted'
+          }
         ],
         xAxisFieldName: 'a_country',
         yAxisFieldName: 'acceptance_rate',
         numOfResultToDisplay: 10,
-        isColorfulBar: true,
+        isColorfulBar: true
       }
     }
   },
-  "submission_accepted_rank_country": {
-    name: "Submission Accepted Rank Country",
+  'submission_accepted_rank_country': {
+    name: 'Submission Accepted Rank Country',
     group: 'Author Record + Submission Record',
     data: {
       type: 'bar_chart',
@@ -2428,11 +2428,11 @@ export default {
           rename: 'acceptance_rate'
         },
         {
-          expression: "a_country",
+          expression: 'a_country',
           rename: 'a_country'
         },
         {
-          expression: "COUNT(*)",
+          expression: 'COUNT(*)',
           rename: 'submitted'
         },
         {
@@ -2443,33 +2443,33 @@ export default {
       involvedRecords: [
         {
           name: 'author_record',
-          customized: false,
+          customized: false
         },
         {
           name: 'submission_record',
-          customized: false,
+          customized: false
         }
       ],
       filters: [],
       joiners: [
         {
-          left: "a_submission_id",
-          right: "s_submission_id",
+          left: 'a_submission_id',
+          right: 's_submission_id'
         }
       ],
       groupers: [
         {
-          field: "a_country"
+          field: 'a_country'
         }
       ],
       sorters: [
         {
           field: 'accepted',
-          order: 'DESC',
+          order: 'DESC'
         },
         {
           field: 'a_country',
-          order: 'ASC',
+          order: 'ASC'
         }
       ],
       extraData: {
@@ -2477,22 +2477,22 @@ export default {
         fieldsShownInToolTips: [
           {
             label: 'Acceptance Rate',
-            field: 'acceptance_rate',
+            field: 'acceptance_rate'
           },
           {
             label: 'Total Submitted',
-            field: 'submitted',
-          },
+            field: 'submitted'
+          }
         ],
         xAxisFieldName: 'a_country',
         yAxisFieldName: 'accepted',
         numOfResultToDisplay: 10,
-        isColorfulBar: true,
+        isColorfulBar: true
       }
     }
   },
-  "reviewer_assignment_rank": {
-    name: "Reviewer Assignment Rank",
+  'reviewer_assignment_rank': {
+    name: 'Reviewer Assignment Rank',
     group: 'Review Record',
     data: {
       type: 'bar_chart',
@@ -2505,31 +2505,31 @@ export default {
           rename: 'review_assignment'
         },
         {
-          expression: "r_reviewer_name",
+          expression: 'r_reviewer_name',
           rename: 'r_reviewer_name'
         }
       ],
       involvedRecords: [
         {
           name: 'review_record',
-          customized: false,
+          customized: false
         }
       ],
       filters: [],
       joiners: [],
       groupers: [
         {
-          field: "r_reviewer_name"
+          field: 'r_reviewer_name'
         }
       ],
       sorters: [
         {
           field: 'review_assignment',
-          order: 'DESC',
+          order: 'DESC'
         },
         {
           field: 'r_reviewer_name',
-          order: 'ASC',
+          order: 'ASC'
         }
       ],
       extraData: {
@@ -2538,12 +2538,12 @@ export default {
         xAxisFieldName: 'r_reviewer_name',
         yAxisFieldName: 'review_assignment',
         numOfResultToDisplay: 10,
-        isColorfulBar: true,
+        isColorfulBar: true
       }
     }
   },
-  "reviewer_avg_expertise_level_rank": {
-    name: "Reviewer Average Expertise Level Rank",
+  'reviewer_avg_expertise_level_rank': {
+    name: 'Reviewer Average Expertise Level Rank',
     group: 'Review Record',
     data: {
       type: 'bar_chart',
@@ -2564,31 +2564,31 @@ export default {
           rename: 'avg_evaluation_score'
         },
         {
-          expression: "r_reviewer_name",
+          expression: 'r_reviewer_name',
           rename: 'r_reviewer_name'
         }
       ],
       involvedRecords: [
         {
           name: 'review_record',
-          customized: false,
+          customized: false
         }
       ],
       filters: [],
       joiners: [],
       groupers: [
         {
-          field: "r_reviewer_name"
+          field: 'r_reviewer_name'
         }
       ],
       sorters: [
         {
           field: 'avg_expertise_level',
-          order: 'DESC',
+          order: 'DESC'
         },
         {
           field: 'r_reviewer_name',
-          order: 'ASC',
+          order: 'ASC'
         }
       ],
       extraData: {
@@ -2596,22 +2596,22 @@ export default {
         fieldsShownInToolTips: [
           {
             label: 'Average Evaluation Score',
-            field: 'avg_evaluation_score',
+            field: 'avg_evaluation_score'
           },
           {
             label: 'Average Confidence Level',
-            field: 'avg_confidence_level',
-          },
+            field: 'avg_confidence_level'
+          }
         ],
         xAxisFieldName: 'r_reviewer_name',
         yAxisFieldName: 'avg_expertise_level',
         numOfResultToDisplay: 30,
-        isColorfulBar: true,
+        isColorfulBar: true
       }
     }
   },
-  "reviewer_avg_confidence_level_rank": {
-    name: "Reviewer Average Confidence Level Rank",
+  'reviewer_avg_confidence_level_rank': {
+    name: 'Reviewer Average Confidence Level Rank',
     group: 'Review Record',
     data: {
       type: 'bar_chart',
@@ -2632,31 +2632,31 @@ export default {
           rename: 'avg_evaluation_score'
         },
         {
-          expression: "r_reviewer_name",
+          expression: 'r_reviewer_name',
           rename: 'r_reviewer_name'
         }
       ],
       involvedRecords: [
         {
           name: 'review_record',
-          customized: false,
+          customized: false
         }
       ],
       filters: [],
       joiners: [],
       groupers: [
         {
-          field: "r_reviewer_name"
+          field: 'r_reviewer_name'
         }
       ],
       sorters: [
         {
           field: 'avg_confidence_level',
-          order: 'DESC',
+          order: 'DESC'
         },
         {
           field: 'r_reviewer_name',
-          order: 'ASC',
+          order: 'ASC'
         }
       ],
       extraData: {
@@ -2664,22 +2664,22 @@ export default {
         fieldsShownInToolTips: [
           {
             label: 'Average Evaluation Score',
-            field: 'avg_evaluation_score',
+            field: 'avg_evaluation_score'
           },
           {
             label: 'Average Expertise Level',
-            field: 'avg_expertise_level',
-          },
+            field: 'avg_expertise_level'
+          }
         ],
         xAxisFieldName: 'r_reviewer_name',
         yAxisFieldName: 'avg_confidence_level',
         numOfResultToDisplay: 30,
-        isColorfulBar: true,
+        isColorfulBar: true
       }
     }
   },
-  "reviewer_avg_evaluation_score_rank": {
-    name: "Reviewer Average Evaluation Score Rank",
+  'reviewer_avg_evaluation_score_rank': {
+    name: 'Reviewer Average Evaluation Score Rank',
     group: 'Review Record',
     data: {
       type: 'bar_chart',
@@ -2700,31 +2700,31 @@ export default {
           rename: 'avg_evaluation_score'
         },
         {
-          expression: "r_reviewer_name",
+          expression: 'r_reviewer_name',
           rename: 'r_reviewer_name'
         }
       ],
       involvedRecords: [
         {
           name: 'review_record',
-          customized: false,
+          customized: false
         }
       ],
       filters: [],
       joiners: [],
       groupers: [
         {
-          field: "r_reviewer_name"
+          field: 'r_reviewer_name'
         }
       ],
       sorters: [
         {
           field: 'avg_evaluation_score',
-          order: 'DESC',
+          order: 'DESC'
         },
         {
           field: 'r_reviewer_name',
-          order: 'ASC',
+          order: 'ASC'
         }
       ],
       extraData: {
@@ -2732,23 +2732,23 @@ export default {
         fieldsShownInToolTips: [
           {
             label: 'Average Confidence Level',
-            field: 'avg_confidence_level',
+            field: 'avg_confidence_level'
           },
           {
             label: 'Average Expertise Level',
-            field: 'avg_expertise_level',
-          },
+            field: 'avg_expertise_level'
+          }
         ],
         xAxisFieldName: 'r_reviewer_name',
         yAxisFieldName: 'avg_evaluation_score',
         numOfResultToDisplay: 30,
-        isColorfulBar: true,
+        isColorfulBar: true
       }
     }
   },
-  "num_of_review_distribution": {
-    name: "Number of Review Distribution",
-    group: "Review Record",
+  'num_of_review_distribution': {
+    name: 'Number of Review Distribution',
+    group: 'Review Record',
     data: {
       type: 'bar_chart',
       title: 'Number of Review Distribution',
@@ -2761,13 +2761,13 @@ export default {
         },
         {
           expression: 'num_of_review',
-          rename: 'num_of_review',
+          rename: 'num_of_review'
         }
       ],
       involvedRecords: [{
         name: "(SELECT IF(COUNT(*)<10, CONVERT(COUNT(*), char), '>=10') AS `num_of_review` FROM review_record WHERE " +
           "review_record.data_set = '${PLACEHOLDER_DATA_SET}' AND review_record.data_set = '${PLACEHOLDER_DATA_SET}' " +
-          "GROUP BY r_submission_id " +
+          'GROUP BY r_submission_id ' +
           "UNION ALL SELECT '0'" +
           "UNION ALL SELECT '1'" +
           "UNION ALL SELECT '2'" +
@@ -2779,7 +2779,7 @@ export default {
           "UNION ALL SELECT '8'" +
           "UNION ALL SELECT '9'" +
           "UNION ALL SELECT '>=10') AS `tmp`",
-        customized: true,
+        customized: true
       }],
       filters: [],
       joiners: [],
@@ -2789,7 +2789,7 @@ export default {
       sorters: [
         {
           field: 'num_of_review',
-          order: 'ASC',
+          order: 'ASC'
         }
       ],
       extraData: {
@@ -2798,12 +2798,12 @@ export default {
         xAxisFieldName: 'num_of_review',
         yAxisFieldName: 'num_of_submission',
         numOfResultToDisplay: 30,
-        isColorfulBar: false,
+        isColorfulBar: false
       }
     }
   },
-  "reviewer_avg_expertise_level_distribution": {
-    name: "Reviewer Average Expertise Level Distribution",
+  'reviewer_avg_expertise_level_distribution': {
+    name: 'Reviewer Average Expertise Level Distribution',
     group: 'Review Record',
     data: {
       type: 'bar_chart',
@@ -2816,42 +2816,42 @@ export default {
           rename: 'avg_expertise_level_interval'
         },
         {
-          expression: "COUNT(*) - 1",
-          rename: 'num_of_reviewer',
+          expression: 'COUNT(*) - 1',
+          rename: 'num_of_reviewer'
         },
         {
-          expression: "ROUND(SUM(avg_evaluation_score) / (COUNT(*) - 1), 2)",
-          rename: 'evaluation_score_in_group',
+          expression: 'ROUND(SUM(avg_evaluation_score) / (COUNT(*) - 1), 2)',
+          rename: 'evaluation_score_in_group'
         },
         {
-          expression: "ROUND(SUM(avg_confidence_level) / (COUNT(*) - 1), 2)",
-          rename: 'confidence_level_in_group',
+          expression: 'ROUND(SUM(avg_confidence_level) / (COUNT(*) - 1), 2)',
+          rename: 'confidence_level_in_group'
         }
       ],
       involvedRecords: [
         {
-          name: "(SELECT CASE  \n" +
-            "  WHEN avg_expertise_level <= 0.25 THEN 1\n" +
-            "  WHEN avg_expertise_level <= 0.50 THEN 2\n" +
-            "  WHEN avg_expertise_level <= 0.75 THEN 3\n" +
-            "  WHEN avg_expertise_level <= 1.00 THEN 4\n" +
-            "  WHEN avg_expertise_level <= 1.25 THEN 5\n" +
-            "  WHEN avg_expertise_level <= 1.50 THEN 6\n" +
-            "  WHEN avg_expertise_level <= 1.75 THEN 7\n" +
-            "  WHEN avg_expertise_level <= 2.00 THEN 8\n" +
-            "  WHEN avg_expertise_level <= 2.25 THEN 9\n" +
-            "  WHEN avg_expertise_level <= 2.50 THEN 10\n" +
-            "  WHEN avg_expertise_level <= 2.75 THEN 11\n" +
-            "  WHEN avg_expertise_level <= 3.00 THEN 12\n" +
-            "  WHEN avg_expertise_level <= 3.25 THEN 13\n" +
-            "  WHEN avg_expertise_level <= 3.50 THEN 14\n" +
-            "  WHEN avg_expertise_level <= 3.75 THEN 15\n" +
-            "  WHEN avg_expertise_level <= 4.00 THEN 16\n" +
-            "  WHEN avg_expertise_level <= 4.25 THEN 17\n" +
-            "  WHEN avg_expertise_level <= 4.50 THEN 18\n" +
-            "  WHEN avg_expertise_level <= 4.75 THEN 19\n" +
-            "  WHEN avg_expertise_level <= 5.00 THEN 20\n" +
-            "END `avg_expertise_level_interval_sort`, CASE  \n" +
+          name: '(SELECT CASE  \n' +
+            '  WHEN avg_expertise_level <= 0.25 THEN 1\n' +
+            '  WHEN avg_expertise_level <= 0.50 THEN 2\n' +
+            '  WHEN avg_expertise_level <= 0.75 THEN 3\n' +
+            '  WHEN avg_expertise_level <= 1.00 THEN 4\n' +
+            '  WHEN avg_expertise_level <= 1.25 THEN 5\n' +
+            '  WHEN avg_expertise_level <= 1.50 THEN 6\n' +
+            '  WHEN avg_expertise_level <= 1.75 THEN 7\n' +
+            '  WHEN avg_expertise_level <= 2.00 THEN 8\n' +
+            '  WHEN avg_expertise_level <= 2.25 THEN 9\n' +
+            '  WHEN avg_expertise_level <= 2.50 THEN 10\n' +
+            '  WHEN avg_expertise_level <= 2.75 THEN 11\n' +
+            '  WHEN avg_expertise_level <= 3.00 THEN 12\n' +
+            '  WHEN avg_expertise_level <= 3.25 THEN 13\n' +
+            '  WHEN avg_expertise_level <= 3.50 THEN 14\n' +
+            '  WHEN avg_expertise_level <= 3.75 THEN 15\n' +
+            '  WHEN avg_expertise_level <= 4.00 THEN 16\n' +
+            '  WHEN avg_expertise_level <= 4.25 THEN 17\n' +
+            '  WHEN avg_expertise_level <= 4.50 THEN 18\n' +
+            '  WHEN avg_expertise_level <= 4.75 THEN 19\n' +
+            '  WHEN avg_expertise_level <= 5.00 THEN 20\n' +
+            'END `avg_expertise_level_interval_sort`, CASE  \n' +
             "  WHEN avg_expertise_level <= 0.25 THEN '0.00 ~ 0.25'\n" +
             "  WHEN avg_expertise_level <= 0.50 THEN '0.25 ~ 0.50'\n" +
             "  WHEN avg_expertise_level <= 0.75 THEN '0.50 ~ 0.75'\n" +
@@ -2872,36 +2872,36 @@ export default {
             "  WHEN avg_expertise_level <= 4.50 THEN '4.25 ~ 4.50'\n" +
             "  WHEN avg_expertise_level <= 4.75 THEN '4.50 ~ 4.75'\n" +
             "  WHEN avg_expertise_level <= 5.00 THEN '4.75 ~ 5.00'\n" +
-            "END AS `avg_expertise_level_interval`, avg_evaluation_score, avg_confidence_level FROM (SELECT AVG(r_confidence_level) AS `avg_confidence_level`, AVG(r_overall_evaluation_score) AS `avg_evaluation_score`, AVG(r_expertise_level) AS `avg_expertise_level` " +
+            'END AS `avg_expertise_level_interval`, avg_evaluation_score, avg_confidence_level FROM (SELECT AVG(r_confidence_level) AS `avg_confidence_level`, AVG(r_overall_evaluation_score) AS `avg_evaluation_score`, AVG(r_expertise_level) AS `avg_expertise_level` ' +
             "FROM review_record WHERE review_record.data_set = '${PLACEHOLDER_DATA_SET}' GROUP BY r_reviewer_name " +
-            "UNION ALL SELECT 0, 0, 0.25\n" +
-            "UNION ALL SELECT 0, 0, 0.50\n" +
-            "UNION ALL SELECT 0, 0, 0.75\n" +
-            "UNION ALL SELECT 0, 0, 1.00\n" +
-            "UNION ALL SELECT 0, 0, 1.25\n" +
-            "UNION ALL SELECT 0, 0, 1.50\n" +
-            "UNION ALL SELECT 0, 0, 1.75\n" +
-            "UNION ALL SELECT 0, 0, 2.00\n" +
-            "UNION ALL SELECT 0, 0, 2.25\n" +
-            "UNION ALL SELECT 0, 0, 2.50\n" +
-            "UNION ALL SELECT 0, 0, 2.75\n" +
-            "UNION ALL SELECT 0, 0, 3.00\n" +
-            "UNION ALL SELECT 0, 0, 3.25\n" +
-            "UNION ALL SELECT 0, 0, 3.50\n" +
-            "UNION ALL SELECT 0, 0, 3.75\n" +
-            "UNION ALL SELECT 0, 0, 4.00\n" +
-            "UNION ALL SELECT 0, 0, 4.25\n" +
-            "UNION ALL SELECT 0, 0, 4.50\n" +
-            "UNION ALL SELECT 0, 0, 4.75\n" +
-            "UNION ALL SELECT 0, 0, 5.00) AS `tmp1`) AS `tmp2`",
-          customized: true,
+            'UNION ALL SELECT 0, 0, 0.25\n' +
+            'UNION ALL SELECT 0, 0, 0.50\n' +
+            'UNION ALL SELECT 0, 0, 0.75\n' +
+            'UNION ALL SELECT 0, 0, 1.00\n' +
+            'UNION ALL SELECT 0, 0, 1.25\n' +
+            'UNION ALL SELECT 0, 0, 1.50\n' +
+            'UNION ALL SELECT 0, 0, 1.75\n' +
+            'UNION ALL SELECT 0, 0, 2.00\n' +
+            'UNION ALL SELECT 0, 0, 2.25\n' +
+            'UNION ALL SELECT 0, 0, 2.50\n' +
+            'UNION ALL SELECT 0, 0, 2.75\n' +
+            'UNION ALL SELECT 0, 0, 3.00\n' +
+            'UNION ALL SELECT 0, 0, 3.25\n' +
+            'UNION ALL SELECT 0, 0, 3.50\n' +
+            'UNION ALL SELECT 0, 0, 3.75\n' +
+            'UNION ALL SELECT 0, 0, 4.00\n' +
+            'UNION ALL SELECT 0, 0, 4.25\n' +
+            'UNION ALL SELECT 0, 0, 4.50\n' +
+            'UNION ALL SELECT 0, 0, 4.75\n' +
+            'UNION ALL SELECT 0, 0, 5.00) AS `tmp1`) AS `tmp2`',
+          customized: true
         }
       ],
       filters: [],
       joiners: [],
       groupers: [
         {
-          field: "avg_expertise_level_interval"
+          field: 'avg_expertise_level_interval'
         },
         {
           field: 'avg_expertise_level_interval_sort'
@@ -2910,7 +2910,7 @@ export default {
       sorters: [
         {
           field: 'avg_expertise_level_interval_sort',
-          order: 'ASC',
+          order: 'ASC'
         }
       ],
       extraData: {
@@ -2918,22 +2918,22 @@ export default {
         fieldsShownInToolTips: [
           {
             label: 'Evaluation Score in Group',
-            field: 'evaluation_score_in_group',
+            field: 'evaluation_score_in_group'
           },
           {
             label: 'Confidence Level in Group',
-            field: 'confidence_level_in_group',
-          },
+            field: 'confidence_level_in_group'
+          }
         ],
         xAxisFieldName: 'avg_expertise_level_interval',
         yAxisFieldName: 'num_of_reviewer',
         numOfResultToDisplay: 30,
-        isColorfulBar: false,
+        isColorfulBar: false
       }
     }
   },
-  "reviewer_avg_confidence_level_distribution": {
-    name: "Reviewer Average Confidence Level Distribution",
+  'reviewer_avg_confidence_level_distribution': {
+    name: 'Reviewer Average Confidence Level Distribution',
     group: 'Review Record',
     data: {
       type: 'bar_chart',
@@ -2946,42 +2946,42 @@ export default {
           rename: 'avg_confidence_level_interval'
         },
         {
-          expression: "COUNT(*) - 1",
-          rename: 'num_of_reviewer',
+          expression: 'COUNT(*) - 1',
+          rename: 'num_of_reviewer'
         },
         {
-          expression: "ROUND(SUM(avg_evaluation_score) / (COUNT(*) - 1), 2)",
-          rename: 'evaluation_score_in_group',
+          expression: 'ROUND(SUM(avg_evaluation_score) / (COUNT(*) - 1), 2)',
+          rename: 'evaluation_score_in_group'
         },
         {
-          expression: "ROUND(SUM(avg_expertise_level) / (COUNT(*) - 1), 2)",
-          rename: 'expertise_level_in_group',
+          expression: 'ROUND(SUM(avg_expertise_level) / (COUNT(*) - 1), 2)',
+          rename: 'expertise_level_in_group'
         }
       ],
       involvedRecords: [
         {
-          name: "(SELECT CASE  \n" +
-            "  WHEN avg_confidence_level <= 0.25 THEN 1\n" +
-            "  WHEN avg_confidence_level <= 0.50 THEN 2\n" +
-            "  WHEN avg_confidence_level <= 0.75 THEN 3\n" +
-            "  WHEN avg_confidence_level <= 1.00 THEN 4\n" +
-            "  WHEN avg_confidence_level <= 1.25 THEN 5\n" +
-            "  WHEN avg_confidence_level <= 1.50 THEN 6\n" +
-            "  WHEN avg_confidence_level <= 1.75 THEN 7\n" +
-            "  WHEN avg_confidence_level <= 2.00 THEN 8\n" +
-            "  WHEN avg_confidence_level <= 2.25 THEN 9\n" +
-            "  WHEN avg_confidence_level <= 2.50 THEN 10\n" +
-            "  WHEN avg_confidence_level <= 2.75 THEN 11\n" +
-            "  WHEN avg_confidence_level <= 3.00 THEN 12\n" +
-            "  WHEN avg_confidence_level <= 3.25 THEN 13\n" +
-            "  WHEN avg_confidence_level <= 3.50 THEN 14\n" +
-            "  WHEN avg_confidence_level <= 3.75 THEN 15\n" +
-            "  WHEN avg_confidence_level <= 4.00 THEN 16\n" +
-            "  WHEN avg_confidence_level <= 4.25 THEN 17\n" +
-            "  WHEN avg_confidence_level <= 4.50 THEN 18\n" +
-            "  WHEN avg_confidence_level <= 4.75 THEN 19\n" +
-            "  WHEN avg_confidence_level <= 5.00 THEN 20\n" +
-            "END `avg_confidence_level_interval_sort`, CASE  \n" +
+          name: '(SELECT CASE  \n' +
+            '  WHEN avg_confidence_level <= 0.25 THEN 1\n' +
+            '  WHEN avg_confidence_level <= 0.50 THEN 2\n' +
+            '  WHEN avg_confidence_level <= 0.75 THEN 3\n' +
+            '  WHEN avg_confidence_level <= 1.00 THEN 4\n' +
+            '  WHEN avg_confidence_level <= 1.25 THEN 5\n' +
+            '  WHEN avg_confidence_level <= 1.50 THEN 6\n' +
+            '  WHEN avg_confidence_level <= 1.75 THEN 7\n' +
+            '  WHEN avg_confidence_level <= 2.00 THEN 8\n' +
+            '  WHEN avg_confidence_level <= 2.25 THEN 9\n' +
+            '  WHEN avg_confidence_level <= 2.50 THEN 10\n' +
+            '  WHEN avg_confidence_level <= 2.75 THEN 11\n' +
+            '  WHEN avg_confidence_level <= 3.00 THEN 12\n' +
+            '  WHEN avg_confidence_level <= 3.25 THEN 13\n' +
+            '  WHEN avg_confidence_level <= 3.50 THEN 14\n' +
+            '  WHEN avg_confidence_level <= 3.75 THEN 15\n' +
+            '  WHEN avg_confidence_level <= 4.00 THEN 16\n' +
+            '  WHEN avg_confidence_level <= 4.25 THEN 17\n' +
+            '  WHEN avg_confidence_level <= 4.50 THEN 18\n' +
+            '  WHEN avg_confidence_level <= 4.75 THEN 19\n' +
+            '  WHEN avg_confidence_level <= 5.00 THEN 20\n' +
+            'END `avg_confidence_level_interval_sort`, CASE  \n' +
             "  WHEN avg_confidence_level <= 0.25 THEN '0.00 ~ 0.25'\n" +
             "  WHEN avg_confidence_level <= 0.50 THEN '0.25 ~ 0.50'\n" +
             "  WHEN avg_confidence_level <= 0.75 THEN '0.50 ~ 0.75'\n" +
@@ -3002,36 +3002,36 @@ export default {
             "  WHEN avg_confidence_level <= 4.50 THEN '4.25 ~ 4.50'\n" +
             "  WHEN avg_confidence_level <= 4.75 THEN '4.50 ~ 4.75'\n" +
             "  WHEN avg_confidence_level <= 5.00 THEN '4.75 ~ 5.00'\n" +
-            "END AS `avg_confidence_level_interval`, avg_evaluation_score, avg_expertise_level FROM (SELECT AVG(r_confidence_level) AS `avg_confidence_level`, AVG(r_overall_evaluation_score) AS `avg_evaluation_score`, AVG(r_expertise_level) AS `avg_expertise_level` " +
+            'END AS `avg_confidence_level_interval`, avg_evaluation_score, avg_expertise_level FROM (SELECT AVG(r_confidence_level) AS `avg_confidence_level`, AVG(r_overall_evaluation_score) AS `avg_evaluation_score`, AVG(r_expertise_level) AS `avg_expertise_level` ' +
             "FROM review_record WHERE review_record.data_set = '${PLACEHOLDER_DATA_SET}' GROUP BY r_reviewer_name " +
-            "UNION ALL SELECT 0.25, 0, 0\n" +
-            "UNION ALL SELECT 0.50, 0, 0\n" +
-            "UNION ALL SELECT 0.75, 0, 0\n" +
-            "UNION ALL SELECT 1.00, 0, 0\n" +
-            "UNION ALL SELECT 1.25, 0, 0\n" +
-            "UNION ALL SELECT 1.50, 0, 0\n" +
-            "UNION ALL SELECT 1.75, 0, 0\n" +
-            "UNION ALL SELECT 2.00, 0, 0\n" +
-            "UNION ALL SELECT 2.25, 0, 0\n" +
-            "UNION ALL SELECT 2.50, 0, 0\n" +
-            "UNION ALL SELECT 2.75, 0, 0\n" +
-            "UNION ALL SELECT 3.00, 0, 0\n" +
-            "UNION ALL SELECT 3.25, 0, 0\n" +
-            "UNION ALL SELECT 3.50, 0, 0\n" +
-            "UNION ALL SELECT 3.75, 0, 0\n" +
-            "UNION ALL SELECT 4.00, 0, 0\n" +
-            "UNION ALL SELECT 4.25, 0, 0\n" +
-            "UNION ALL SELECT 4.50, 0, 0\n" +
-            "UNION ALL SELECT 4.75, 0, 0\n" +
-            "UNION ALL SELECT 5.00, 0, 0) AS `tmp1`) AS `tmp2`",
-          customized: true,
+            'UNION ALL SELECT 0.25, 0, 0\n' +
+            'UNION ALL SELECT 0.50, 0, 0\n' +
+            'UNION ALL SELECT 0.75, 0, 0\n' +
+            'UNION ALL SELECT 1.00, 0, 0\n' +
+            'UNION ALL SELECT 1.25, 0, 0\n' +
+            'UNION ALL SELECT 1.50, 0, 0\n' +
+            'UNION ALL SELECT 1.75, 0, 0\n' +
+            'UNION ALL SELECT 2.00, 0, 0\n' +
+            'UNION ALL SELECT 2.25, 0, 0\n' +
+            'UNION ALL SELECT 2.50, 0, 0\n' +
+            'UNION ALL SELECT 2.75, 0, 0\n' +
+            'UNION ALL SELECT 3.00, 0, 0\n' +
+            'UNION ALL SELECT 3.25, 0, 0\n' +
+            'UNION ALL SELECT 3.50, 0, 0\n' +
+            'UNION ALL SELECT 3.75, 0, 0\n' +
+            'UNION ALL SELECT 4.00, 0, 0\n' +
+            'UNION ALL SELECT 4.25, 0, 0\n' +
+            'UNION ALL SELECT 4.50, 0, 0\n' +
+            'UNION ALL SELECT 4.75, 0, 0\n' +
+            'UNION ALL SELECT 5.00, 0, 0) AS `tmp1`) AS `tmp2`',
+          customized: true
         }
       ],
       filters: [],
       joiners: [],
       groupers: [
         {
-          field: "avg_confidence_level_interval"
+          field: 'avg_confidence_level_interval'
         },
         {
           field: 'avg_confidence_level_interval_sort'
@@ -3040,7 +3040,7 @@ export default {
       sorters: [
         {
           field: 'avg_confidence_level_interval_sort',
-          order: 'ASC',
+          order: 'ASC'
         }
       ],
       extraData: {
@@ -3048,22 +3048,22 @@ export default {
         fieldsShownInToolTips: [
           {
             label: 'Evaluation Score in Group',
-            field: 'evaluation_score_in_group',
+            field: 'evaluation_score_in_group'
           },
           {
             label: 'Expertise Level in Group',
-            field: 'expertise_level_in_group',
-          },
+            field: 'expertise_level_in_group'
+          }
         ],
         xAxisFieldName: 'avg_confidence_level_interval',
         yAxisFieldName: 'num_of_reviewer',
         numOfResultToDisplay: 30,
-        isColorfulBar: false,
+        isColorfulBar: false
       }
     }
   },
-  "reviewer_avg_evaluation_score_distribution": {
-    name: "Reviewer Average Evaluation Score Distribution",
+  'reviewer_avg_evaluation_score_distribution': {
+    name: 'Reviewer Average Evaluation Score Distribution',
     group: 'Review Record',
     data: {
       type: 'bar_chart',
@@ -3076,46 +3076,46 @@ export default {
           rename: 'avg_evaluation_score_interval'
         },
         {
-          expression: "COUNT(*) - 1",
-          rename: 'num_of_reviewer',
+          expression: 'COUNT(*) - 1',
+          rename: 'num_of_reviewer'
         },
         {
-          expression: "ROUND(SUM(avg_confidence_level) / (COUNT(*) - 1), 2)",
-          rename: 'confidence_level_in_group',
+          expression: 'ROUND(SUM(avg_confidence_level) / (COUNT(*) - 1), 2)',
+          rename: 'confidence_level_in_group'
         },
         {
-          expression: "ROUND(SUM(avg_expertise_level) / (COUNT(*) - 1), 2)",
-          rename: 'expertise_level_in_group',
+          expression: 'ROUND(SUM(avg_expertise_level) / (COUNT(*) - 1), 2)',
+          rename: 'expertise_level_in_group'
         }
       ],
       involvedRecords: [
         {
-          name: "(SELECT CASE  \n" +
-            "  WHEN avg_evaluation_score <= -2.75 THEN 1\n" +
-            "  WHEN avg_evaluation_score <= -2.50 THEN 2\n" +
-            "  WHEN avg_evaluation_score <= -2.25 THEN 3\n" +
-            "  WHEN avg_evaluation_score <= -2.00 THEN 4\n" +
-            "  WHEN avg_evaluation_score <= -1.75 THEN 5\n" +
-            "  WHEN avg_evaluation_score <= -1.50 THEN 6\n" +
-            "  WHEN avg_evaluation_score <= -1.25 THEN 7\n" +
-            "  WHEN avg_evaluation_score <= -1.00 THEN 8\n" +
-            "  WHEN avg_evaluation_score <= -0.75 THEN 9\n" +
-            "  WHEN avg_evaluation_score <= -0.50 THEN 10\n" +
-            "  WHEN avg_evaluation_score <= -0.25 THEN 11\n" +
-            "  WHEN avg_evaluation_score <= 0.00 THEN 12\n" +
-            "  WHEN avg_evaluation_score <= 0.25 THEN 13\n" +
-            "  WHEN avg_evaluation_score <= 0.50 THEN 14\n" +
-            "  WHEN avg_evaluation_score <= 0.75 THEN 15\n" +
-            "  WHEN avg_evaluation_score <= 1.00 THEN 16\n" +
-            "  WHEN avg_evaluation_score <= 1.25 THEN 17\n" +
-            "  WHEN avg_evaluation_score <= 1.50 THEN 18\n" +
-            "  WHEN avg_evaluation_score <= 1.75 THEN 19\n" +
-            "  WHEN avg_evaluation_score <= 2.00 THEN 20\n" +
-            "  WHEN avg_evaluation_score <= 2.25 THEN 21\n" +
-            "  WHEN avg_evaluation_score <= 2.50 THEN 22\n" +
-            "  WHEN avg_evaluation_score <= 2.75 THEN 23\n" +
-            "  WHEN avg_evaluation_score <= 3.00 THEN 24\n" +
-            "END `avg_evaluation_score_interval_sort`, CASE  \n" +
+          name: '(SELECT CASE  \n' +
+            '  WHEN avg_evaluation_score <= -2.75 THEN 1\n' +
+            '  WHEN avg_evaluation_score <= -2.50 THEN 2\n' +
+            '  WHEN avg_evaluation_score <= -2.25 THEN 3\n' +
+            '  WHEN avg_evaluation_score <= -2.00 THEN 4\n' +
+            '  WHEN avg_evaluation_score <= -1.75 THEN 5\n' +
+            '  WHEN avg_evaluation_score <= -1.50 THEN 6\n' +
+            '  WHEN avg_evaluation_score <= -1.25 THEN 7\n' +
+            '  WHEN avg_evaluation_score <= -1.00 THEN 8\n' +
+            '  WHEN avg_evaluation_score <= -0.75 THEN 9\n' +
+            '  WHEN avg_evaluation_score <= -0.50 THEN 10\n' +
+            '  WHEN avg_evaluation_score <= -0.25 THEN 11\n' +
+            '  WHEN avg_evaluation_score <= 0.00 THEN 12\n' +
+            '  WHEN avg_evaluation_score <= 0.25 THEN 13\n' +
+            '  WHEN avg_evaluation_score <= 0.50 THEN 14\n' +
+            '  WHEN avg_evaluation_score <= 0.75 THEN 15\n' +
+            '  WHEN avg_evaluation_score <= 1.00 THEN 16\n' +
+            '  WHEN avg_evaluation_score <= 1.25 THEN 17\n' +
+            '  WHEN avg_evaluation_score <= 1.50 THEN 18\n' +
+            '  WHEN avg_evaluation_score <= 1.75 THEN 19\n' +
+            '  WHEN avg_evaluation_score <= 2.00 THEN 20\n' +
+            '  WHEN avg_evaluation_score <= 2.25 THEN 21\n' +
+            '  WHEN avg_evaluation_score <= 2.50 THEN 22\n' +
+            '  WHEN avg_evaluation_score <= 2.75 THEN 23\n' +
+            '  WHEN avg_evaluation_score <= 3.00 THEN 24\n' +
+            'END `avg_evaluation_score_interval_sort`, CASE  \n' +
             "  WHEN avg_evaluation_score <= -2.75 THEN '-3.00 ~ -2.75'\n" +
             "  WHEN avg_evaluation_score <= -2.50 THEN '-2.75 ~ -2.50'\n" +
             "  WHEN avg_evaluation_score <= -2.25 THEN '-2.50 ~ -2.25'\n" +
@@ -3140,40 +3140,40 @@ export default {
             "  WHEN avg_evaluation_score <= 2.50 THEN '2.25 ~ 2.50'\n" +
             "  WHEN avg_evaluation_score <= 2.75 THEN '2.50 ~ 2.75'\n" +
             "  WHEN avg_evaluation_score <= 3.00 THEN '2.75 ~ 3.00'\n" +
-            "END AS `avg_evaluation_score_interval`, avg_confidence_level, avg_expertise_level FROM (SELECT AVG(r_confidence_level) AS `avg_confidence_level`, AVG(r_overall_evaluation_score) AS `avg_evaluation_score`, AVG(r_expertise_level) AS `avg_expertise_level` " +
+            'END AS `avg_evaluation_score_interval`, avg_confidence_level, avg_expertise_level FROM (SELECT AVG(r_confidence_level) AS `avg_confidence_level`, AVG(r_overall_evaluation_score) AS `avg_evaluation_score`, AVG(r_expertise_level) AS `avg_expertise_level` ' +
             "FROM review_record WHERE review_record.data_set = '${PLACEHOLDER_DATA_SET}' GROUP BY r_reviewer_name " +
-            "UNION ALL SELECT 0, -2.75, 0\n" +
-            "UNION ALL SELECT 0, -2.50, 0\n" +
-            "UNION ALL SELECT 0, -2.25, 0\n" +
-            "UNION ALL SELECT 0, -2.00, 0\n" +
-            "UNION ALL SELECT 0, -1.75, 0\n" +
-            "UNION ALL SELECT 0, -1.50, 0\n" +
-            "UNION ALL SELECT 0, -1.25, 0\n" +
-            "UNION ALL SELECT 0, -1.00, 0\n" +
-            "UNION ALL SELECT 0, -0.75, 0\n" +
-            "UNION ALL SELECT 0, -0.50, 0\n" +
-            "UNION ALL SELECT 0, -0.25, 0\n" +
-            "UNION ALL SELECT 0, 0.00, 0\n" +
-            "UNION ALL SELECT 0, 0.25, 0\n" +
-            "UNION ALL SELECT 0, 0.50, 0\n" +
-            "UNION ALL SELECT 0, 0.75, 0\n" +
-            "UNION ALL SELECT 0, 1.00, 0\n" +
-            "UNION ALL SELECT 0, 1.25, 0\n" +
-            "UNION ALL SELECT 0, 1.50, 0\n" +
-            "UNION ALL SELECT 0, 1.75, 0\n" +
-            "UNION ALL SELECT 0, 2.00, 0\n" +
-            "UNION ALL SELECT 0, 2.25, 0\n" +
-            "UNION ALL SELECT 0, 2.50, 0\n" +
-            "UNION ALL SELECT 0, 2.75, 0\n" +
-            "UNION ALL SELECT 0, 3.00, 0) AS `tmp1`) AS `tmp2`",
-          customized: true,
+            'UNION ALL SELECT 0, -2.75, 0\n' +
+            'UNION ALL SELECT 0, -2.50, 0\n' +
+            'UNION ALL SELECT 0, -2.25, 0\n' +
+            'UNION ALL SELECT 0, -2.00, 0\n' +
+            'UNION ALL SELECT 0, -1.75, 0\n' +
+            'UNION ALL SELECT 0, -1.50, 0\n' +
+            'UNION ALL SELECT 0, -1.25, 0\n' +
+            'UNION ALL SELECT 0, -1.00, 0\n' +
+            'UNION ALL SELECT 0, -0.75, 0\n' +
+            'UNION ALL SELECT 0, -0.50, 0\n' +
+            'UNION ALL SELECT 0, -0.25, 0\n' +
+            'UNION ALL SELECT 0, 0.00, 0\n' +
+            'UNION ALL SELECT 0, 0.25, 0\n' +
+            'UNION ALL SELECT 0, 0.50, 0\n' +
+            'UNION ALL SELECT 0, 0.75, 0\n' +
+            'UNION ALL SELECT 0, 1.00, 0\n' +
+            'UNION ALL SELECT 0, 1.25, 0\n' +
+            'UNION ALL SELECT 0, 1.50, 0\n' +
+            'UNION ALL SELECT 0, 1.75, 0\n' +
+            'UNION ALL SELECT 0, 2.00, 0\n' +
+            'UNION ALL SELECT 0, 2.25, 0\n' +
+            'UNION ALL SELECT 0, 2.50, 0\n' +
+            'UNION ALL SELECT 0, 2.75, 0\n' +
+            'UNION ALL SELECT 0, 3.00, 0) AS `tmp1`) AS `tmp2`',
+          customized: true
         }
       ],
       filters: [],
       joiners: [],
       groupers: [
         {
-          field: "avg_evaluation_score_interval_sort"
+          field: 'avg_evaluation_score_interval_sort'
         },
         {
           field: 'avg_evaluation_score_interval'
@@ -3182,7 +3182,7 @@ export default {
       sorters: [
         {
           field: 'avg_evaluation_score_interval_sort',
-          order: 'ASC',
+          order: 'ASC'
         }
       ],
       extraData: {
@@ -3190,23 +3190,23 @@ export default {
         fieldsShownInToolTips: [
           {
             label: 'Confidence Level in Group',
-            field: 'confidence_level_in_group',
+            field: 'confidence_level_in_group'
           },
           {
             label: 'Expertise Level in Group',
-            field: 'expertise_level_in_group',
-          },
+            field: 'expertise_level_in_group'
+          }
         ],
         xAxisFieldName: 'avg_evaluation_score_interval',
         yAxisFieldName: 'num_of_reviewer',
         numOfResultToDisplay: 30,
-        isColorfulBar: false,
+        isColorfulBar: false
       }
     }
   },
 
-  "acceptance_rate_and_weighted_score": {
-    name: "Acceptance Rate and Weighted Score",
+  'acceptance_rate_and_weighted_score': {
+    name: 'Acceptance Rate and Weighted Score',
     group: 'Review Record + Submission Record',
     data: {
       type: 'bar_chart',
@@ -3223,42 +3223,42 @@ export default {
           rename: 'accepted'
         },
         {
-          expression: "COUNT(*) - 1",
+          expression: 'COUNT(*) - 1',
           rename: 'submitted'
         },
         {
           expression: "ROUND(SUM(CASE WHEN s_is_accepted = 'accept' THEN 1 ELSE 0 END) / (COUNT(*) - 1), 2)",
           rename: 'acceptance_rate'
-        },
+        }
       ],
       involvedRecords: [
         {
-          name: "(SELECT CASE  \n" +
-            "  WHEN weighted_score <= -2.75 THEN 1\n" +
-            "  WHEN weighted_score <= -2.50 THEN 2\n" +
-            "  WHEN weighted_score <= -2.25 THEN 3\n" +
-            "  WHEN weighted_score <= -2.00 THEN 4\n" +
-            "  WHEN weighted_score <= -1.75 THEN 5\n" +
-            "  WHEN weighted_score <= -1.50 THEN 6\n" +
-            "  WHEN weighted_score <= -1.25 THEN 7\n" +
-            "  WHEN weighted_score <= -1.00 THEN 8\n" +
-            "  WHEN weighted_score <= -0.75 THEN 9\n" +
-            "  WHEN weighted_score <= -0.50 THEN 10\n" +
-            "  WHEN weighted_score <= -0.25 THEN 11\n" +
-            "  WHEN weighted_score <= 0.00 THEN 12\n" +
-            "  WHEN weighted_score <= 0.25 THEN 13\n" +
-            "  WHEN weighted_score <= 0.50 THEN 14\n" +
-            "  WHEN weighted_score <= 0.75 THEN 15\n" +
-            "  WHEN weighted_score <= 1.00 THEN 16\n" +
-            "  WHEN weighted_score <= 1.25 THEN 17\n" +
-            "  WHEN weighted_score <= 1.50 THEN 18\n" +
-            "  WHEN weighted_score <= 1.75 THEN 19\n" +
-            "  WHEN weighted_score <= 2.00 THEN 20\n" +
-            "  WHEN weighted_score <= 2.25 THEN 21\n" +
-            "  WHEN weighted_score <= 2.50 THEN 22\n" +
-            "  WHEN weighted_score <= 2.75 THEN 23\n" +
-            "  WHEN weighted_score <= 3.00 THEN 24\n" +
-            "END `weighted_score_interval_sort`, CASE  \n" +
+          name: '(SELECT CASE  \n' +
+            '  WHEN weighted_score <= -2.75 THEN 1\n' +
+            '  WHEN weighted_score <= -2.50 THEN 2\n' +
+            '  WHEN weighted_score <= -2.25 THEN 3\n' +
+            '  WHEN weighted_score <= -2.00 THEN 4\n' +
+            '  WHEN weighted_score <= -1.75 THEN 5\n' +
+            '  WHEN weighted_score <= -1.50 THEN 6\n' +
+            '  WHEN weighted_score <= -1.25 THEN 7\n' +
+            '  WHEN weighted_score <= -1.00 THEN 8\n' +
+            '  WHEN weighted_score <= -0.75 THEN 9\n' +
+            '  WHEN weighted_score <= -0.50 THEN 10\n' +
+            '  WHEN weighted_score <= -0.25 THEN 11\n' +
+            '  WHEN weighted_score <= 0.00 THEN 12\n' +
+            '  WHEN weighted_score <= 0.25 THEN 13\n' +
+            '  WHEN weighted_score <= 0.50 THEN 14\n' +
+            '  WHEN weighted_score <= 0.75 THEN 15\n' +
+            '  WHEN weighted_score <= 1.00 THEN 16\n' +
+            '  WHEN weighted_score <= 1.25 THEN 17\n' +
+            '  WHEN weighted_score <= 1.50 THEN 18\n' +
+            '  WHEN weighted_score <= 1.75 THEN 19\n' +
+            '  WHEN weighted_score <= 2.00 THEN 20\n' +
+            '  WHEN weighted_score <= 2.25 THEN 21\n' +
+            '  WHEN weighted_score <= 2.50 THEN 22\n' +
+            '  WHEN weighted_score <= 2.75 THEN 23\n' +
+            '  WHEN weighted_score <= 3.00 THEN 24\n' +
+            'END `weighted_score_interval_sort`, CASE  \n' +
             "  WHEN weighted_score <= -2.75 THEN '-3.00 ~ -2.75'\n" +
             "  WHEN weighted_score <= -2.50 THEN '-2.75 ~ -2.50'\n" +
             "  WHEN weighted_score <= -2.25 THEN '-2.50 ~ -2.25'\n" +
@@ -3283,9 +3283,9 @@ export default {
             "  WHEN weighted_score <= 2.50 THEN '2.25 ~ 2.50'\n" +
             "  WHEN weighted_score <= 2.75 THEN '2.50 ~ 2.75'\n" +
             "  WHEN weighted_score <= 3.00 THEN '2.75 ~ 3.00'\n" +
-            "END AS `weighted_score_interval`, s_is_accepted FROM (SELECT SUM(r_confidence_level * r_overall_evaluation_score) / SUM(r_confidence_level) AS `weighted_score`, s_is_accepted " +
+            'END AS `weighted_score_interval`, s_is_accepted FROM (SELECT SUM(r_confidence_level * r_overall_evaluation_score) / SUM(r_confidence_level) AS `weighted_score`, s_is_accepted ' +
             "FROM review_record, submission_record WHERE review_record.data_set = '${PLACEHOLDER_DATA_SET}' AND submission_record.data_set = '${PLACEHOLDER_DATA_SET}' " +
-            "AND review_record.r_submission_id = submission_record.s_submission_id GROUP BY r_submission_id, s_is_accepted " +
+            'AND review_record.r_submission_id = submission_record.s_submission_id GROUP BY r_submission_id, s_is_accepted ' +
             "UNION ALL SELECT -2.75, 'no'\n" +
             "UNION ALL SELECT -2.50, 'no'\n" +
             "UNION ALL SELECT -2.25, 'no'\n" +
@@ -3310,7 +3310,7 @@ export default {
             "UNION ALL SELECT 2.50, 'no'\n" +
             "UNION ALL SELECT 2.75, 'no'\n" +
             "UNION ALL SELECT 3.00, 'no') AS `tmp1`) AS `tmp2`",
-          customized: true,
+          customized: true
         }
       ],
       filters: [],
@@ -3323,7 +3323,7 @@ export default {
       sorters: [
         {
           field: 'weighted_score_interval_sort',
-          order: 'ASC',
+          order: 'ASC'
         }
       ],
       extraData: {
@@ -3331,22 +3331,22 @@ export default {
         fieldsShownInToolTips: [
           {
             label: 'Total Accepted',
-            field: 'accepted',
+            field: 'accepted'
           },
           {
             label: 'Total Submitted',
-            field: 'submitted',
-          },
+            field: 'submitted'
+          }
         ],
         xAxisFieldName: 'weighted_score_interval',
         yAxisFieldName: 'acceptance_rate',
         numOfResultToDisplay: 50,
-        isColorfulBar: false,
+        isColorfulBar: false
       }
     }
   },
-  "avg_weighted_score_by_track": {
-    name: "Average Weighted Score By Track",
+  'avg_weighted_score_by_track': {
+    name: 'Average Weighted Score By Track',
     group: 'Review Record + Submission Record',
     data: {
       type: 'bar_chart',
@@ -3359,16 +3359,16 @@ export default {
           rename: 'avg_weighted_score'
         },
         {
-          expression: "s_track_name",
+          expression: 's_track_name',
           rename: 's_track_name'
-        },
+        }
       ],
       involvedRecords: [
         {
-          name: "(SELECT s_track_name, SUM(r_confidence_level * r_overall_evaluation_score) / SUM(r_confidence_level) AS `weighted_score` " +
+          name: '(SELECT s_track_name, SUM(r_confidence_level * r_overall_evaluation_score) / SUM(r_confidence_level) AS `weighted_score` ' +
             "FROM review_record, submission_record WHERE review_record.data_set = '${PLACEHOLDER_DATA_SET}' AND submission_record.data_set = '${PLACEHOLDER_DATA_SET}' " +
-            "AND review_record.r_submission_id = submission_record.s_submission_id GROUP BY r_submission_id, s_track_name) AS `tmp`",
-          customized: true,
+            'AND review_record.r_submission_id = submission_record.s_submission_id GROUP BY r_submission_id, s_track_name) AS `tmp`',
+          customized: true
         }
       ],
       filters: [],
@@ -3379,7 +3379,7 @@ export default {
       sorters: [
         {
           field: 's_track_name',
-          order: 'ASC',
+          order: 'ASC'
         }
       ],
       extraData: {
@@ -3388,12 +3388,12 @@ export default {
         xAxisFieldName: 's_track_name',
         yAxisFieldName: 'avg_weighted_score',
         numOfResultToDisplay: 50,
-        isColorfulBar: true,
+        isColorfulBar: true
       }
     }
   },
-  "earliest_review_for_submission": {
-    name: "Earliest Review in Days For Submission",
+  'earliest_review_for_submission': {
+    name: 'Earliest Review in Days For Submission',
     group: 'Review Record + Submission Record',
     data: {
       type: 'bar_chart',
@@ -3406,42 +3406,42 @@ export default {
           rename: 'num_of_submission'
         },
         {
-          expression: "duration_get_reviewed",
+          expression: 'duration_get_reviewed',
           rename: 'duration_get_reviewed'
         },
         {
           expression: "IF(duration_get_reviewed = 21, '>21', duration_get_reviewed)",
           rename: 'duration_get_reviewed_group'
-        },
+        }
       ],
       involvedRecords: [
         {
-          name: "(SELECT IF(DATEDIFF(MIN(r_review_submission_time), s_submission_time) < 21, DATEDIFF(MIN(r_review_submission_time), s_submission_time), 21)  AS `duration_get_reviewed` " +
+          name: '(SELECT IF(DATEDIFF(MIN(r_review_submission_time), s_submission_time) < 21, DATEDIFF(MIN(r_review_submission_time), s_submission_time), 21)  AS `duration_get_reviewed` ' +
             "FROM review_record, submission_record WHERE review_record.data_set = '${PLACEHOLDER_DATA_SET}' AND submission_record.data_set = '${PLACEHOLDER_DATA_SET}' " +
-            "AND review_record.r_submission_id = submission_record.s_submission_id GROUP BY r_submission_id, s_submission_time " +
-            "UNION ALL SELECT 0 " +
-            "UNION ALL SELECT 1 " +
-            "UNION ALL SELECT 2 " +
-            "UNION ALL SELECT 3 " +
-            "UNION ALL SELECT 4 " +
-            "UNION ALL SELECT 5 " +
-            "UNION ALL SELECT 6 " +
-            "UNION ALL SELECT 7 " +
-            "UNION ALL SELECT 8 " +
-            "UNION ALL SELECT 9 " +
-            "UNION ALL SELECT 10 " +
-            "UNION ALL SELECT 11 " +
-            "UNION ALL SELECT 12 " +
-            "UNION ALL SELECT 13 " +
-            "UNION ALL SELECT 14 " +
-            "UNION ALL SELECT 15 " +
-            "UNION ALL SELECT 16 " +
-            "UNION ALL SELECT 17 " +
-            "UNION ALL SELECT 18 " +
-            "UNION ALL SELECT 19 " +
-            "UNION ALL SELECT 20 " +
-            "UNION ALL SELECT 21) AS `tmp`",
-          customized: true,
+            'AND review_record.r_submission_id = submission_record.s_submission_id GROUP BY r_submission_id, s_submission_time ' +
+            'UNION ALL SELECT 0 ' +
+            'UNION ALL SELECT 1 ' +
+            'UNION ALL SELECT 2 ' +
+            'UNION ALL SELECT 3 ' +
+            'UNION ALL SELECT 4 ' +
+            'UNION ALL SELECT 5 ' +
+            'UNION ALL SELECT 6 ' +
+            'UNION ALL SELECT 7 ' +
+            'UNION ALL SELECT 8 ' +
+            'UNION ALL SELECT 9 ' +
+            'UNION ALL SELECT 10 ' +
+            'UNION ALL SELECT 11 ' +
+            'UNION ALL SELECT 12 ' +
+            'UNION ALL SELECT 13 ' +
+            'UNION ALL SELECT 14 ' +
+            'UNION ALL SELECT 15 ' +
+            'UNION ALL SELECT 16 ' +
+            'UNION ALL SELECT 17 ' +
+            'UNION ALL SELECT 18 ' +
+            'UNION ALL SELECT 19 ' +
+            'UNION ALL SELECT 20 ' +
+            'UNION ALL SELECT 21) AS `tmp`',
+          customized: true
         }
       ],
       filters: [],
@@ -3452,7 +3452,7 @@ export default {
       sorters: [
         {
           field: 'duration_get_reviewed',
-          order: 'ASC',
+          order: 'ASC'
         }
       ],
       extraData: {
@@ -3461,12 +3461,12 @@ export default {
         xAxisFieldName: 'duration_get_reviewed_group',
         yAxisFieldName: 'num_of_submission',
         numOfResultToDisplay: 50,
-        isColorfulBar: false,
+        isColorfulBar: false
       }
     }
   },
-  "average_expert_level_for_submission": {
-    name: "Average Expert Level For Submission",
+  'average_expert_level_for_submission': {
+    name: 'Average Expert Level For Submission',
     group: 'Review Record',
     data: {
       type: 'bar_chart',
@@ -3479,34 +3479,34 @@ export default {
           rename: 'num_of_submission'
         },
         {
-          expression: "avg_expertise_level_interval",
+          expression: 'avg_expertise_level_interval',
           rename: 'avg_expertise_level_interval'
-        },
+        }
       ],
       involvedRecords: [
         {
-          name: "(SELECT CASE  \n" +
-            "  WHEN avg_expertise_level <= 0.25 THEN 1\n" +
-            "  WHEN avg_expertise_level <= 0.50 THEN 2\n" +
-            "  WHEN avg_expertise_level <= 0.75 THEN 3\n" +
-            "  WHEN avg_expertise_level <= 1.00 THEN 4\n" +
-            "  WHEN avg_expertise_level <= 1.25 THEN 5\n" +
-            "  WHEN avg_expertise_level <= 1.50 THEN 6\n" +
-            "  WHEN avg_expertise_level <= 1.75 THEN 7\n" +
-            "  WHEN avg_expertise_level <= 2.00 THEN 8\n" +
-            "  WHEN avg_expertise_level <= 2.25 THEN 9\n" +
-            "  WHEN avg_expertise_level <= 2.50 THEN 10\n" +
-            "  WHEN avg_expertise_level <= 2.75 THEN 11\n" +
-            "  WHEN avg_expertise_level <= 3.00 THEN 12\n" +
-            "  WHEN avg_expertise_level <= 3.25 THEN 13\n" +
-            "  WHEN avg_expertise_level <= 3.50 THEN 14\n" +
-            "  WHEN avg_expertise_level <= 3.75 THEN 15\n" +
-            "  WHEN avg_expertise_level <= 4.00 THEN 16\n" +
-            "  WHEN avg_expertise_level <= 4.25 THEN 17\n" +
-            "  WHEN avg_expertise_level <= 4.50 THEN 18\n" +
-            "  WHEN avg_expertise_level <= 4.75 THEN 19\n" +
-            "  WHEN avg_expertise_level <= 5.00 THEN 20\n" +
-            "END `avg_expertise_level_interval_sort`, CASE  \n" +
+          name: '(SELECT CASE  \n' +
+            '  WHEN avg_expertise_level <= 0.25 THEN 1\n' +
+            '  WHEN avg_expertise_level <= 0.50 THEN 2\n' +
+            '  WHEN avg_expertise_level <= 0.75 THEN 3\n' +
+            '  WHEN avg_expertise_level <= 1.00 THEN 4\n' +
+            '  WHEN avg_expertise_level <= 1.25 THEN 5\n' +
+            '  WHEN avg_expertise_level <= 1.50 THEN 6\n' +
+            '  WHEN avg_expertise_level <= 1.75 THEN 7\n' +
+            '  WHEN avg_expertise_level <= 2.00 THEN 8\n' +
+            '  WHEN avg_expertise_level <= 2.25 THEN 9\n' +
+            '  WHEN avg_expertise_level <= 2.50 THEN 10\n' +
+            '  WHEN avg_expertise_level <= 2.75 THEN 11\n' +
+            '  WHEN avg_expertise_level <= 3.00 THEN 12\n' +
+            '  WHEN avg_expertise_level <= 3.25 THEN 13\n' +
+            '  WHEN avg_expertise_level <= 3.50 THEN 14\n' +
+            '  WHEN avg_expertise_level <= 3.75 THEN 15\n' +
+            '  WHEN avg_expertise_level <= 4.00 THEN 16\n' +
+            '  WHEN avg_expertise_level <= 4.25 THEN 17\n' +
+            '  WHEN avg_expertise_level <= 4.50 THEN 18\n' +
+            '  WHEN avg_expertise_level <= 4.75 THEN 19\n' +
+            '  WHEN avg_expertise_level <= 5.00 THEN 20\n' +
+            'END `avg_expertise_level_interval_sort`, CASE  \n' +
             "  WHEN avg_expertise_level <= 0.25 THEN '0.00 ~ 0.25'\n" +
             "  WHEN avg_expertise_level <= 0.50 THEN '0.25 ~ 0.50'\n" +
             "  WHEN avg_expertise_level <= 0.75 THEN '0.50 ~ 0.75'\n" +
@@ -3527,31 +3527,31 @@ export default {
             "  WHEN avg_expertise_level <= 4.50 THEN '4.25 ~ 4.50'\n" +
             "  WHEN avg_expertise_level <= 4.75 THEN '4.50 ~ 4.75'\n" +
             "  WHEN avg_expertise_level <= 5.00 THEN '4.75 ~ 5.00'\n" +
-            "END AS `avg_expertise_level_interval` FROM " +
-            "(SELECT AVG(r_expertise_level) AS `avg_expertise_level` FROM review_record " +
+            'END AS `avg_expertise_level_interval` FROM ' +
+            '(SELECT AVG(r_expertise_level) AS `avg_expertise_level` FROM review_record ' +
             "WHERE review_record.data_set = '${PLACEHOLDER_DATA_SET}'" +
-            "GROUP BY r_submission_id " +
-            "UNION ALL SELECT 0.25\n" +
-            "UNION ALL SELECT 0.50\n" +
-            "UNION ALL SELECT 0.75\n" +
-            "UNION ALL SELECT 1.00\n" +
-            "UNION ALL SELECT 1.25\n" +
-            "UNION ALL SELECT 1.50\n" +
-            "UNION ALL SELECT 1.75\n" +
-            "UNION ALL SELECT 2.00\n" +
-            "UNION ALL SELECT 2.25\n" +
-            "UNION ALL SELECT 2.50\n" +
-            "UNION ALL SELECT 2.75\n" +
-            "UNION ALL SELECT 3.00\n" +
-            "UNION ALL SELECT 3.25\n" +
-            "UNION ALL SELECT 3.50\n" +
-            "UNION ALL SELECT 3.75\n" +
-            "UNION ALL SELECT 4.00\n" +
-            "UNION ALL SELECT 4.25\n" +
-            "UNION ALL SELECT 4.50\n" +
-            "UNION ALL SELECT 4.75\n" +
-            "UNION ALL SELECT 5.00) AS `tmp1`) AS `tmp2`",
-          customized: true,
+            'GROUP BY r_submission_id ' +
+            'UNION ALL SELECT 0.25\n' +
+            'UNION ALL SELECT 0.50\n' +
+            'UNION ALL SELECT 0.75\n' +
+            'UNION ALL SELECT 1.00\n' +
+            'UNION ALL SELECT 1.25\n' +
+            'UNION ALL SELECT 1.50\n' +
+            'UNION ALL SELECT 1.75\n' +
+            'UNION ALL SELECT 2.00\n' +
+            'UNION ALL SELECT 2.25\n' +
+            'UNION ALL SELECT 2.50\n' +
+            'UNION ALL SELECT 2.75\n' +
+            'UNION ALL SELECT 3.00\n' +
+            'UNION ALL SELECT 3.25\n' +
+            'UNION ALL SELECT 3.50\n' +
+            'UNION ALL SELECT 3.75\n' +
+            'UNION ALL SELECT 4.00\n' +
+            'UNION ALL SELECT 4.25\n' +
+            'UNION ALL SELECT 4.50\n' +
+            'UNION ALL SELECT 4.75\n' +
+            'UNION ALL SELECT 5.00) AS `tmp1`) AS `tmp2`',
+          customized: true
         }
       ],
       filters: [],
@@ -3564,7 +3564,7 @@ export default {
       sorters: [
         {
           field: 'avg_expertise_level_interval_sort',
-          order: 'ASC',
+          order: 'ASC'
         }
       ],
       extraData: {
@@ -3573,12 +3573,12 @@ export default {
         xAxisFieldName: 'avg_expertise_level_interval',
         yAxisFieldName: 'num_of_submission',
         numOfResultToDisplay: 50,
-        isColorfulBar: false,
+        isColorfulBar: false
       }
     }
   },
-  "average_confidence_level_for_submission": {
-    name: "Average Confidence Level For Submission",
+  'average_confidence_level_for_submission': {
+    name: 'Average Confidence Level For Submission',
     group: 'Review Record',
     data: {
       type: 'bar_chart',
@@ -3591,34 +3591,34 @@ export default {
           rename: 'num_of_submission'
         },
         {
-          expression: "avg_confidence_level_interval",
+          expression: 'avg_confidence_level_interval',
           rename: 'avg_confidence_level_interval'
-        },
+        }
       ],
       involvedRecords: [
         {
-          name: "(SELECT CASE  \n" +
-            "  WHEN avg_confidence_level <= 0.25 THEN 1\n" +
-            "  WHEN avg_confidence_level <= 0.50 THEN 2\n" +
-            "  WHEN avg_confidence_level <= 0.75 THEN 3\n" +
-            "  WHEN avg_confidence_level <= 1.00 THEN 4\n" +
-            "  WHEN avg_confidence_level <= 1.25 THEN 5\n" +
-            "  WHEN avg_confidence_level <= 1.50 THEN 6\n" +
-            "  WHEN avg_confidence_level <= 1.75 THEN 7\n" +
-            "  WHEN avg_confidence_level <= 2.00 THEN 8\n" +
-            "  WHEN avg_confidence_level <= 2.25 THEN 9\n" +
-            "  WHEN avg_confidence_level <= 2.50 THEN 10\n" +
-            "  WHEN avg_confidence_level <= 2.75 THEN 11\n" +
-            "  WHEN avg_confidence_level <= 3.00 THEN 12\n" +
-            "  WHEN avg_confidence_level <= 3.25 THEN 13\n" +
-            "  WHEN avg_confidence_level <= 3.50 THEN 14\n" +
-            "  WHEN avg_confidence_level <= 3.75 THEN 15\n" +
-            "  WHEN avg_confidence_level <= 4.00 THEN 16\n" +
-            "  WHEN avg_confidence_level <= 4.25 THEN 17\n" +
-            "  WHEN avg_confidence_level <= 4.50 THEN 18\n" +
-            "  WHEN avg_confidence_level <= 4.75 THEN 19\n" +
-            "  WHEN avg_confidence_level <= 5.00 THEN 20\n" +
-            "END `avg_confidence_level_interval_sort`, CASE  \n" +
+          name: '(SELECT CASE  \n' +
+            '  WHEN avg_confidence_level <= 0.25 THEN 1\n' +
+            '  WHEN avg_confidence_level <= 0.50 THEN 2\n' +
+            '  WHEN avg_confidence_level <= 0.75 THEN 3\n' +
+            '  WHEN avg_confidence_level <= 1.00 THEN 4\n' +
+            '  WHEN avg_confidence_level <= 1.25 THEN 5\n' +
+            '  WHEN avg_confidence_level <= 1.50 THEN 6\n' +
+            '  WHEN avg_confidence_level <= 1.75 THEN 7\n' +
+            '  WHEN avg_confidence_level <= 2.00 THEN 8\n' +
+            '  WHEN avg_confidence_level <= 2.25 THEN 9\n' +
+            '  WHEN avg_confidence_level <= 2.50 THEN 10\n' +
+            '  WHEN avg_confidence_level <= 2.75 THEN 11\n' +
+            '  WHEN avg_confidence_level <= 3.00 THEN 12\n' +
+            '  WHEN avg_confidence_level <= 3.25 THEN 13\n' +
+            '  WHEN avg_confidence_level <= 3.50 THEN 14\n' +
+            '  WHEN avg_confidence_level <= 3.75 THEN 15\n' +
+            '  WHEN avg_confidence_level <= 4.00 THEN 16\n' +
+            '  WHEN avg_confidence_level <= 4.25 THEN 17\n' +
+            '  WHEN avg_confidence_level <= 4.50 THEN 18\n' +
+            '  WHEN avg_confidence_level <= 4.75 THEN 19\n' +
+            '  WHEN avg_confidence_level <= 5.00 THEN 20\n' +
+            'END `avg_confidence_level_interval_sort`, CASE  \n' +
             "  WHEN avg_confidence_level <= 0.25 THEN '0.00 ~ 0.25'\n" +
             "  WHEN avg_confidence_level <= 0.50 THEN '0.25 ~ 0.50'\n" +
             "  WHEN avg_confidence_level <= 0.75 THEN '0.50 ~ 0.75'\n" +
@@ -3639,31 +3639,31 @@ export default {
             "  WHEN avg_confidence_level <= 4.50 THEN '4.25 ~ 4.50'\n" +
             "  WHEN avg_confidence_level <= 4.75 THEN '4.50 ~ 4.75'\n" +
             "  WHEN avg_confidence_level <= 5.00 THEN '4.75 ~ 5.00'\n" +
-            "END AS `avg_confidence_level_interval` FROM " +
-            "(SELECT AVG(r_confidence_level) AS `avg_confidence_level` FROM review_record " +
+            'END AS `avg_confidence_level_interval` FROM ' +
+            '(SELECT AVG(r_confidence_level) AS `avg_confidence_level` FROM review_record ' +
             "WHERE review_record.data_set = '${PLACEHOLDER_DATA_SET}'" +
-            "GROUP BY r_submission_id " +
-            "UNION ALL SELECT 0.25\n" +
-            "UNION ALL SELECT 0.50\n" +
-            "UNION ALL SELECT 0.75\n" +
-            "UNION ALL SELECT 1.00\n" +
-            "UNION ALL SELECT 1.25\n" +
-            "UNION ALL SELECT 1.50\n" +
-            "UNION ALL SELECT 1.75\n" +
-            "UNION ALL SELECT 2.00\n" +
-            "UNION ALL SELECT 2.25\n" +
-            "UNION ALL SELECT 2.50\n" +
-            "UNION ALL SELECT 2.75\n" +
-            "UNION ALL SELECT 3.00\n" +
-            "UNION ALL SELECT 3.25\n" +
-            "UNION ALL SELECT 3.50\n" +
-            "UNION ALL SELECT 3.75\n" +
-            "UNION ALL SELECT 4.00\n" +
-            "UNION ALL SELECT 4.25\n" +
-            "UNION ALL SELECT 4.50\n" +
-            "UNION ALL SELECT 4.75\n" +
-            "UNION ALL SELECT 5.00) AS `tmp1`) AS `tmp2`",
-          customized: true,
+            'GROUP BY r_submission_id ' +
+            'UNION ALL SELECT 0.25\n' +
+            'UNION ALL SELECT 0.50\n' +
+            'UNION ALL SELECT 0.75\n' +
+            'UNION ALL SELECT 1.00\n' +
+            'UNION ALL SELECT 1.25\n' +
+            'UNION ALL SELECT 1.50\n' +
+            'UNION ALL SELECT 1.75\n' +
+            'UNION ALL SELECT 2.00\n' +
+            'UNION ALL SELECT 2.25\n' +
+            'UNION ALL SELECT 2.50\n' +
+            'UNION ALL SELECT 2.75\n' +
+            'UNION ALL SELECT 3.00\n' +
+            'UNION ALL SELECT 3.25\n' +
+            'UNION ALL SELECT 3.50\n' +
+            'UNION ALL SELECT 3.75\n' +
+            'UNION ALL SELECT 4.00\n' +
+            'UNION ALL SELECT 4.25\n' +
+            'UNION ALL SELECT 4.50\n' +
+            'UNION ALL SELECT 4.75\n' +
+            'UNION ALL SELECT 5.00) AS `tmp1`) AS `tmp2`',
+          customized: true
         }
       ],
       filters: [],
@@ -3676,7 +3676,7 @@ export default {
       sorters: [
         {
           field: 'avg_confidence_level_interval_sort',
-          order: 'ASC',
+          order: 'ASC'
         }
       ],
       extraData: {
@@ -3685,12 +3685,12 @@ export default {
         xAxisFieldName: 'avg_confidence_level_interval',
         yAxisFieldName: 'num_of_submission',
         numOfResultToDisplay: 50,
-        isColorfulBar: false,
+        isColorfulBar: false
       }
     }
   },
-  "avg_weighted_score_paper_author": {
-    name: "Average Weighted Score Rank Paper Author",
+  'avg_weighted_score_paper_author': {
+    name: 'Average Weighted Score Rank Paper Author',
     group: 'Review Record + Submission Record',
     data: {
       type: 'bar_chart',
@@ -3703,33 +3703,33 @@ export default {
           rename: 'avg_weighted_score'
         },
         {
-          expression: "s_author_name",
+          expression: 's_author_name',
           rename: 's_author_name'
         }
       ],
       involvedRecords: [
         {
-          name: "(SELECT s_author_name, weighted_score FROM " +
+          name: '(SELECT s_author_name, weighted_score FROM ' +
             "(SELECT r_submission_id, SUM(r_confidence_level * r_overall_evaluation_score) / SUM(r_confidence_level) AS `weighted_score` FROM review_record WHERE review_record.data_set = '${PLACEHOLDER_DATA_SET}' GROUP BY r_submission_id) AS `tmp1`, submission_record, submission_record_author_set, submission_author_record " +
             "WHERE r_submission_id = s_submission_id AND s_id = submission_record_s_id AND author_set_s_author_id = s_author_id AND submission_record.data_set = '${PLACEHOLDER_DATA_SET}') AS `tmp2`",
-          customized: true,
+          customized: true
         }
       ],
       filters: [],
       joiners: [],
       groupers: [
         {
-          field: "s_author_name"
+          field: 's_author_name'
         }
       ],
       sorters: [
         {
           field: 'avg_weighted_score',
-          order: 'DESC',
+          order: 'DESC'
         },
         {
           field: 's_author_name',
-          order: 'ASC',
+          order: 'ASC'
         }
       ],
       extraData: {
@@ -3739,12 +3739,12 @@ export default {
         xAxisFieldName: 's_author_name',
         yAxisFieldName: 'avg_weighted_score',
         numOfResultToDisplay: 10,
-        isColorfulBar: true,
+        isColorfulBar: true
       }
     }
   },
-  "avg_weighted_score_author": {
-    name: "Average Weighted Score Rank Author",
+  'avg_weighted_score_author': {
+    name: 'Average Weighted Score Rank Author',
     group: 'Author Record + Review Record',
     data: {
       type: 'bar_chart',
@@ -3757,7 +3757,7 @@ export default {
           rename: 'avg_weighted_score'
         },
         {
-          expression: "COUNT(*)",
+          expression: 'COUNT(*)',
           rename: 'submission_count'
         },
         {
@@ -3765,39 +3765,39 @@ export default {
           rename: 'author_name'
         },
         {
-          expression: "a_email",
+          expression: 'a_email',
           rename: 'author_email'
         }
       ],
       involvedRecords: [
         {
-          name: "(SELECT a_first_name, a_last_name, a_email, SUM(r_confidence_level * r_overall_evaluation_score) / SUM(r_confidence_level) AS `weighted_score` FROM review_record, author_record " +
+          name: '(SELECT a_first_name, a_last_name, a_email, SUM(r_confidence_level * r_overall_evaluation_score) / SUM(r_confidence_level) AS `weighted_score` FROM review_record, author_record ' +
             "WHERE review_record.data_set = '${PLACEHOLDER_DATA_SET}' AND author_record.data_set = '${PLACEHOLDER_DATA_SET}' " +
-            "AND review_record.r_submission_id = author_record.a_submission_id GROUP BY a_submission_id, a_first_name, a_last_name, a_email) AS `tmp`",
-          customized: true,
+            'AND review_record.r_submission_id = author_record.a_submission_id GROUP BY a_submission_id, a_first_name, a_last_name, a_email) AS `tmp`',
+          customized: true
         }
       ],
       filters: [],
       joiners: [],
       groupers: [
         {
-          field: "a_first_name"
+          field: 'a_first_name'
         },
         {
-          field: "a_last_name"
+          field: 'a_last_name'
         },
         {
-          field: "a_email"
+          field: 'a_email'
         }
       ],
       sorters: [
         {
           field: 'avg_weighted_score',
-          order: 'DESC',
+          order: 'DESC'
         },
         {
           field: 'a_email',
-          order: 'ASC',
+          order: 'ASC'
         }
       ],
       extraData: {
@@ -3816,12 +3816,12 @@ export default {
         xAxisFieldName: 'author_name',
         yAxisFieldName: 'avg_weighted_score',
         numOfResultToDisplay: 10,
-        isColorfulBar: true,
+        isColorfulBar: true
       }
     }
   },
-  "avg_weighted_score_organization": {
-    name: "Average Weighted Score Rank Organization",
+  'avg_weighted_score_organization': {
+    name: 'Average Weighted Score Rank Organization',
     group: 'Author Record + Review Record',
     data: {
       type: 'bar_chart',
@@ -3834,37 +3834,37 @@ export default {
           rename: 'avg_weighted_score'
         },
         {
-          expression: "COUNT(*)",
+          expression: 'COUNT(*)',
           rename: 'submission_count'
         },
         {
-          expression: "a_organisation",
+          expression: 'a_organisation',
           rename: 'a_organisation'
         }
       ],
       involvedRecords: [
         {
-          name: "(SELECT a_organisation, SUM(r_confidence_level * r_overall_evaluation_score) / SUM(r_confidence_level) AS `weighted_score` FROM review_record, author_record " +
+          name: '(SELECT a_organisation, SUM(r_confidence_level * r_overall_evaluation_score) / SUM(r_confidence_level) AS `weighted_score` FROM review_record, author_record ' +
             "WHERE review_record.data_set = '${PLACEHOLDER_DATA_SET}' AND author_record.data_set = '${PLACEHOLDER_DATA_SET}' " +
-            "AND review_record.r_submission_id = author_record.a_submission_id GROUP BY a_submission_id, a_organisation) AS `tmp`",
-          customized: true,
+            'AND review_record.r_submission_id = author_record.a_submission_id GROUP BY a_submission_id, a_organisation) AS `tmp`',
+          customized: true
         }
       ],
       filters: [],
       joiners: [],
       groupers: [
         {
-          field: "a_organisation"
+          field: 'a_organisation'
         }
       ],
       sorters: [
         {
           field: 'avg_weighted_score',
-          order: 'DESC',
+          order: 'DESC'
         },
         {
           field: 'a_organisation',
-          order: 'ASC',
+          order: 'ASC'
         }
       ],
       extraData: {
@@ -3879,12 +3879,12 @@ export default {
         xAxisFieldName: 'a_organisation',
         yAxisFieldName: 'avg_weighted_score',
         numOfResultToDisplay: 10,
-        isColorfulBar: true,
+        isColorfulBar: true
       }
     }
   },
-  "avg_weighted_score_country": {
-    name: "Average Weighted Score Rank Country",
+  'avg_weighted_score_country': {
+    name: 'Average Weighted Score Rank Country',
     group: 'Author Record + Review Record',
     data: {
       type: 'bar_chart',
@@ -3897,37 +3897,37 @@ export default {
           rename: 'avg_weighted_score'
         },
         {
-          expression: "COUNT(*)",
+          expression: 'COUNT(*)',
           rename: 'submission_count'
         },
         {
-          expression: "a_country",
+          expression: 'a_country',
           rename: 'a_country'
         }
       ],
       involvedRecords: [
         {
-          name: "(SELECT a_country, SUM(r_confidence_level * r_overall_evaluation_score) / SUM(r_confidence_level) AS `weighted_score` FROM review_record, author_record " +
+          name: '(SELECT a_country, SUM(r_confidence_level * r_overall_evaluation_score) / SUM(r_confidence_level) AS `weighted_score` FROM review_record, author_record ' +
             "WHERE review_record.data_set = '${PLACEHOLDER_DATA_SET}' AND author_record.data_set = '${PLACEHOLDER_DATA_SET}' " +
-            "AND review_record.r_submission_id = author_record.a_submission_id GROUP BY a_submission_id, a_country) AS `tmp`",
-          customized: true,
+            'AND review_record.r_submission_id = author_record.a_submission_id GROUP BY a_submission_id, a_country) AS `tmp`',
+          customized: true
         }
       ],
       filters: [],
       joiners: [],
       groupers: [
         {
-          field: "a_country"
+          field: 'a_country'
         }
       ],
       sorters: [
         {
           field: 'avg_weighted_score',
-          order: 'DESC',
+          order: 'DESC'
         },
         {
           field: 'a_country',
-          order: 'ASC',
+          order: 'ASC'
         }
       ],
       extraData: {
@@ -3942,13 +3942,13 @@ export default {
         xAxisFieldName: 'a_country',
         yAxisFieldName: 'avg_weighted_score',
         numOfResultToDisplay: 10,
-        isColorfulBar: true,
+        isColorfulBar: true
       }
     }
   },
 
 /*
-// visualization for gender distribution.  
+// visualization for gender distribution.
   "author_gender_ratio": {
         name: "Author Gender Distribution", // define the name of the chart
         group: 'Author Record', // classify the group of record (author/submission/review)
@@ -4000,199 +4000,197 @@ export default {
 */
 
 // visualization for conf score test
-  "all_conf_all_scores_test": {
-        name: "Reviewer Confidence vs Score", // define the name of the chart
-        group: 'Review Record', // classify the group of record (author/submission/review)
-        data: {
+  'all_conf_all_scores_test': {
+    name: 'Reviewer Confidence vs Score', // define the name of the chart
+    group: 'Review Record', // classify the group of record (author/submission/review)
+    data: {
           // set the variables for bar chart
-          type: 'bar_chart',
-          title: 'Reviewer Confidence vs Score',
-          dataSet: '${PLACEHOLDER_DATA_SET}',
-          description: 'This bar chart shows percentage of high/low scores for all confidence values. By default, it shows the percentage of high scores per confidence. You may toggle to high score percentage using advanced features',
-          //determine the selections for select query
-          selections: [
-            {
-              expression: "r_confidence_level",
-              rename: 'r_confidence_level'
-            },
-            {
-              //expression: "CASE When r_overall_evaluation_score <3 then 'low' else 'high' end",
-              expression: '(r_score_low/(r_score_low+r_score_high)*100)',
-              rename: 'r_score_low_per'
-            },
-            {
-              //expression: "CASE When r_overall_evaluation_score <3 then 'low' else 'high' end",
-              expression: '(r_score_high/(r_score_low+r_score_high)*100)',
-              rename: 'r_score_high_per'
-            }
-          ],
-          //determine the table name for query
-          //change min-max logic once we revamp db supporting two datasets simultaneously(softconf,easychair)
-          involvedRecords: [
-            {
-              name: "(select A.r_confidence_level as r_confidence_level, IFNULL(A.tot_score,0) AS r_score_low, IFNULL(B.tot_score,0) AS r_score_high" +
-                     " from (select r_confidence_level, r_low_or_high, count(*) as tot_score"+
-                     " from (select r_confidence_level,case when r_overall_evaluation_score<"+
+      type: 'bar_chart',
+      title: 'Reviewer Confidence vs Score',
+      dataSet: '${PLACEHOLDER_DATA_SET}',
+      description: 'This bar chart shows percentage of high/low scores for all confidence values. By default, it shows the percentage of high scores per confidence. You may toggle to high score percentage using advanced features',
+          // determine the selections for select query
+      selections: [
+        {
+          expression: 'r_confidence_level',
+          rename: 'r_confidence_level'
+        },
+        {
+              // expression: "CASE When r_overall_evaluation_score <3 then 'low' else 'high' end",
+          expression: '(r_score_low/(r_score_low+r_score_high)*100)',
+          rename: 'r_score_low_per'
+        },
+        {
+              // expression: "CASE When r_overall_evaluation_score <3 then 'low' else 'high' end",
+          expression: '(r_score_high/(r_score_low+r_score_high)*100)',
+          rename: 'r_score_high_per'
+        }
+      ],
+          // determine the table name for query
+          // change min-max logic once we revamp db supporting two datasets simultaneously(softconf,easychair)
+      involvedRecords: [
+        {
+          name: '(select A.r_confidence_level as r_confidence_level, IFNULL(A.tot_score,0) AS r_score_low, IFNULL(B.tot_score,0) AS r_score_high' +
+                     ' from (select r_confidence_level, r_low_or_high, count(*) as tot_score' +
+                     ' from (select r_confidence_level,case when r_overall_evaluation_score<' +
                      "(select case when ((MAX(r_overall_evaluation_score)-MIN(r_overall_evaluation_score))/2)<3 then 3 else 0 end as medium FROM review_record WHERE review_record.data_set = '${PLACEHOLDER_DATA_SET}') then 'low' when r_overall_evaluation_score=(select case when ((MAX(r_overall_evaluation_score)-MIN(r_overall_evaluation_score))/2)<3 then 3 else 0 end as medium FROM review_record WHERE review_record.data_set = '${PLACEHOLDER_DATA_SET}') then 'medium' else 'high' end as r_low_or_high FROM review_record WHERE review_record.data_set = '${PLACEHOLDER_DATA_SET}')as temp1  where r_low_or_high like 'low' group by r_confidence_level,r_low_or_high) as A" +
-                     " LEFT JOIN (select r_confidence_level, r_low_or_high, count(*) as tot_score"+
-                     " from (select r_confidence_level,case when r_overall_evaluation_score<"+
+                     ' LEFT JOIN (select r_confidence_level, r_low_or_high, count(*) as tot_score' +
+                     ' from (select r_confidence_level,case when r_overall_evaluation_score<' +
                      "(select case when ((MAX(r_overall_evaluation_score)-MIN(r_overall_evaluation_score))/2)<3 then 3 else 0 end as medium FROM review_record WHERE review_record.data_set = '${PLACEHOLDER_DATA_SET}') then 'low' when r_overall_evaluation_score=(select case when ((MAX(r_overall_evaluation_score)-MIN(r_overall_evaluation_score))/2)<3 then 3 else 0 end as medium FROM review_record WHERE review_record.data_set = '${PLACEHOLDER_DATA_SET}') then 'medium' else 'high' end as r_low_or_high FROM review_record WHERE review_record.data_set = '${PLACEHOLDER_DATA_SET}')as temp1  where r_low_or_high like 'high' group by r_confidence_level,r_low_or_high) as B" +
-                     " ON A.r_confidence_level=B.r_confidence_level" +
-                     " union" +
-                     " select B.r_confidence_level as r_confidence_level, IFNULL(A.tot_score,0) AS r_score_low, IFNULL(B.tot_score,0) AS r_score_high" +
-                     " from (select r_confidence_level, r_low_or_high, count(*) as tot_score"+
-                     " from (select r_confidence_level,case when r_overall_evaluation_score<"+
+                     ' ON A.r_confidence_level=B.r_confidence_level' +
+                     ' union' +
+                     ' select B.r_confidence_level as r_confidence_level, IFNULL(A.tot_score,0) AS r_score_low, IFNULL(B.tot_score,0) AS r_score_high' +
+                     ' from (select r_confidence_level, r_low_or_high, count(*) as tot_score' +
+                     ' from (select r_confidence_level,case when r_overall_evaluation_score<' +
                      "(select case when ((MAX(r_overall_evaluation_score)-MIN(r_overall_evaluation_score))/2)<3 then 3 else 0 end as medium FROM review_record WHERE review_record.data_set = '${PLACEHOLDER_DATA_SET}') then 'low' when r_overall_evaluation_score=(select case when ((MAX(r_overall_evaluation_score)-MIN(r_overall_evaluation_score))/2)<3 then 3 else 0 end as medium FROM review_record WHERE review_record.data_set = '${PLACEHOLDER_DATA_SET}') then 'medium' else 'high' end as r_low_or_high FROM review_record WHERE review_record.data_set = '${PLACEHOLDER_DATA_SET}')as temp1  where r_low_or_high like 'low' group by r_confidence_level,r_low_or_high) as A" +
-                     " RIGHT JOIN (select r_confidence_level, r_low_or_high, count(*) as tot_score"+
-                     " from (select r_confidence_level,case when r_overall_evaluation_score<"+
+                     ' RIGHT JOIN (select r_confidence_level, r_low_or_high, count(*) as tot_score' +
+                     ' from (select r_confidence_level,case when r_overall_evaluation_score<' +
                      "(select case when ((MAX(r_overall_evaluation_score)-MIN(r_overall_evaluation_score))/2)<3 then 3 else 0 end as medium FROM review_record WHERE review_record.data_set = '${PLACEHOLDER_DATA_SET}') then 'low' when r_overall_evaluation_score=(select case when ((MAX(r_overall_evaluation_score)-MIN(r_overall_evaluation_score))/2)<3 then 3 else 0 end as medium FROM review_record WHERE review_record.data_set = '${PLACEHOLDER_DATA_SET}') then 'medium' else 'high' end as r_low_or_high FROM review_record WHERE review_record.data_set = '${PLACEHOLDER_DATA_SET}')as temp1  where r_low_or_high like 'high' group by r_confidence_level,r_low_or_high) as B" +
-                     " ON A.r_confidence_level=B.r_confidence_level)as temp",
-              customized: true,
-            }
-          ],
-          filters: [
-          ],
-          joiners: [],
-          //determine the field for group by clause
-          groupers: [],
-          sorters: [
-
-          ],
-          // set the labels, x and y axis, and modify chart style
-          extraData: {
-            dataSetLabel: 'Percentage of High Scores',
-            xAxisFieldName:'r_confidence_level' ,
-            yAxisFieldName: 'r_score_high_per',
-            numOfResultToDisplay: 10,
-            isColorfulBar: false,
-          }
+                     ' ON A.r_confidence_level=B.r_confidence_level)as temp',
+          customized: true
         }
-      },
+      ],
+      filters: [
+      ],
+      joiners: [],
+          // determine the field for group by clause
+      groupers: [],
+      sorters: [
 
-      "Number of Review Assignment based on Confidence Level": {
-        name: "Number of Review Assignment based on Confidence Level", // define the name of the chart
-        group: 'Review Record', // classify the group of record (author/submission/review)
-        data: {
+      ],
+          // set the labels, x and y axis, and modify chart style
+      extraData: {
+        dataSetLabel: 'Percentage of High Scores',
+        xAxisFieldName: 'r_confidence_level',
+        yAxisFieldName: 'r_score_high_per',
+        numOfResultToDisplay: 10,
+        isColorfulBar: false
+      }
+    }
+  },
+
+  'Number of Review Assignment based on Confidence Level': {
+    name: 'Number of Review Assignment based on Confidence Level', // define the name of the chart
+    group: 'Review Record', // classify the group of record (author/submission/review)
+    data: {
           // set the variables for bar chart
-          type: 'scatter_chart',
-          title: 'Number of Review Assignment based on Confidence Level',
-          dataSet: '${PLACEHOLDER_DATA_SET}',
-          description: 'This scatter chart shows the number of review assignment by confidence level.',
-          //determine the selections for select query
-          selections: [
-            {
-              expression: "r_reviewer_name",
-              rename: "r_reviewer_name"
-            },
-            {
-              expression: "r_confidence_level",
-              rename: "r_confidence_level"
-            },
-            {
-              expression: "r_num_review_assignment",
-              rename: "r_num_review_assignment"
-            }
-          ],
-          //determine the table name for query
-          involvedRecords: [
-            {
-              name: 'review_record',
-              customized: false,
-            }
-          ],
-          filters: [],
-          joiners: [],
-          //determine the field for group by clause
-          groupers: [
-
-          ],
-          sorters: [
-
-          ],
-          // set the labels, x and y axis, and modify chart style
-          extraData: {
-            dataSetLabel: 'Number of Review Assignments',
-            xAxisFieldName: 'r_confidence_level',
-            yAxisFieldName: 'r_num_review_assignment',
-            numOfResultToDisplay: 20,
-            fieldsShownInToolTips: [
-              {
-                label: 'Reviewer Name',
-                field: 'r_reviewer_name'
-              }
-            ],
-            isColorfulBar: true,
-          }
+      type: 'scatter_chart',
+      title: 'Number of Review Assignment based on Confidence Level',
+      dataSet: '${PLACEHOLDER_DATA_SET}',
+      description: 'This scatter chart shows the number of review assignment by confidence level.',
+          // determine the selections for select query
+      selections: [
+        {
+          expression: 'r_reviewer_name',
+          rename: 'r_reviewer_name'
+        },
+        {
+          expression: 'r_confidence_level',
+          rename: 'r_confidence_level'
+        },
+        {
+          expression: 'r_num_review_assignment',
+          rename: 'r_num_review_assignment'
         }
-      },
+      ],
+          // determine the table name for query
+      involvedRecords: [
+        {
+          name: 'review_record',
+          customized: false
+        }
+      ],
+      filters: [],
+      joiners: [],
+          // determine the field for group by clause
+      groupers: [
 
+      ],
+      sorters: [
 
+      ],
+          // set the labels, x and y axis, and modify chart style
+      extraData: {
+        dataSetLabel: 'Number of Review Assignments',
+        xAxisFieldName: 'r_confidence_level',
+        yAxisFieldName: 'r_num_review_assignment',
+        numOfResultToDisplay: 20,
+        fieldsShownInToolTips: [
+          {
+            label: 'Reviewer Name',
+            field: 'r_reviewer_name'
+          }
+        ],
+        isColorfulBar: true
+      }
+    }
+  },
 
-      "Test": {
-        name: "Test", // define the name of the chart
-        group: 'Author Record', // classify the group of record (author/submission/review)
-        data: {
+  'Test': {
+    name: 'Test', // define the name of the chart
+    group: 'Author Record', // classify the group of record (author/submission/review)
+    data: {
           // set the variables for bar chart
-          type: 'graph_network',
-          title: 'Test',
-          dataSet: '${PLACEHOLDER_DATA_SET}',
-          description: 'Test',
-          //determine the selections for select query
-          selections: [
-            {
-              expression: "a1_name_pair",
-              rename: "a1_name_pair"
-            },
-            {
-              expression: "a2_name_pair",
-              rename: "a2_name_pair"
-            },
-            {
-              expression: "num_entries",
-              rename: "num_entries"
-            }
-          ],
-          //determine the table name for query
-          involvedRecords: [
-            {
-              name: "(select " +
-              "concat (a1.a_first_name,a1.a_last_name) as a1_name_pair,\n" +
-              "concat (a2.a_first_name,a2.a_last_name) as a2_name_pair,\n" +
-              "count(*) as Num_Entries\n" +
-              "from author_record as a1, author_record as a2\n" +
-              "where a1.data_set = '${PLACEHOLDER_DATA_SET}' and a2.data_set = '${PLACEHOLDER_DATA_SET}'\n" +          
-              "and a1.a_submission_id = a2.a_submission_id and a1.a_id < a2.a_id\n" +
-              "group by a1.a_id, a2.a_id\n" +
-              "order by count(*) desc)as temp",
-              customized: true,
-            }
-          ],
-          filters: [],
-          joiners: [],
-          //determine the field for group by clause
-          groupers: [
-
-          ],
-          sorters: [
-
-          ],
-          // set the labels, x and y axis, and modify chart style
-          extraData: {
-            linkMessage: [ 
-              {
-                msg: " has collaborated with  "
-              },
-              {
-                msg: " for  "
-              },
-              {
-                msg: " entries ",
-              }
-            ],
-            numOfResultToDisplay: 10,
-            isColorfulBar: true,
-            nodeMessage: "Name: ",
-          }
+      type: 'graph_network',
+      title: 'Test',
+      dataSet: '${PLACEHOLDER_DATA_SET}',
+      description: 'Test',
+          // determine the selections for select query
+      selections: [
+        {
+          expression: 'a1_name_pair',
+          rename: 'a1_name_pair'
+        },
+        {
+          expression: 'a2_name_pair',
+          rename: 'a2_name_pair'
+        },
+        {
+          expression: 'num_entries',
+          rename: 'num_entries'
         }
-      },
+      ],
+          // determine the table name for query
+      involvedRecords: [
+        {
+          name: '(select ' +
+              'concat (a1.a_first_name,a1.a_last_name) as a1_name_pair,\n' +
+              'concat (a2.a_first_name,a2.a_last_name) as a2_name_pair,\n' +
+              'count(*) as Num_Entries\n' +
+              'from author_record as a1, author_record as a2\n' +
+              "where a1.data_set = '${PLACEHOLDER_DATA_SET}' and a2.data_set = '${PLACEHOLDER_DATA_SET}'\n" +
+              'and a1.a_submission_id = a2.a_submission_id and a1.a_id < a2.a_id\n' +
+              'group by a1.a_id, a2.a_id\n' +
+              'order by count(*) desc)as temp',
+          customized: true
+        }
+      ],
+      filters: [],
+      joiners: [],
+          // determine the field for group by clause
+      groupers: [
+
+      ],
+      sorters: [
+
+      ],
+          // set the labels, x and y axis, and modify chart style
+      extraData: {
+        linkMessage: [
+          {
+            msg: ' has collaborated with  '
+          },
+          {
+            msg: ' for  '
+          },
+          {
+            msg: ' entries '
+          }
+        ],
+        numOfResultToDisplay: 10,
+        isColorfulBar: true,
+        nodeMessage: 'Name: '
+      }
+    }
+  }
 }

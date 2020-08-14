@@ -1,5 +1,5 @@
 import axios from 'axios'
-import {deepCopy} from "@/common/utility"
+import {deepCopy} from '@/common/utility'
 
 export default {
   state: {
@@ -8,185 +8,185 @@ export default {
     presentationListStatus: {
       isLoading: true,
       isApiError: false,
-      apiErrorMsg: '',
+      apiErrorMsg: ''
     },
     presentationForm: {
       id: '',
       name: '',
       version: '',
       description: '',
-      creatorIdentifier: '',
+      creatorIdentifier: ''
     },
 
     presentationFormStatus: {
       isLoading: false,
       isApiError: false,
-      apiErrorMsg: '',
+      apiErrorMsg: ''
     },
     isSaveSuccess: false,
     isPresentationEditable: false
   },
   mutations: {
-    setPresentationListLoading(state, payload) {
+    setPresentationListLoading (state, payload) {
       if (payload) {
-        state.presentationListStatus.isApiError = false;
+        state.presentationListStatus.isApiError = false
       }
-      state.presentationListStatus.isLoading = payload;
+      state.presentationListStatus.isLoading = payload
     },
 
-    setPresentationListApiError(state, payload) {
-      state.presentationListStatus.isApiError = true;
-      state.presentationListStatus.apiErrorMsg = payload;
+    setPresentationListApiError (state, payload) {
+      state.presentationListStatus.isApiError = true
+      state.presentationListStatus.apiErrorMsg = payload
     },
 
-    setPresentationList(state, payload) {
-      state.presentationList = payload;
+    setPresentationList (state, payload) {
+      state.presentationList = payload
     },
 
-    setVersionList(state, payload) {
-      state.versionList = payload;
+    setVersionList (state, payload) {
+      state.versionList = payload
     },
 
-    addToPresentationList(state, payload) {
-      state.presentationList.push(payload);
+    addToPresentationList (state, payload) {
+      state.presentationList.push(payload)
     },
 
-    deleteFromPresentationList(state, payload) {
-      const index = state.presentationList.findIndex(presentation => presentation.id === payload);
+    deleteFromPresentationList (state, payload) {
+      const index = state.presentationList.findIndex(presentation => presentation.id === payload)
       state.presentationList.splice(index, 1)
     },
 
-    updatePresentationListWith(state, payload) {
+    updatePresentationListWith (state, payload) {
       state.presentationList = state.presentationList.map(presentation => {
         if (presentation.id === payload.id) {
           return payload
         }
         return presentation
-      });
+      })
     },
 
-    setPresentationFormLoading(state, isLoading) {
-      state.presentationFormStatus.isLoading = isLoading;
+    setPresentationFormLoading (state, isLoading) {
+      state.presentationFormStatus.isLoading = isLoading
     },
 
-    setPresentationFormApiError(state, msg) {
-      state.presentationFormStatus.isApiError = true;
-      state.presentationFormStatus.apiErrorMsg = msg;
+    setPresentationFormApiError (state, msg) {
+      state.presentationFormStatus.isApiError = true
+      state.presentationFormStatus.apiErrorMsg = msg
     },
 
-    setPresentationForm(state, payload) {
-      state.presentationForm = payload;
+    setPresentationForm (state, payload) {
+      state.presentationForm = payload
     },
 
-    resetPresentationForm(state) {
-      state.presentationForm.id = '';
-      state.presentationForm.name = '';
-      state.presentationForm.version = '';
-      state.presentationForm.description = '';
-      state.presentationForm.creatorIdentifier = '';
-      state.presentationFormStatus.isLoading = false;
-      state.presentationFormStatus.isApiError = false;
-      state.presentationFormStatus.apiErrorMsg = '';
+    resetPresentationForm (state) {
+      state.presentationForm.id = ''
+      state.presentationForm.name = ''
+      state.presentationForm.version = ''
+      state.presentationForm.description = ''
+      state.presentationForm.creatorIdentifier = ''
+      state.presentationFormStatus.isLoading = false
+      state.presentationFormStatus.isApiError = false
+      state.presentationFormStatus.apiErrorMsg = ''
     },
 
-    setPresentationFormField(state, {field, value}) {
+    setPresentationFormField (state, {field, value}) {
       state.presentationForm[field] = value
     },
 
-    setSaveSuccess(state, success) {
-      state.isSaveSuccess = success;
+    setSaveSuccess (state, success) {
+      state.isSaveSuccess = success
     },
-    setIsPresentationEditable(state, isPresentationEditable) {
-      state.isPresentationEditable = isPresentationEditable;
+    setIsPresentationEditable (state, isPresentationEditable) {
+      state.isPresentationEditable = isPresentationEditable
     }
   },
   actions: {
-    async getPresentationList({commit}) {
-      commit('setPresentationListLoading', true);
+    async getPresentationList ({commit}) {
+      commit('setPresentationListLoading', true)
       axios.get('/api/presentations')
         .then(response => {
           commit('setPresentationList', response.data)
         })
         .catch(e => {
-          commit('setPresentationListApiError', e.toString());
+          commit('setPresentationListApiError', e.toString())
         })
         .finally(() => {
-          commit('setPresentationListLoading', false);
+          commit('setPresentationListLoading', false)
         })
     },
 
-    async getVersionList({commit}) {
-      commit('setPresentationListLoading', true);
+    async getVersionList ({commit}) {
+      commit('setPresentationListLoading', true)
       axios.get('/api/version')
           .then(response => {
             commit('setVersionList', response.data)
           })
           .catch(e => {
-            commit('setPresentationListApiError', e.toString());
+            commit('setPresentationListApiError', e.toString())
           })
           .finally(() => {
-            commit('setPresentationListLoading', false);
+            commit('setPresentationListLoading', false)
           })
     },
 
-    async getPresentation({commit}, presentationId) {
-      commit('setPresentationFormLoading', true);
+    async getPresentation ({commit}, presentationId) {
+      commit('setPresentationFormLoading', true)
       await axios.get(`/api/presentations/${presentationId}`)
           .then(response => {
             commit('setPresentationForm', response.data)
           })
           .catch(e => {
-            commit('setPresentationFormApiError', e.toString());
+            commit('setPresentationFormApiError', e.toString())
           })
           .finally(() => {
-            commit('setPresentationFormLoading', false);
-          });
+            commit('setPresentationFormLoading', false)
+          })
     },
 
-    async savePresentation({commit, state}) {
-      commit('setPresentationFormLoading', true);
+    async savePresentation ({commit, state}) {
+      commit('setPresentationFormLoading', true)
       await axios.post('/api/presentations', state.presentationForm)
           .then(response => {
-            commit('addToPresentationList', deepCopy(response.data));
-            commit('setPresentationForm', deepCopy(response.data));
-            commit("setSaveSuccess", true);
+            commit('addToPresentationList', deepCopy(response.data))
+            commit('setPresentationForm', deepCopy(response.data))
+            commit('setSaveSuccess', true)
           })
           .catch(e => {
-            commit('setPresentationFormApiError', e.toString());
-            commit("setSaveSuccess", false);
+            commit('setPresentationFormApiError', e.toString())
+            commit('setSaveSuccess', false)
           })
           .finally(() => {
-            commit('setPresentationFormLoading', false);
+            commit('setPresentationFormLoading', false)
           })
     },
 
-    async updatePresentation({commit, state}) {
-      commit('setPresentationFormLoading', true);
+    async updatePresentation ({commit, state}) {
+      commit('setPresentationFormLoading', true)
       await axios.put('/api/presentations/' + state.presentationForm.id, state.presentationForm)
           .then(response => {
             commit('updatePresentationListWith', response.data)
           })
           .catch(e => {
-            commit('setPresentationFormApiError', e.toString());
+            commit('setPresentationFormApiError', e.toString())
           })
           .finally(() => {
-            commit('setPresentationFormLoading', false);
+            commit('setPresentationFormLoading', false)
           })
     },
 
-    async deletePresentation({commit}, payload) {
-      commit('setPresentationFormLoading', true);
+    async deletePresentation ({commit}, payload) {
+      commit('setPresentationFormLoading', true)
       await axios.delete('/api/presentations/' + payload)
           .then(() => {
-            commit('deleteFromPresentationList', payload);
+            commit('deleteFromPresentationList', payload)
             commit('resetPresentationForm')
           })
           .catch(e => {
-            commit('setPresentationFormApiError', e.toString());
+            commit('setPresentationFormApiError', e.toString())
           })
           .finally(() => {
-            commit('setPresentationFormLoading', false);
+            commit('setPresentationFormLoading', false)
           })
     }
   }
-};
+}

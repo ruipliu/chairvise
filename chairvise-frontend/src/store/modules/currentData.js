@@ -10,6 +10,6 @@ export default {
 }
 
 // eslint-disable-next-line no-unused-vars
-export function submissionRankTrack(submission) {
-  return;
+export function submissionRankTrack (submission) {
+
 }

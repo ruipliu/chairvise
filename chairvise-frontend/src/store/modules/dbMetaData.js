@@ -6,40 +6,40 @@ export default {
     entitiesStatus: {
       isLoading: false,
       isApiError: false,
-      apiErrorMsg: '',
+      apiErrorMsg: ''
     }
   },
 
   mutations: {
-    setDBMetaDataEntitiesLoading(state, isLoading) {
-      state.entitiesStatus.isApiError = false;
-      state.entitiesStatus.isLoading = isLoading;
+    setDBMetaDataEntitiesLoading (state, isLoading) {
+      state.entitiesStatus.isApiError = false
+      state.entitiesStatus.isLoading = isLoading
     },
 
-    setDBMetaDataEntitiesApiError(state, payload) {
-      state.entitiesStatus.isApiError = true;
-      state.entitiesStatus.apiErrorMsg = payload;
+    setDBMetaDataEntitiesApiError (state, payload) {
+      state.entitiesStatus.isApiError = true
+      state.entitiesStatus.apiErrorMsg = payload
     },
 
-    setDBMetaDataEntities(state, payload) {
-      state.entities = payload;
-    },
+    setDBMetaDataEntities (state, payload) {
+      state.entities = payload
+    }
 
   },
 
   actions: {
-    async fetchDBMetaDataEntities({commit}) {
-      commit('setDBMetaDataEntitiesLoading', true);
+    async fetchDBMetaDataEntities ({commit}) {
+      commit('setDBMetaDataEntitiesLoading', true)
 
       await axios.get('/api/db/entity')
         .then(response => {
-          commit('setDBMetaDataEntities', response.data);
+          commit('setDBMetaDataEntities', response.data)
         })
         .catch(e => {
-          commit('setDBMetaDataEntitiesApiError', e.toString());
+          commit('setDBMetaDataEntitiesApiError', e.toString())
         })
         .finally(() => {
-          commit('setDBMetaDataEntitiesLoading', false);
+          commit('setDBMetaDataEntitiesLoading', false)
         })
     }
   }

@@ -1,5 +1,5 @@
 export default {
-  setPageLoadingStatus(state, payload) {
-    state.isPageLoading = payload;
-  },
+  setPageLoadingStatus (state, payload) {
+    state.isPageLoading = payload
+  }
 }

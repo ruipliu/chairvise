@@ -1,4 +1,4 @@
-import Color from 'color';
+import Color from 'color'
 import palette from './open-color'
 
 const colors = [
@@ -13,22 +13,22 @@ const colors = [
   palette['grape'],
   palette['indigo'],
   palette['teal'],
-  palette['violet'],
-];
+  palette['violet']
+]
 
 const chooseColorSet = (size) => {
-  let colorSet = [];
+  let colorSet = []
   for (let i = 0; i < size; i++) {
-    colorSet.push(colors[i % colors.length][Math.floor(i / colors.length) % colors[0].length]);
+    colorSet.push(colors[i % colors.length][Math.floor(i / colors.length) % colors[0].length])
   }
-  return colorSet;
-};
+  return colorSet
+}
 
 export const generateBorderColor = (size) => {
-  return chooseColorSet(size);
-};
+  return chooseColorSet(size)
+}
 
 export const generateBackgroundColor = (size) => {
-  let colorSet = chooseColorSet(size);
-  return colorSet.map(hex => new Color(hex).alpha(0.8).string());
-};
+  let colorSet = chooseColorSet(size)
+  return colorSet.map(hex => new Color(hex).alpha(0.8).string())
+}
